@@ -1,0 +1,178 @@
+//
+//  MarketMastro-Prefix.pch
+//  MarketMastro
+//
+//  Created by DHARMESH on 11/01/17.
+//  Copyright © 2017 Macmittal software. All rights reserved.
+//
+
+#ifndef MarketMastro_Prefix_pch
+#define MarketMastro_Prefix_pch
+
+#endif
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 5.0 and later."
+#endif
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "Reachability.h"
+#import "MethodsManager.h"
+//#import <Toast/Toast.h>
+#import "webManager.h"
+#import "DropDownCell.h"
+#import "SQLiteDatabase.h"
+#import "DBQueryHelper.h"
+#import "TPKeyboardAvoidingScrollView.h"
+#import "ReferFriendViewController.h"
+#import "ViewController.h"
+#import "ContactUsViewController.h"
+#import "HPClass.h"
+#import "UIColor+HPColor.h"
+#import "UIImage+HPImage.h"
+#import "MarketDetailsVC.h"
+#import "CreatePortflioVC.h"
+#import "AlertViewController.h"
+#import "CurrentAlertListCell.h"
+#import "MyAlertViewController.h"
+#import "UIViewController+MJPopupViewController.h"
+#import "MoreItemsDetailViewController.h"
+#import "MoreDetailPlusViewController.h"
+#import "MoreItems1VC.h"
+#import "MoreItemsViewController.h"
+
+//[self dismissPopupViewControllerWithanimationType:MJPopupViewAnimationFade];
+
+//DATABASE NAME
+#define DB_NAME @"LKS_DB.db";
+
+//DATABASE VERSION
+#define DB_VERSION = 1;
+
+
+//Internal DB Path
+#define DB_PATH @"/data/data/com.app.marketmastro/databases/";
+
+//TABLES
+#define TABLE_COMMODITY @"Commodity";
+#define TABLE_NEWS @"News";
+#define TABLE_USER_PORTFOLIO @"UserPortfolio";
+#define TABLE_COMMODITY_GROUP @"CommodityGroup";
+#define TABLE_POPULAR_COMMODITY @"PopularCommodity";
+#define TABLE_USER_INFO @"UserInfo";
+#define TABLE_COMMODITY_TYPE @"CommodityType";
+#define TABLE_ALERT @"Alert";
+
+
+//PopularCommodity COLUMNS
+
+#define COLUMN_COMMODITY_ID @"CommodityID";
+#define COLUMN_SCRIP_CODE @"ScriptCode";
+#define COLUMN_SYMBOL @"Symbol";
+#define COLUMN_COMMODITY_TYPE @"CommodityType";
+#define COLUMN_EXCH @"Exch";
+#define COLUMN_EXCH_TYPE @"ExchType";
+#define COLUMN_STOCK_NAME @"Name";
+#define COLUMN_SHORT_NAME @"ShortName";
+#define COLUMN_EXPIRY @"Expiry";
+#define COLUMN_STRIKE_RATE @"StrikeRate";
+#define COLUMN_CPYYPE_INT @"CPTypeInt";
+#define COLUMN_TICKSIZE @"TickSize";
+#define COLUMN_LOTSIZE @"LotSize";
+#define  COLUMN_ULTOKEN @"ULToken";
+#define COLUMN_OFISTYPE_INT @"OFISTypeInt";
+#define COLUMN_CALEVEL @"CALevel";
+#define COLUMN_TAB_VALUE @"Tab";
+#define COLUMN_EC_VALUE @"EC";
+#define COLUMN_SERIES @"Series";
+#define COLUMN_IS_DELETED @"IsDeleted";
+#define COLUMN_CREATED_ON @"CreatedOn";
+#define COLUMN_MODIFIED_ON @"ModifiedOn";
+#define COLUMN_TIME_SPAN @"TimeSpan";
+#define COLUMN_DESCRIPTION @"Description";
+#define COLUMN_CITY_ID @"CityID";
+#define COLUMN_COMPANY_ID @"CompanyID";
+#define COLUMN_DIGITS @"Digits";
+#define COLUMN_IS_POPULAR @"isPopular";
+#define COLUMN_SUBTITLE @"SubTitle";
+#define COLUMN_STATUS @"Status";
+#define COLUMN_SORT_ORDER @"SortOrder";
+
+
+//Portfolio COLUMNS
+#define COLUMN_PREV_DAY_CLOSE @"PrevDayClose";
+
+//News COLUMNS
+#define COLUMN_NEWS_ID @"newsid";
+#define COLUMN_NEWS_TITLE @"title";
+#define COLUMN_NEWS_TYPE @"type";
+#define COLUMN_NEWS_LINK @"link";
+#define COLUMN_NEWS_PUB_DATE @"pubDate";
+#define COLUMN_NEWS_DESC @"description";
+#define COLUMN_NEWS_IMAGE @"image";
+
+
+//Popular commodity COLUMNS
+#define COLUMN_PC_TYPE_ID @"TypeID";
+#define COLUMN_PC_TYPE_NAME @"TypeName";
+#define COLUMN_PC_IS_LOCAL_SPOT @"isLocalSpot";
+#define COLUMN_PC_COMMODITY_ID @"CommodityID";
+#define COLUMN_PC_IS_POPULAR @"isPopular";
+#define COLUMN_PC_GROUP_NAME @"GroupName";
+#define COLUMN_PC_NAME @"Name";
+#define COLUMN_PC_GROUP_ID @"GroupID";
+
+//USERINFO COLUMNS
+#define COLUMN_IMAGE_PATH @"ImagePath";
+#define COLUMN_IMAGE @"Image";
+
+//ALERT COLUMNS
+#define COLUMN_ALERT_ID @"AlertID";
+#define COLUMN_CONDITION @"Condition";
+#define COLUMN_VALUE @"Value";
+#define COLUMN_PAUESE_ALERTS @"PauseAlerts";
+#define COLUMN_TEXT @"Text";
+#define COLUMN_HISTORY_TEXT @"HistoryText";
+#define COLUMN_COMMODITY_NAME @"CommodityName";
+#define COLUMN_CREATED_TIME @"CreatedDateTime";
+#define COLUMN_EXPIRY_TIME @"ExpiryDateTime";
+#define COLUMN_IS_EXECUTED @"isExecuted";
+#define COLUMN_IS_READ @"isRead";
+
+//COMMODITY GROUPS COLUMNS
+#define COLUMN_GROUP_TYPE @"GroupType";
+#define COLUMN_GROUP_DESC @"GroupDesc";
+#define COLUMN_PARENT_GROUP_ID @"ParentGroupID";
+
+//AdMob
+//Live//ca-app-pub-7827419066044802/2676708973
+//Test//ca-app-pub-3940256099942544/2934735716
+#define BannerAdUnitID @"ca-app-pub-7827419066044802/2676708973";
+#define InterstitialAdUnitID @"ca-app-pub-3940256099942544/4411468910";
+
+
+// UI stuff
+#define ViewBackgroundColor [UIColor colorWithRed:22/255.0 green:25/255.0 blue:27/255.0 alpha:1.0];
+
+#define HeaderTextColor [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
+
+#define LabelTextColor [UIColor colorWithRed:149/255.0 green:149/255.0 blue:149/255.0 alpha:1.0];
+
+#define TextFieldBackGroundColor [UIColor colorWithRed:12/255.0 green:16/255.0 blue:20/255.0 alpha:1.0];
+
+#define textfieldBorderColor [UIColor colorWithRed:41/255.0 green:42/255.0 blue:43/255.0 alpha:1.0];
+
+#define ButtonBackGroundColor [UIColor colorWithRed:21/255.0 green:85/255.0 blue:140/255.0 alpha:1.0];
+
+#define CornerRadius 3.0f;
+
+//HP
+#define HPClassObj [HPClass sharedInstanse]
+#define RateDownCGColor [UIColor colorwithHexString:@"#15558C"].CGColor;
+#define RateUpCGColor [UIColor colorwithHexString:@"#BA1E1A"].CGColor;
+
+#endif /* MarketMastro_Prefix_pch */
