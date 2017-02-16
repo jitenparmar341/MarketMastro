@@ -1,0 +1,25 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "666b7d38-9c1d-554e-81e1-478a3f17fb3e++505",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "666b7d38-9c1d-554e-81e1-478a3f17fb3e++505" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "666b7d38-9c1d-554e-81e1-478a3f17fb3e++505" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "98F79164-A73D-431B-9A6A-897073E82928",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "666b7d38-9c1d-554e-81e1-478a3f17fb3e++505" : "HARISH_LKS_IOS\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "MarketMastro",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "MarketMastro\/MarketMastro\/MarketMastro.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "http:\/\/182.59.130.128:81\/svn\/MarketMastro_iOS",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "666b7d38-9c1d-554e-81e1-478a3f17fb3e++505"
+    }
+  ]
+}
