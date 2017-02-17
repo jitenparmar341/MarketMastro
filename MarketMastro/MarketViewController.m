@@ -77,7 +77,6 @@
     
     NSMutableArray *arrOfTypes =  [[NSUserDefaults standardUserDefaults] valueForKey:@"commodity_types"];
     
-    
     for (int i =0; i<arrOfTypes.count; i++)
     {
         NSDictionary *dic = [arrOfTypes objectAtIndex:i];
@@ -133,14 +132,15 @@
 }
 
 #pragma mark - UITableViewDataSource
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return arrMarketData.count;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     UITableViewCell *cell;
-    
     
    if([self.title isEqualToString:@"Bullion"]) {
         cell = [self shareCellDesignTableView:tableView indexPath:indexPath];

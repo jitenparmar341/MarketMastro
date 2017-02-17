@@ -162,6 +162,7 @@ NSString *selctedOption;
 - (IBAction)selectCommoditeBtnClick:(id)sender
 {
     [_txtFieldPrice resignFirstResponder];
+    
     if([selctedOption length] > 0)
     {
         [_selectCondition setTitle:[NSString stringWithFormat:@"  %@",selctedOption] forState:UIControlStateNormal];

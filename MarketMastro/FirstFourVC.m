@@ -267,9 +267,9 @@
         CGRect frameimg4 = CGRectMake(0, 0, 35, 25);
         UIButton *editButton = [[UIButton alloc] initWithFrame:frameimg4];
         [editButton setImage:[UIImage imageNamed:@"act_edit_ico"] forState:UIControlStateNormal];
-        [editButton setImage:[UIImage imageNamed:@"act_edit_ico"] forState:UIControlStateHighlighted];
+        [editButton setImage:[UIImage imageNamed:@"act_tick_ico"] forState:UIControlStateSelected];
         [editButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
-        [editButton addTarget:self action:@selector(editClicked) forControlEvents:UIControlEventTouchUpInside];
+        [editButton addTarget:self action:@selector(editClicked:) forControlEvents:UIControlEventTouchUpInside];
         
         CGRect frameimg5 = CGRectMake(0, 0, 35, 25);
         UIButton *list = [[UIButton alloc] initWithFrame:frameimg5];
@@ -298,9 +298,9 @@
     sender.selected =! sender.selected;
 }
 
-- (void)editClicked
+- (void)editClicked:(UIButton *)sender
 {
-    
+    sender.selected =! sender.selected;
 }
 
 -(void)BtnSearchTapped
@@ -308,13 +308,15 @@
     CreatePortflioVC *commodityPage = [self.storyboard instantiateViewControllerWithIdentifier:@"CreatePortflioVC"];
     commodityPage.isFromVC = @"Dashboard";
     
-      [[NSUserDefaults standardUserDefaults]setObject:@"Dashboard" forKey:@"isFromVC"];
+    [[NSUserDefaults standardUserDefaults]setObject:@"Dashboard" forKey:@"isFromVC"];
     
     [self.navigationController pushViewController:commodityPage animated:YES];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
+    
     UIImage *tSImg = [UIImage imageFromColor:[UIColor colorwithHexString:@"16191B"] size:_btnMarket.frame.size];
     [_btnMarket setBackgroundImage:tSImg forState:UIControlStateSelected];
     [_btnNews setBackgroundImage:tSImg forState:UIControlStateSelected];
@@ -536,8 +538,10 @@ else
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     UITableViewCell *cell;
+    
     if(tableView == self.tableViewForNews)
     {
         /*
@@ -570,6 +574,7 @@ else
    
     return cell;
 }
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(tableView == self.tableViewForNews)
@@ -624,6 +629,7 @@ else
             indexOfDrawer = 0;
         }
     }
+    
     if(indexOfDrawer == 0)
     {
         self.title = @"Market Mastro";
@@ -652,8 +658,9 @@ else
         [self.viewForPortflio setHidden:NO];
         
         self.viewForPortflio.frame = CGRectMake(0, 135, SCREEN_WIDTH, SCREEN_HEIGHT-135);
-        [self.view addSubview:self.viewForPortflio];
-        [self.viewForPortflio addSubview:ViewSelected3Commodity];
+        [self.view addSubview:self.viewForMarket];
+        [self setupMarketPageControl];
+//        [self.viewForPortflio addSubview:ViewSelected3Commodity];
         
         [ViewSelected3Commodity setFrame:CGRectMake(ViewSelected3Commodity.frame.origin.x, ViewSelected3Commodity.frame.origin.y, SCREEN_WIDTH, ViewSelected3Commodity.frame.size.height)];
     }
@@ -731,6 +738,26 @@ else
         [self.viewForMarket addSubview:ViewSelected3Commodity];
         [self setupMarketPageControl];
     }
+    else if(btnSelectedTab == btnNews)
+    {
+        self.title = @"EMC";
+        btnNews.selected = YES;
+        indexOfDrawer = 1;
+        
+        [self.viewForCalendar setHidden:YES];
+        [self.viewForMarket setHidden:YES];
+        [self.viewForPortflio setHidden:YES];
+        [self.viewForNews setHidden:YES];
+        [self.viewForEMC setHidden:NO];
+        [self.view addSubview:self.viewForEMC];
+        [self.viewForEMC addSubview:ViewSelected3Commodity];
+        [self setupMarketPageControl];
+        
+        //        [self.tableViewForNews reloadData];
+        
+        //Harish
+        //        [self newsPage];
+    }
     else if(btnSelectedTab == btnPortfolio)
     {
         self.title = @"Market Portfolio";
@@ -747,26 +774,6 @@ else
         
         [self.viewForPortflio addSubview:ViewSelected3Commodity];
         [self setUpOnTapPortfolio];
-    }
-    else if(btnSelectedTab == btnNews)
-    {
-        self.title = @"EMC";
-        btnNews.selected = YES;
-        indexOfDrawer = 1;
-       
-        [self.viewForCalendar setHidden:YES];
-        [self.viewForMarket setHidden:YES];
-        [self.viewForPortflio setHidden:YES];
-        [self.viewForNews setHidden:YES];
-        [self.viewForEMC setHidden:NO];
-        [self.view addSubview:self.viewForEMC];
-        [self.viewForEMC addSubview:ViewSelected3Commodity];
-        [self setupMarketPageControl];
-        
-//        [self.tableViewForNews reloadData];
-        
-        //Harish
-//        [self newsPage];
     }
     else if(btnSelectedTab == btnCalendar)
     {
@@ -881,6 +888,7 @@ else
     /*Bullion, Expected MCX, Costing & Difference, Base metals, Energy, Agri, Local Spot, International Markets
     */
     NSMutableArray *arrPageModle = [[NSMutableArray alloc] init];
+    
     for (int i=0; i<pageArr.count; i++)
     {
         ADPageModel *pageModel = [[ADPageModel alloc] init];
@@ -1077,23 +1085,24 @@ else
 
 - (void)setUpOnTapPortfolio
 {
-    [self emptyPortfolioViewHiddenStatus:NO];
-    
-    return;
-    
+//    [self emptyPortfolioViewHiddenStatus:NO];
+//    
+//    return;
+//    
     //Temp Login
     
-    if ([imgViewEmpty isHidden]) {
-        if (portfolioVCObj && [portfolioVCObj.title isEqualToString:@"ProfolioList"]) {
-            [self showPortfolioEditable];
-        }
-        else {
-            [self emptyPortfolioViewHiddenStatus:NO];
-        }
-    }
-    else {
+//    if ([imgViewEmpty isHidden])
+//    {
+//        if (portfolioVCObj && [portfolioVCObj.title isEqualToString:@"ProfolioList"]) {
+//            [self showPortfolioEditable];
+//        }
+//        else {
+//            [self emptyPortfolioViewHiddenStatus:NO];
+//        }
+//    }
+//    else {
         [self showPortfolioList];
-    }
+//    }
 }
 
 - (void)emptyPortfolioViewHiddenStatus:(BOOL)isHide
@@ -1104,16 +1113,25 @@ else
     [lblEmptyDescripiton setHidden:isHide];
     [btnOCreatePortfolio setHidden:isHide];
 }
-- (void)showPortfolioList {
+
+- (void)showPortfolioList
+{
     [self emptyPortfolioViewHiddenStatus:YES];
+    
     portfolioVCObj =   [self.storyboard instantiateViewControllerWithIdentifier:@"MarketViewController"];
     portfolioVCObj.title = @"ProfolioList";
+    
     CGRect portfolioFrame = CGRectMake(0, CGRectGetMaxY(ViewSelected3Commodity.frame), SCREEN_WIDTH, CGRectGetHeight(_viewForPortflio.frame)-CGRectGetMaxY(ViewSelected3Commodity.frame));
+    
     portfolioVCObj.view.frame = portfolioFrame;
+    
     [_viewForPortflio addSubview:portfolioVCObj.view];
 }
-- (void)showPortfolioEditable {
+
+- (void)showPortfolioEditable
+{
     [self emptyPortfolioViewHiddenStatus:YES];
+    
     portfolioVCObj =   [self.storyboard instantiateViewControllerWithIdentifier:@"MarketViewController"];
     portfolioVCObj.title = @"ProfolioEditable";
     CGRect portfolioFrame = CGRectMake(0, CGRectGetMinY(ViewSelected3Commodity.frame), SCREEN_WIDTH, CGRectGetHeight(_viewForPortflio.frame)-CGRectGetMinY(ViewSelected3Commodity.frame));
