@@ -67,7 +67,7 @@
 {
     [self.viewForAddOptions removeFromSuperview];
 
-    MarketCreateAlertVC *createAlertvc = [self.storyboard instantiateViewControllerWithIdentifier:@"MarketCreateAlertVC"];
+    CreateAlertVC *createAlertvc = [self.storyboard instantiateViewControllerWithIdentifier:@"CreateAlertVC"];
     [self.navigationController pushViewController:createAlertvc animated:YES];
 
 }

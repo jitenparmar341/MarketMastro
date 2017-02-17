@@ -156,6 +156,7 @@
 		969C7AC71E53877B009B0123 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 969C7AB41E53877B009B0123 /* UIView+WebCacheOperation.m */; };
 		96CFE2221E54CB9200190322 /* CustomSelPack.m in Sources */ = {isa = PBXBuildFile; fileRef = 96CFE2211E54CB9200190322 /* CustomSelPack.m */; };
 		96CFE2251E54D30E00190322 /* CustomModePay.m in Sources */ = {isa = PBXBuildFile; fileRef = 96CFE2241E54D30E00190322 /* CustomModePay.m */; };
+		96D1BE2B1E56297500921555 /* Main-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96D1BE2A1E56297500921555 /* Main-iPad.storyboard */; };
 		96DB25931E561078007506AD /* TransactionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DB25921E561078007506AD /* TransactionVC.m */; };
 		96DCBD291E55FCDA00746E07 /* ConfirmVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DCBD281E55FCDA00746E07 /* ConfirmVC.m */; };
 		AB314E501DE51BAC00228701 /* MyTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = AB314E4D1DE51BAC00228701 /* MyTextField.m */; };
@@ -181,7 +182,6 @@
 		AB6C1FD21DEAC7EC0093B03E /* MoreItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6C1FD11DEAC7EC0093B03E /* MoreItemsViewController.m */; };
 		AB6C1FD51DEAC94A0093B03E /* MoreItems1VC.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6C1FD41DEAC94A0093B03E /* MoreItems1VC.m */; };
 		AB91F1C11DE073A00032AD9A /* ChangePassword.png in Resources */ = {isa = PBXBuildFile; fileRef = AB91F1C01DE073A00032AD9A /* ChangePassword.png */; };
-		ABCF78DC1DF4A8CF00BB35FB /* Main-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABCF78DB1DF4A8CF00BB35FB /* Main-iPad.storyboard */; };
 		BB01F4011E4ED7B900259994 /* MoreDetailPlusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB01F4001E4ED7B900259994 /* MoreDetailPlusViewController.m */; };
 		BB06B58B1E2F2DC2002FDCF9 /* res_logo_ico.png in Resources */ = {isa = PBXBuildFile; fileRef = BB06B58A1E2F2DC2002FDCF9 /* res_logo_ico.png */; };
 		BB06B58D1E2F33B3002FDCF9 /* unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = BB06B58C1E2F33B3002FDCF9 /* unchecked.png */; };
@@ -453,6 +453,7 @@
 		96CFE2211E54CB9200190322 /* CustomSelPack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSelPack.m; sourceTree = "<group>"; };
 		96CFE2231E54D30E00190322 /* CustomModePay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomModePay.h; sourceTree = "<group>"; };
 		96CFE2241E54D30E00190322 /* CustomModePay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomModePay.m; sourceTree = "<group>"; };
+		96D1BE2A1E56297500921555 /* Main-iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Main-iPad.storyboard"; sourceTree = "<group>"; };
 		96DB25911E561078007506AD /* TransactionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionVC.h; sourceTree = "<group>"; };
 		96DB25921E561078007506AD /* TransactionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionVC.m; sourceTree = "<group>"; };
 		96DCBD271E55FCDA00746E07 /* ConfirmVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmVC.h; sourceTree = "<group>"; };
@@ -493,7 +494,6 @@
 		AB6C1FD31DEAC94A0093B03E /* MoreItems1VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreItems1VC.h; sourceTree = "<group>"; };
 		AB6C1FD41DEAC94A0093B03E /* MoreItems1VC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreItems1VC.m; sourceTree = "<group>"; };
 		AB91F1C01DE073A00032AD9A /* ChangePassword.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChangePassword.png; sourceTree = "<group>"; };
-		ABCF78DB1DF4A8CF00BB35FB /* Main-iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Main-iPad.storyboard"; sourceTree = "<group>"; };
 		BB01CCBD1E26299200DFFB63 /* MarketMastro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MarketMastro.entitlements; sourceTree = "<group>"; };
 		BB01CCBF1E2629C100DFFB63 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		BB01CCC21E26510F00DFFB63 /* MarketMastro-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MarketMastro-Prefix.pch"; sourceTree = "<group>"; };
@@ -869,6 +869,7 @@
 			isa = PBXGroup;
 			children = (
 				BBED81C51E45A73200CD980E /* Main.storyboard */,
+				96D1BE2A1E56297500921555 /* Main-iPad.storyboard */,
 				969C7A8D1E538755009B0123 /* SDWebimage */,
 				BB33971B1E433191007A3EEE /* mjpopup */,
 				043817111DD74AD700FCEB7D /* Images */,
@@ -915,7 +916,6 @@
 				04D5F8401DD4BDE100CE1091 /* ViewController.m */,
 				68316F861E44909C00198929 /* Firebase.h */,
 				AB91F1C01DE073A00032AD9A /* ChangePassword.png */,
-				ABCF78DB1DF4A8CF00BB35FB /* Main-iPad.storyboard */,
 				04D5F8451DD4BDE200CE1091 /* Assets.xcassets */,
 				04D5F8471DD4BDE200CE1091 /* LaunchScreen.storyboard */,
 				04D5F84A1DD4BDE200CE1091 /* Info.plist */,
@@ -1556,7 +1556,6 @@
 				BB901ED31E4208A500CE6768 /* dro_contact_ico.png in Resources */,
 				BB4468C21E30BED8002B288A /* Lato-Bold.ttf in Resources */,
 				BBF833201E3B1AC700CF91E8 /* referactive.png in Resources */,
-				ABCF78DC1DF4A8CF00BB35FB /* Main-iPad.storyboard in Resources */,
 				043817391DD7664700FCEB7D /* reg_mobile_icon@2x.png in Resources */,
 				BB33971A1E4323EA007A3EEE /* MyAlertViewController.xib in Resources */,
 				BB50CACE1E3B961D00778D1D /* more.png in Resources */,
@@ -1613,6 +1612,7 @@
 				BBED81C61E45A73200CD980E /* Main.storyboard in Resources */,
 				0438175A1DD80BD400FCEB7D /* checked_checkbox.png in Resources */,
 				BBF8331C1E3B1AC700CF91E8 /* helpactive.png in Resources */,
+				96D1BE2B1E56297500921555 /* Main-iPad.storyboard in Resources */,
 				684D9F491E4888BE00DA3A0F /* dro_emc_active_ico.png in Resources */,
 				BBF8331A1E3B1AC700CF91E8 /* calenderactive.png in Resources */,
 				BB4BDBC61E3C91BB008775E1 /* sad_portfolio_ico.png in Resources */,

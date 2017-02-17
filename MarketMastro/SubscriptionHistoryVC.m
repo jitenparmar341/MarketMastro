@@ -139,11 +139,41 @@
     
   
     BOOL isExpired = [[dic valueForKey:@"isExpired"] boolValue];
+    
     cell.lblorderid.text = [NSString stringWithFormat:@"Order Id #%@",[dic valueForKey:@"USOrderID"]];
-    cell.lblSubscribedOn.text =  [NSString stringWithFormat:@"%@",[dic valueForKey:@"PurchasedOn"]];
+    
     cell.LblPackageName.text = [NSString stringWithFormat:@"%@",[dic valueForKey:@"PackageName"]];
-    cell.lblValidDate.text = [NSString stringWithFormat:@"%@",[dic valueForKey:@"ExpiredOn"]];
+    
+    {
+        NSString *strExpiredOn = [NSString stringWithFormat:@"%@",[dic valueForKey:@"ExpiredOn"]];
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd hh:mm"];
+        NSDate *dateFromString = [dateFormatter dateFromString:strExpiredOn];
+        
+        [dateFormatter setDateFormat:@"dd MMM, yyyy"];
+        
+        strExpiredOn = [dateFormatter stringFromDate:dateFromString];
+        
+        cell.lblValidDate.text = [NSString stringWithFormat:@"Valid Till %@",strExpiredOn];
+    }
+    
+    {
+        NSString *strExpiredOn = [NSString stringWithFormat:@"%@",[dic valueForKey:@"PurchasedOn"]];
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+        NSDate *dateFromString = [dateFormatter dateFromString:strExpiredOn];
+        
+        [dateFormatter setDateFormat:@"dd MMM, yyyy"];
+        
+        strExpiredOn = [dateFormatter stringFromDate:dateFromString];
+        
+        cell.lblSubscribedOn.text =  [NSString stringWithFormat:@"Subscribed On %@",strExpiredOn];
+    }
+    
     //PurchasedStatus
+    
     NSString *strPurchasedStatus = [NSString stringWithFormat:@"%@",[dic valueForKey:@"PurchasedStatus"]];
     
     BOOL isFree = [[dic valueForKey:@"isFree"] boolValue];
@@ -195,18 +225,12 @@
         cell.btnRenew.hidden = YES;
     }
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    OrderDetailsVC *upgradeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"OrderDetailsVC"];
-    upgradeVC.ArrayHistoryDetail = [ArraySubscriptionhistory objectAtIndex:indexPath.row];
-    [self.navigationController pushViewController:upgradeVC animated:YES];
-}
-
-
--(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     OrderDetailsVC *upgradeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"OrderDetailsVC"];
     upgradeVC.ArrayHistoryDetail = [ArraySubscriptionhistory objectAtIndex:indexPath.row];

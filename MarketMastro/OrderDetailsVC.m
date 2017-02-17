@@ -54,7 +54,17 @@
     
     if ([ArrayHistoryDetail valueForKey:@"PurchasedOn"] != nil)
     {
-        _lblDateSubscribedOn.text = [NSString stringWithFormat:@"%@",[ArrayHistoryDetail valueForKey:@"PurchasedOn"]];
+        NSString *strExpiredOn = [NSString stringWithFormat:@"%@",[ArrayHistoryDetail valueForKey:@"PurchasedOn"]];
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+        NSDate *dateFromString = [dateFormatter dateFromString:strExpiredOn];
+        
+        [dateFormatter setDateFormat:@"dd MMM, yyyy hh:mm a"];
+        
+        strExpiredOn = [dateFormatter stringFromDate:dateFromString];
+        
+        _lblDateSubscribedOn.text = strExpiredOn;
     }
     else
     {
@@ -70,8 +80,6 @@
         _lblPackageName.hidden = YES;
     }
     
-   
-    
     BOOL isWithAdd = [[ArrayHistoryDetail valueForKey:@"WithAd"] boolValue];
     
     if (isWithAdd)
@@ -83,25 +91,33 @@
         _lblAdd.text = @"No Ad";
     }
     
-    
     if ([ArrayHistoryDetail valueForKey:@"ExpiredOn"] != nil)
     {
-         _lblExpiredOn.text = [NSString stringWithFormat:@"Expires On %@",[ArrayHistoryDetail valueForKey:@"ExpiredOn"]];
+        NSString *strExpiredOn = [NSString stringWithFormat:@"%@",[ArrayHistoryDetail valueForKey:@"ExpiredOn"]];
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+        NSDate *dateFromString = [dateFormatter dateFromString:strExpiredOn];
+        
+        [dateFormatter setDateFormat:@"dd MMM, yyyy"];
+        
+        strExpiredOn = [dateFormatter stringFromDate:dateFromString];
+        
+         _lblExpiredOn.text = [NSString stringWithFormat:@"Expires On %@",strExpiredOn];
     }
     else
     {
         _lblExpiredOn.hidden = YES;
     }
     
-    if ([ArrayHistoryDetail valueForKey:@"PaymentMode"] != nil)
-    {
-        _lblpaidVia.text =  [NSString stringWithFormat:@"Paid via %@",[ArrayHistoryDetail valueForKey:@"PaymentMode"]];
-    }
-    else
-    {
-        _lblpaidVia.hidden = YES;
-    }
-    
+//    if ([ArrayHistoryDetail valueForKey:@"PaymentMode"] != nil)
+//    {
+//        _lblpaidVia.text =  [NSString stringWithFormat:@"Paid via %@",[ArrayHistoryDetail valueForKey:@"PaymentMode"]];
+//    }
+//    else
+//    {
+//        _lblpaidVia.hidden = YES;
+//    }
     
     if ([ArrayHistoryDetail valueForKey:@"Paid"] != nil)
     {
@@ -110,7 +126,7 @@
     }
     else
     {
-        NSString *strPrice = [NSString stringWithFormat:@"Paid ₹ 0"];
+        NSString *strPrice = [NSString stringWithFormat:@"₹ 0.0"];
         [_btnPrize setTitle:strPrice forState:UIControlStateNormal];
     }
     

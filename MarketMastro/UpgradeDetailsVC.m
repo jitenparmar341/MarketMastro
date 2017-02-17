@@ -19,6 +19,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+     [self setDoneKeypad];
+    
     self.title = @"Subscribe";
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
@@ -31,13 +34,36 @@
     // Do any additional setup after loading the view.
 }
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    txtRef = textField;
+    
+    return true;
+}
+
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     if (textField == self.txtPromoCode)
     {
         //abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@._
+        
         NSCharacterSet *invalidCharSet = [[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:invalidCharSet] componentsJoinedByString:@""];
+        return [string isEqualToString:filtered];
+    }
+    
+    if (textField == self.txtBalance)
+    {
+        if ([string isEqualToString:@""])
+            return true;
+        
+        if (self.txtBalance.text.length > 3)
+            return false;
+        
+        NSCharacterSet *invalidCharSet = [[NSCharacterSet characterSetWithCharactersInString:@"1234567890"] invertedSet];
+        
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:invalidCharSet] componentsJoinedByString:@""];
+        
         return [string isEqualToString:filtered];
     }
     
@@ -55,6 +81,18 @@
     sender.selected =! sender.selected;
 }
 
+- (IBAction)btnPromoApplyClicked:(id)sender
+{
+    if (self.txtPromoCode.text.length == 0)
+    {
+        [txtRef resignFirstResponder];
+        
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"MarketMastro" message:@"Please enter promocode" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        
+        [alert show];
+    }
+}
+
 - (IBAction)btnProceedClicked:(UIButton *)sender
 {
     ConfirmVC *confirm = [self.storyboard instantiateViewControllerWithIdentifier:@"ConfirmVC"];
@@ -70,6 +108,29 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return NO;
+}
+
+-(void)setDoneKeypad
+{
+    UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
+    numberToolbar.barStyle = UIBarStyleBlackTranslucent;
+    numberToolbar.items = @[[[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelNumberPad)],
+                            [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                            [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneWithNumberPad)]];
+    [numberToolbar sizeToFit];
+    
+    self.txtBalance.inputAccessoryView = numberToolbar;
+    self.txtPromoCode.inputAccessoryView = numberToolbar;
+}
+
+-(void)cancelNumberPad
+{
+    [txtRef resignFirstResponder];
+}
+
+-(void)doneWithNumberPad
+{
+    [txtRef resignFirstResponder];
 }
 /*
 #pragma mark - Navigation

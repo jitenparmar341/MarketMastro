@@ -8,14 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UpgradeDetailsVC : UIViewController
+@interface UpgradeDetailsVC : UIViewController<UITextFieldDelegate>
 {
-    
+    UITextField *txtRef;
 }
 
 @property (nonatomic,weak)IBOutlet UIButton *btnApply;
 
-@property (nonatomic,weak)IBOutlet UITextField *txtPromoCode;
+@property (nonatomic,weak)IBOutlet UITextField *txtPromoCode,*txtBalance;
 
 @property(nonatomic,retain)NSString *numberOfIndex;
 @end

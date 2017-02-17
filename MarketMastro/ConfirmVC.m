@@ -22,7 +22,7 @@
 {
     [super viewDidLoad];
     
-    self.title = @"Confirm";
+    self.title = @"Confirmation";
     
     self.btnChangePayment.layer.cornerRadius = 2;
     self.btnChangePayment.layer.borderColor = [UIColor lightGrayColor].CGColor;
@@ -51,7 +51,7 @@
 
 -(IBAction)callingForDeposit:(id)sender
 {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://+91 11111111111"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://+91 9898005511"]];
 }
 
 -(IBAction)btnCallForAssist:(id)sender
