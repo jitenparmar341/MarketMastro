@@ -32,6 +32,13 @@
     self.view.backgroundColor = [UIColor colorWithRed:22/255.0 green:25/255.0 blue:27/255.0 alpha:1.0];
     
     
+    [self setUpForDrawerList];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
     NSString *strName = [[NSUserDefaults standardUserDefaults] valueForKey:@"Name"];
     _lblname.text = strName;
     NSDictionary *dicOfLoggedInuser = [[NSUserDefaults standardUserDefaults] valueForKey:@"DictOfLogedInuser"];
@@ -39,12 +46,6 @@
     NSString *strCredit = [dicOfLoggedInuser valueForKey:@"CreditPoints"];
     _lblcredit.text = [NSString stringWithFormat:@"Credit : %@",strCredit];
     _imgProfile.image = [UIImage imageNamed:@"accountImage.png"];
-    
-    [self setUpForDrawerList];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
     
     if (lastSelectedIndex && lastSelectedIndex.section == 0) {
         NSIndexPath *tIndexPath = lastSelectedIndex;

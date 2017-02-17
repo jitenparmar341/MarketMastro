@@ -53,7 +53,6 @@
     [_mainScrollView layoutIfNeeded];
     //self.mainScrollView.contentSize=self.mainView.bounds.size;
      _mainScrollView.contentSize = CGSizeMake(_mainScrollView.frame.size.width, btnUpdate.frame.origin.y+btnUpdate.frame.size.height);
-    
 }
 
 -(IBAction)goBack:(id)sender
@@ -73,35 +72,27 @@
     [txtLocation setReturnKeyType:UIReturnKeyDone];
     [self setDoneKeypad];
     
-    dicOfLoggedInuser = [[NSUserDefaults standardUserDefaults] valueForKey:@"DictOfLogedInuser"];
+    dicOfLoggedInuser = [[[NSUserDefaults standardUserDefaults] valueForKey:@"DictOfLogedInuser"] mutableCopy];
     
-   // NSString *strcityID =[NSString stringWithFormat:@"%@",[dicOfLoggedInuser valueForKey:@"CityID"]];
-    
-    NSString *strcityID = [NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults]valueForKey:@"CityID"]];
-    
+    strCityID =[NSString stringWithFormat:@"%@",[dicOfLoggedInuser valueForKey:@"CityID"]];
     
     //CityList
     NSArray *ArrCity = [[NSArray alloc] init];
     ArrCity = [[NSUserDefaults standardUserDefaults]valueForKey:@"CityList"];
+    
     for (int i = 0; i<ArrCity.count; i++)
     {
         NSString *strgetCityID =[NSString stringWithFormat:@"%@",[[ArrCity valueForKey:@"CityID"] objectAtIndex:i]];
-        if ([strcityID isEqualToString:strgetCityID])
+        if ([strCityID isEqualToString:strgetCityID])
         {
             strcityName = [[ArrCity valueForKey:@"CityName"] objectAtIndex:i];
         }
     }
     
-    /*
-     txtName.text = [dicOfLoggedInuser valueForKey:@"Name"];
-     txtEmail.text = [dicOfLoggedInuser valueForKey:@"Email"];
-     txtLocation.text = strcityName;
-     */
+    txtName.text = [dicOfLoggedInuser valueForKey:@"Name"];
+    txtEmail.text = [dicOfLoggedInuser valueForKey:@"Email"];
     
-    txtName.text = [[NSUserDefaults standardUserDefaults]valueForKey:@"Name"];
-    txtEmail.text = [[NSUserDefaults standardUserDefaults]valueForKey:@"Email"];
     txtLocation.text = strcityName;
-    
 }
 
 -(void)setDoneKeypad
@@ -145,7 +136,6 @@
     [txtEmail resignFirstResponder];
     [txtLocation resignFirstResponder];
 }
-
 
 -(void)callGif
 {
@@ -328,6 +318,7 @@
     NSString *strUSerID = [[NSUserDefaults standardUserDefaults] valueForKey:@"UserID"];
     
     NSDictionary *parameter;
+    
     if (strCityID != nil)
     {
         parameter = @{
@@ -367,12 +358,12 @@
              
              [[[UIAlertView alloc] initWithTitle:@"Success" message:@"Profile Updated successfully" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil]show];
              
-             NSString *strUserId;
              if ([response valueForKey:@"UserID"])
              {
-                 strUserId = [NSString stringWithFormat:@"%@",[response valueForKey:@"UserID"]];
+                 [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@",[response valueForKey:@"UserID"]] forKey:@"UserID"];
+                 
+                 [[NSUserDefaults standardUserDefaults]synchronize];
              }
-             [[NSUserDefaults standardUserDefaults] setObject:strUserId forKey:@"UserID"];
              
              [self saveUserInformation:response];
              //name,city,email
@@ -449,11 +440,7 @@
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:invalidCharSet] componentsJoinedByString:@""];
         return [string isEqualToString:filtered];
     }
-//    if (textField == _txtMobileNumber)
-//    {
-//        NSString *resultText = [textField.text stringByReplacingCharactersInRange:range withString:string];
-//        return resultText.length <= 10;
-//    }
+
     return YES;
 }
 
@@ -475,6 +462,7 @@
     //CityList
     NSArray *ArrCity = [[NSArray alloc] init];
     ArrCity = [[NSUserDefaults standardUserDefaults]valueForKey:@"CityList"];
+    
     for (int i = 0; i<ArrCity.count; i++)
     {
         NSString *strgetCityName =[NSString stringWithFormat:@"%@",[[ArrCity valueForKey:@"CityName"] objectAtIndex:i]];//CityID
@@ -483,8 +471,17 @@
             strCityIDd = [[ArrCity valueForKey:@"CityID"] objectAtIndex:i];
         }
     }
+    
     [[NSUserDefaults standardUserDefaults]setObject:strCityID forKey:@"CityID"];
     
+    [dicOfLoggedInuser setValue:strCityID forKey:@"CityID"];
+    [dicOfLoggedInuser setValue:txtName.text forKey:@"Name"];
+    [dicOfLoggedInuser setValue:txtEmail.text forKey:@"Email"];
+    
+    [[NSUserDefaults standardUserDefaults]setObject:dicOfLoggedInuser forKey:@"DictOfLogedInuser"];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    
+    [self goBack:nil];
 }
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField

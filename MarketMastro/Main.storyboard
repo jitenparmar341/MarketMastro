@@ -2062,7 +2062,7 @@ get 25 credit points in your wallet.</string>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="AaQ-Rj-Nlv" kind="push" id="Li7-1w-2gb"/>
+                                    <action selector="btnUpgradeBtnClick:" destination="ONw-Qg-BAQ" eventType="touchUpInside" id="ekN-di-aPa"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="iPM-9H-PAS">
@@ -5378,7 +5378,7 @@ get 25 credit points in your wallet.</string>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="textColor" red="0.58431372550000005" green="0.58431372550000005" blue="0.58431372550000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="namePhonePad"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="namePhonePad"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="AaQ-Rj-Nlv" id="vzP-mV-mRP"/>
                                                 </connections>
@@ -5390,7 +5390,7 @@ get 25 credit points in your wallet.</string>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="textColor" red="0.58431372550000005" green="0.58431372550000005" blue="0.58431372550000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="AaQ-Rj-Nlv" id="zsa-yk-JUi"/>
                                                 </connections>
@@ -5407,9 +5407,10 @@ get 25 credit points in your wallet.</string>
                                                     <outlet property="delegate" destination="AaQ-Rj-Nlv" id="dkZ-wI-LGT"/>
                                                 </connections>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="bea-tq-a9f">
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bea-tq-a9f">
                                                 <rect key="frame" x="7" y="97" width="343" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <inset key="imageEdgeInsets" minX="154" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <connections>
                                                     <action selector="btntextLocationTapped:" destination="AaQ-Rj-Nlv" eventType="touchUpInside" id="MYC-lR-874"/>
                                                 </connections>
