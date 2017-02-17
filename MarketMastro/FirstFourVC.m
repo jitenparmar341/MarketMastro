@@ -69,6 +69,11 @@
     
     [self checkNetwork];
     
+    _btnMarket.selected = YES;
+    _btnNews.selected = NO;
+    _btnCalender.selected = NO;
+    _btnPortfolio.selected = NO;
+    
     
     /*[self setUpPageUI];
     
@@ -208,28 +213,18 @@
         button.contentEdgeInsets = UIEdgeInsetsMake(edgeOffset, 0.0, edgeOffset, 0.0);
     }
 }
+
 -(void)setUpPageUI
 {
-    _btnMarket.selected = YES;
-    _btnNews.selected = NO;
-    _btnCalender.selected = NO;
-    _btnPortfolio.selected = NO;
-    
-    /*
-    [_btnMarket setImage:[UIImage imageNamed:@"tab_market_active_ico"] forState:UIControlStateSelected];
-    [_btnNews setImage:[UIImage imageNamed:@"tab_news_active_ico"] forState:UIControlStateSelected];
-    [_btnCalender setImage:[UIImage imageNamed:@"tab_calendar_active_ico"] forState:UIControlStateSelected];
-    [_btnPortfolio setImage:[UIImage imageNamed:@"tab_portfolio_active_ico"] forState:UIControlStateSelected];
-    
-    [_btnMarket setImage:[UIImage imageNamed:@"tab_market_ico"] forState:UIControlStateNormal];
-    [_btnNews setImage:[UIImage imageNamed:@"tab_news_ico"] forState:UIControlStateNormal];
-    [_btnCalender setImage:[UIImage imageNamed:@"tab_calendar_ico"] forState:UIControlStateNormal];
-    [_btnPortfolio setImage:[UIImage imageNamed:@"tab_portfolio_ico"] forState:UIControlStateNormal];
-    */
+    if (indexOfDrawer == 3)
+    {
+        [self.navigationItem setRightBarButtonItems:nil];
+        return;
+    }
     
     //alert button in navigation bar
-//    UIImage* image3 = [UIImage imageNamed:@"act_alert_ico.png"];
-    CGRect frameimg = CGRectMake(0, 0, 25, 25);
+
+    CGRect frameimg = CGRectMake(0, 0, 40, 25);
     UIButton *Alert = [[UIButton alloc] initWithFrame:frameimg];
     [Alert setImage:[UIImage imageNamed:@"act_alert_ico"] forState:UIControlStateNormal];
     [Alert setImage:[UIImage imageNamed:@"alert_ico"] forState:UIControlStateHighlighted];
@@ -237,25 +232,75 @@
     [Alert addTarget:self action:@selector(BtnAlertTapped) forControlEvents:UIControlEventTouchUpInside];
     
     //search button in navigation bar
-//    UIImage* image2 = [UIImage imageNamed:@"search_ico.png"];
-    CGRect frameimg2 = CGRectMake(0, 0, 25, 25);
+
+    CGRect frameimg2 = CGRectMake(0, 0, 35, 25);
     UIButton *Search = [[UIButton alloc] initWithFrame:frameimg2];
     [Search setImage:[UIImage imageNamed:@"search_ico"] forState:UIControlStateNormal];
     [Search setImage:[UIImage imageNamed:@"search_ico"] forState:UIControlStateHighlighted];
     [Search.imageView setContentMode:UIViewContentModeScaleAspectFit];
     [Search addTarget:self action:@selector(BtnSearchTapped) forControlEvents:UIControlEventTouchUpInside];
-   
+    
+    CGRect frameimg3 = CGRectMake(0, 0, 35, 25);
+    UIButton *list = [[UIButton alloc] initWithFrame:frameimg3];
+    [list setImage:[UIImage imageNamed:@"act_boxview_ico"] forState:UIControlStateNormal];
+    [list setImage:[UIImage imageNamed:@"act_listview_ico"] forState:UIControlStateSelected];
+    [list.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    [list addTarget:self action:@selector(filterClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    //+ button in navigation bar
+    
     UIBarButtonItem *btnAlert = [[UIBarButtonItem alloc] initWithCustomView:Alert];
     UIBarButtonItem *btnSearch = [[UIBarButtonItem alloc] initWithCustomView:Search];
+    UIBarButtonItem *btnList = [[UIBarButtonItem alloc] initWithCustomView:list];
     
-    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:btnAlert, btnSearch, nil]];
+    [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:btnList,btnAlert, btnSearch, nil]];
     
+    if (indexOfDrawer == 2)
+    {
+        CGRect frameimg3 = CGRectMake(0, 0, 35, 25);
+        UIButton *plusButton = [[UIButton alloc] initWithFrame:frameimg3];
+        [plusButton setImage:[UIImage imageNamed:@"act_addcommodities_ico"] forState:UIControlStateNormal];
+        [plusButton setImage:[UIImage imageNamed:@"act_addcommodities_ico"] forState:UIControlStateHighlighted];
+        [plusButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+        [plusButton addTarget:self action:@selector(BtnSearchTapped) forControlEvents:UIControlEventTouchUpInside];
+        
+        CGRect frameimg4 = CGRectMake(0, 0, 35, 25);
+        UIButton *editButton = [[UIButton alloc] initWithFrame:frameimg4];
+        [editButton setImage:[UIImage imageNamed:@"act_edit_ico"] forState:UIControlStateNormal];
+        [editButton setImage:[UIImage imageNamed:@"act_edit_ico"] forState:UIControlStateHighlighted];
+        [editButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
+        [editButton addTarget:self action:@selector(editClicked) forControlEvents:UIControlEventTouchUpInside];
+        
+        CGRect frameimg5 = CGRectMake(0, 0, 35, 25);
+        UIButton *list = [[UIButton alloc] initWithFrame:frameimg5];
+        [list setImage:[UIImage imageNamed:@"act_boxview_ico"] forState:UIControlStateNormal];
+        [list setImage:[UIImage imageNamed:@"act_listview_ico"] forState:UIControlStateSelected];
+        [list.imageView setContentMode:UIViewContentModeScaleAspectFit];
+        [list addTarget:self action:@selector(filterClicked:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIBarButtonItem *btnAlert = [[UIBarButtonItem alloc] initWithCustomView:Alert];
+        UIBarButtonItem *btnPlus = [[UIBarButtonItem alloc] initWithCustomView:plusButton];
+        UIBarButtonItem *btnEdit = [[UIBarButtonItem alloc] initWithCustomView:editButton];
+        UIBarButtonItem *btnList = [[UIBarButtonItem alloc] initWithCustomView:list];
+        
+        [self.navigationItem setRightBarButtonItems:[NSArray arrayWithObjects:btnList,btnAlert,btnEdit,btnPlus, nil]];
+    }
 }
 
 -(void)BtnAlertTapped
 {
     AlertViewController *alert = [self.storyboard instantiateViewControllerWithIdentifier:@"AlertViewController"];
     [self.navigationController pushViewController:alert animated:YES];
+}
+
+- (void)filterClicked:(UIButton *)sender
+{
+    sender.selected =! sender.selected;
+}
+
+- (void)editClicked
+{
+    
 }
 
 -(void)BtnSearchTapped
@@ -282,12 +327,7 @@
     [_btnCalender setBackgroundImage:tDImg forState:UIControlStateNormal];
     [_btnPortfolio setBackgroundImage:tDImg forState:UIControlStateNormal];
     
-//    [ViewSelected3Commodity setFrame:CGRectMake(ViewSelected3Commodity.frame.origin.x, ViewSelected3Commodity.frame.origin.y, SCREEN_WIDTH, ViewSelected3Commodity.frame.size.height)];
     [self buttonImageTitleAlign];
-}
--(void)viewDidAppear:(BOOL)animated
-{
-//    [[[UIApplication sharedApplication] keyWindow] addSubview:vTestView];
 }
 
 #pragma mark - MarketPage
@@ -561,6 +601,11 @@ else
     UIButton *btnPortfolio = (UIButton*)[self.view viewWithTag:11];
     UIButton *btnNews = (UIButton*)[self.view viewWithTag:12];
     UIButton *btnCalendar = (UIButton*)[self.view viewWithTag:13];
+    
+    btnMarket.selected = NO;
+    btnPortfolio.selected = NO;
+    btnNews.selected = NO;
+    btnCalendar.selected = NO;
 
     if (indexOfDrawer>3) {
         if (btnMarket.selected) {
@@ -583,9 +628,6 @@ else
     {
         self.title = @"Market Mastro";
         btnMarket.selected = YES;
-        btnPortfolio.selected = NO;
-        btnNews.selected = NO;
-        btnCalendar.selected = NO;
         
         [self.viewForNews setHidden:YES];
         [self.viewForEMC setHidden:YES];
@@ -600,10 +642,8 @@ else
     else if(indexOfDrawer == 2)
     {
         self.title = @"Market Portfolio";
-        btnMarket.selected = NO;
+        
         btnPortfolio.selected = YES;
-        btnNews.selected = NO;
-        btnCalendar.selected = NO;
         
         [self.viewForNews setHidden:YES];
         [self.viewForEMC setHidden:YES];
@@ -620,10 +660,7 @@ else
     else if(indexOfDrawer == 1)
     {
         self.title = @"EMC";
-        btnMarket.selected = NO;
-        btnPortfolio.selected = NO;
         btnNews.selected = YES;
-        btnCalendar.selected = NO;
         
         [self.viewForNews setHidden:YES];
         [self.viewForCalendar setHidden:YES];
@@ -641,9 +678,6 @@ else
     else if(indexOfDrawer == 3)
     {
         self.title = @"Calendar";
-        btnMarket.selected = NO;
-        btnPortfolio.selected = NO;
-        btnNews.selected = NO;
         btnCalendar.selected = YES;
         
         [self.viewForNews setHidden:YES];
@@ -666,40 +700,27 @@ else
     if(btn == btnMarket)
     {
         self.title = @"Market Mastro";
-        // btn1.backgroundColor=[UIColor whiteColor];
-       //  btnMarket.backgroundColor = [UIColor colorWithRed:22/255.0 green:25/255.0 blue:27/255.0 alpha:1.0];
-        
-       // btnMarket.backgroundColor = [UIColor colorWithRed:22/255.0 green:25/255.0 blue:27/255.0 alpha:1.0];
     }
 }
 
 -(IBAction)optionBtnClick:(id)sender
 {
-    UIButton *btn = (UIButton*)sender;
+    btnSelectedTab = (UIButton*)sender;
     UIButton *btnMarket = (UIButton*)[self.view viewWithTag:10];
     UIButton *btnPortfolio = (UIButton*)[self.view viewWithTag:11];
     UIButton *btnNews = (UIButton*)[self.view viewWithTag:12];
     UIButton *btnCalendar = (UIButton*)[self.view viewWithTag:13];
     
-    if(btn == btnMarket)
+    btnPortfolio.selected = NO;
+    btnNews.selected = NO;
+    btnCalendar.selected = NO;
+    btnMarket.selected = NO;
+    
+    if(btnSelectedTab == btnMarket)
     {
         self.title = @"Market Mastro";
         btnMarket.selected = YES;
         indexOfDrawer = 0;
-        if (btnMarket.selected)
-        {
-//            btnMarket.backgroundColor = [UIColor colorWithRed:22/255.0 green:25/255.0 blue:27/255.0 alpha:1.0];
-            
-            //selected :[UIColor colorWithRed:22/255.0 green:25/255.0 blue:27/255.0 alpha:1.0];
-            //deselected :  [UIColor colorWithRed:12/255.0 green:16/255.0 blue:20/255.0 alpha:1.0];
-            btnPortfolio.selected = NO;
-            btnNews.selected = NO;
-            btnCalendar.selected = NO;
-            
-//            btnPortfolio.backgroundColor =   [UIColor colorWithRed:12/255.0 green:16/255.0 blue:20/255.0 alpha:1.0];
-//            btnNews.backgroundColor =   [UIColor colorWithRed:12/255.0 green:16/255.0 blue:20/255.0 alpha:1.0];
-//            btnCalendar.backgroundColor =  [UIColor colorWithRed:12/255.0 green:16/255.0 blue:20/255.0 alpha:1.0];
-        }
 
         [self.viewForNews setHidden:YES];
         [self.viewForCalendar setHidden:YES];
@@ -707,33 +728,14 @@ else
         [self.viewForEMC setHidden:YES];
         [self.viewForMarket setHidden:NO];
         [self.view addSubview:self.viewForMarket];
-        //        [self.tableViewForMarket reloadData];
         [self.viewForMarket addSubview:ViewSelected3Commodity];
         [self setupMarketPageControl];
     }
-    else if(btn == btnPortfolio)
+    else if(btnSelectedTab == btnPortfolio)
     {
         self.title = @"Market Portfolio";
         btnPortfolio.selected = YES;
         indexOfDrawer = 2;
-        if (btnPortfolio.selected)
-        {
-            //selected :[UIColor colorWithRed:22/255.0 green:25/255.0 blue:27/255.0 alpha:1.0];
-            //deselected :  [UIColor colorWithRed:12/255.0 green:16/255.0 blue:20/255.0 alpha:1.0];
-            btnMarket.selected = NO;
-            btnNews.selected = NO;
-            btnCalendar.selected = NO;
-            
-//            btnPortfolio.backgroundColor = [UIColor colorWithRed:22/255.0 green:25/255.0 blue:27/255.0 alpha:1.0];
-//            btnMarket.backgroundColor =  [UIColor colorWithRed:12/255.0 green:16/255.0 blue:20/255.0 alpha:1.0];
-//            btnNews.backgroundColor =   [UIColor colorWithRed:12/255.0 green:16/255.0 blue:20/255.0 alpha:1.0];
-//            btnCalendar.backgroundColor =  [UIColor colorWithRed:12/255.0 green:16/255.0 blue:20/255.0 alpha:1.0];
-        }
-        
-        
-        //        [self.viewForPortflio removeFromSuperview];
-        //        self.viewForMarket.frame = CGRectMake(0, 135,SCREEN_WIDTH, SCREEN_HEIGHT-135);
-        //        [self.view addSubview:self.viewForMarket];
         
         [self.viewForNews setHidden:YES];
         [self.viewForCalendar setHidden:YES];
@@ -746,22 +748,12 @@ else
         [self.viewForPortflio addSubview:ViewSelected3Commodity];
         [self setUpOnTapPortfolio];
     }
-    else if(btn == btnNews)
+    else if(btnSelectedTab == btnNews)
     {
         self.title = @"EMC";
         btnNews.selected = YES;
         indexOfDrawer = 1;
-        if (btnNews.selected)
-        {
-            btnPortfolio.selected = NO;
-            btnMarket.selected = NO;
-            btnCalendar.selected = NO;
-            
-//            btnNews.backgroundColor = [UIColor colorWithRed:22/255.0 green:25/255.0 blue:27/255.0 alpha:1.0];
-//            btnMarket.backgroundColor = [UIColor colorWithRed:12/255.0 green:16/255.0 blue:20/255.0 alpha:1.0];
-//            btnPortfolio.backgroundColor = [UIColor colorWithRed:12/255.0 green:16/255.0 blue:20/255.0 alpha:1.0];
-//            btnCalendar.backgroundColor = [UIColor colorWithRed:12/255.0 green:16/255.0 blue:20/255.0 alpha:1.0];
-        }
+       
         [self.viewForCalendar setHidden:YES];
         [self.viewForMarket setHidden:YES];
         [self.viewForPortflio setHidden:YES];
@@ -776,25 +768,11 @@ else
         //Harish
 //        [self newsPage];
     }
-    else if(btn == btnCalendar)
+    else if(btnSelectedTab == btnCalendar)
     {
         self.title = @"Calendar";
         btnCalendar.selected = YES;
         indexOfDrawer = 3;
-        if (btnCalendar.selected)
-        {
-            //selected :[UIColor colorWithRed:22/255.0 green:25/255.0 blue:27/255.0 alpha:1.0];
-            //deselected :  [UIColor colorWithRed:12/255.0 green:16/255.0 blue:20/255.0 alpha:1.0];
-            
-            btnPortfolio.selected = NO;
-            btnNews.selected = NO;
-            btnMarket.selected = NO;
-            
-//            btnCalendar.backgroundColor = [UIColor colorWithRed:22/255.0 green:25/255.0 blue:27/255.0 alpha:1.0];
-//            btnMarket.backgroundColor = [UIColor colorWithRed:12/255.0 green:16/255.0 blue:20/255.0 alpha:1.0];
-//            btnPortfolio.backgroundColor = [UIColor colorWithRed:12/255.0 green:16/255.0 blue:20/255.0 alpha:1.0];
-//            btnNews.backgroundColor = [UIColor colorWithRed:12/255.0 green:16/255.0 blue:20/255.0 alpha:1.0];
-        }
         
         [self.viewForNews setHidden:YES];
         [self.viewForEMC setHidden:YES];
@@ -804,42 +782,38 @@ else
         [self.view addSubview:self.viewForCalendar];
         [self.tableViewForCalendar reloadData];
     }
+    
+    [self setUpPageUI];
+    
 }
-- (IBAction)btnClickOnCalendarDays:(id)sender {
+- (IBAction)btnClickOnCalendarDays:(id)sender
+{
+    UIButton *btn = (UIButton*)sender;
+    UIButton *btnMarket = (UIButton*)[self.view viewWithTag:110];
+    UIButton *btnPortfolio = (UIButton*)[self.view viewWithTag:111];
+    UIButton *btnNews = (UIButton*)[self.view viewWithTag:112];
+    UIButton *btnCalendar = (UIButton*)[self.view viewWithTag:113];
+    
+    btnMarket.selected = NO;
+    btnPortfolio.selected = NO;
+    btnNews.selected = NO;
+    btnCalendar.selected = NO;
+    
+    if(btn == btnMarket)
     {
-        UIButton *btn = (UIButton*)sender;
-        UIButton *btnMarket = (UIButton*)[self.view viewWithTag:110];
-        UIButton *btnPortfolio = (UIButton*)[self.view viewWithTag:111];
-        UIButton *btnNews = (UIButton*)[self.view viewWithTag:112];
-        UIButton *btnCalendar = (UIButton*)[self.view viewWithTag:113];
-        if(btn == btnMarket)
-        {
-            btnMarket.selected = YES;
-            btnPortfolio.selected = NO;
-            btnNews.selected = NO;
-            btnCalendar.selected = NO;
-        }
-        else if(btn == btnPortfolio)
-        {
-            btnMarket.selected = NO;
-            btnPortfolio.selected = YES;
-            btnNews.selected = NO;
-            btnCalendar.selected = NO;
-        }
-        else if(btn == btnNews)
-        {
-            btnMarket.selected = NO;
-            btnPortfolio.selected = NO;
-            btnNews.selected = YES;
-            btnCalendar.selected = NO;
-        }
-        else if(btn == btnCalendar)
-        {
-            btnMarket.selected = NO;
-            btnPortfolio.selected = NO;
-            btnNews.selected = NO;
-            btnCalendar.selected = YES;
-        }
+        btnMarket.selected = YES;
+    }
+    else if(btn == btnPortfolio)
+    {
+        btnPortfolio.selected = YES;
+    }
+    else if(btn == btnNews)
+    {
+        btnNews.selected = YES;
+    }
+    else if(btn == btnCalendar)
+    {
+        btnCalendar.selected = YES;
     }
 }
 
@@ -849,7 +823,6 @@ else
     calendarVC.is_NotFromDraw = YES;
 
     [self.navigationController pushViewController:calendarVC animated:YES];
-
 }
 
 #pragma mark - Collectionview Delegate
@@ -1101,8 +1074,15 @@ else
 }
 
 #pragma mark - PortfolioPage
-- (void)setUpOnTapPortfolio {
+
+- (void)setUpOnTapPortfolio
+{
+    [self emptyPortfolioViewHiddenStatus:NO];
+    
+    return;
+    
     //Temp Login
+    
     if ([imgViewEmpty isHidden]) {
         if (portfolioVCObj && [portfolioVCObj.title isEqualToString:@"ProfolioList"]) {
             [self showPortfolioEditable];
@@ -1116,7 +1096,8 @@ else
     }
 }
 
-- (void)emptyPortfolioViewHiddenStatus:(BOOL)isHide {
+- (void)emptyPortfolioViewHiddenStatus:(BOOL)isHide
+{
     [portfolioVCObj.view removeFromSuperview];
     portfolioVCObj = nil;
     [imgViewEmpty setHidden:isHide];

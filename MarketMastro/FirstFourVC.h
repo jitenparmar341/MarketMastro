@@ -61,7 +61,10 @@
     
     //Firebase
     __weak IBOutlet GADBannerView *adBannerView;
+    
+    UIButton *btnSelectedTab;
 }
+
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
 @property (weak, nonatomic) IBOutlet UIView *viewForNews;
 @property (weak, nonatomic) IBOutlet UIView *viewForPortflio;
