@@ -116,7 +116,7 @@ int secondsLeft;
 
 -(void)setupValues
 {
-    UIColor *color = _txtOtp.textColor;
+    UIColor *color = [UIColor colorwithHexString:@"#959595"];
     _txtOtp.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Please enter the OTP received" attributes:@{NSForegroundColorAttributeName: color}];
     
     ViewForResendOTP.backgroundColor = [UIColor colorWithRed:22/255.0 green:24/255.0 blue:26/255.0 alpha:1.0];

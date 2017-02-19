@@ -1392,8 +1392,8 @@
 		BBF8BD811E3F81B700279FD2 /* NewsCell */ = {
 			isa = PBXGroup;
 			children = (
-				BBF8BD821E3F81DE00279FD2 /* NewsTableViewCell.m */,
 				BBF8BD831E3F81DE00279FD2 /* NewsTableViewCell.h */,
+				BBF8BD821E3F81DE00279FD2 /* NewsTableViewCell.m */,
 			);
 			name = NewsCell;
 			sourceTree = "<group>";

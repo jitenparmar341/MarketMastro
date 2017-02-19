@@ -52,6 +52,7 @@
         }
     }
     [self MethodCallPackageListApi];
+    [_btnEdit.imageView setContentMode:UIViewContentModeScaleAspectFit];
 }
 
 - (void)viewWillAppear:(BOOL)animated

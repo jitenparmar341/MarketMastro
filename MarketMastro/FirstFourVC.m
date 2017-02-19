@@ -329,7 +329,9 @@
     [_btnCalender setBackgroundImage:tDImg forState:UIControlStateNormal];
     [_btnPortfolio setBackgroundImage:tDImg forState:UIControlStateNormal];
     
-    [self buttonImageTitleAlign];
+    if (_btnMarket) {
+        [self buttonImageTitleAlign];
+    }
 }
 
 #pragma mark - MarketPage
@@ -456,7 +458,13 @@
                  [[MethodsManager sharedManager]StopAnimating];
                  NSLog(@"get current active package error = %@",error);
                  
-                 [self MethodGetCommodityTypes];
+                 if (error.code==602) {
+                     [self redirectToRegistrationPage:error];
+                 }
+                 else
+                 {
+                     [self MethodGetCommodityTypes];
+                 }
              }];
         }
         else
@@ -659,8 +667,7 @@ else
         
         self.viewForPortflio.frame = CGRectMake(0, 135, SCREEN_WIDTH, SCREEN_HEIGHT-135);
         [self.view addSubview:self.viewForMarket];
-        [self setupMarketPageControl];
-//        [self.viewForPortflio addSubview:ViewSelected3Commodity];
+        [self.viewForPortflio addSubview:ViewSelected3Commodity];
         
         [ViewSelected3Commodity setFrame:CGRectMake(ViewSelected3Commodity.frame.origin.x, ViewSelected3Commodity.frame.origin.y, SCREEN_WIDTH, ViewSelected3Commodity.frame.size.height)];
     }
@@ -1389,6 +1396,35 @@ else
         {
             [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil]show];
         }
+    }
+}
+
+#pragma mark - MultipleLoginRedirectRegistration
+- (void)redirectToRegistrationPage:(NSError*)error {
+    [[[UIAlertView alloc] initWithTitle:@"Error"
+                                message:error.localizedDescription
+                               delegate:nil
+                      cancelButtonTitle:nil
+                      otherButtonTitles:@"Ok", nil] show];
+    
+    ViewController *registrationPage = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
+    NSMutableArray *tArr = [[NSMutableArray alloc] init];
+    [tArr addObject:registrationPage];
+    [tArr addObject:self];
+    self.navigationController.viewControllers = tArr;
+    [self.navigationController popViewControllerAnimated:YES];
+    
+    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+    
+    NSArray *tableNames = @[@"ALERT", @"CommodityGroup", @"CommodityType", @"News", @"PopularCommodity", @"UserInfo", @"UserPortfolio"];
+    for (NSString *tableName in tableNames) {
+        NSString *deleteQuery = [NSString stringWithFormat:@"DELETE FROM %@", tableName];
+        [[SQLiteDatabase sharedInstance] executeUpdate:deleteQuery withParams:nil success:^(SQLiteResult *result) {
+            NSLog(@"Query : %@ - Status : %@", deleteQuery, result.success?@"YES":@"NO");
+        } failure:^(NSString *errorMessage) {
+            NSLog(@"errorMessage : %@", errorMessage);
+        }];
     }
 }
 
