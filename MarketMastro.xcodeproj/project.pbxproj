@@ -135,6 +135,7 @@
 		684D9F4C1E4888BE00DA3A0F /* dro_emc_ico.png in Resources */ = {isa = PBXBuildFile; fileRef = 684D9F461E4888BE00DA3A0F /* dro_emc_ico.png */; };
 		688359F31E4CEA64006A31FB /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 688359F21E4CEA64006A31FB /* NewsViewController.m */; };
 		68B151221E4A6339006621E4 /* UIImage+HPImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B151211E4A6339006621E4 /* UIImage+HPImage.m */; };
+		96999CB31E5A053E00D832E3 /* Main-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96999CB21E5A053E00D832E3 /* Main-iPad.storyboard */; };
 		969C7AB51E53877B009B0123 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 969C7A8F1E53877B009B0123 /* MKAnnotationView+WebCache.m */; };
 		969C7AB61E53877B009B0123 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 969C7A911E53877B009B0123 /* NSData+ImageContentType.m */; };
 		969C7AB71E53877B009B0123 /* NSImage+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 969C7A931E53877B009B0123 /* NSImage+WebCache.m */; };
@@ -156,7 +157,6 @@
 		969C7AC71E53877B009B0123 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 969C7AB41E53877B009B0123 /* UIView+WebCacheOperation.m */; };
 		96CFE2221E54CB9200190322 /* CustomSelPack.m in Sources */ = {isa = PBXBuildFile; fileRef = 96CFE2211E54CB9200190322 /* CustomSelPack.m */; };
 		96CFE2251E54D30E00190322 /* CustomModePay.m in Sources */ = {isa = PBXBuildFile; fileRef = 96CFE2241E54D30E00190322 /* CustomModePay.m */; };
-		96D1BE2B1E56297500921555 /* Main-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96D1BE2A1E56297500921555 /* Main-iPad.storyboard */; };
 		96DB25931E561078007506AD /* TransactionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DB25921E561078007506AD /* TransactionVC.m */; };
 		96DCBD291E55FCDA00746E07 /* ConfirmVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DCBD281E55FCDA00746E07 /* ConfirmVC.m */; };
 		AB314E501DE51BAC00228701 /* MyTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = AB314E4D1DE51BAC00228701 /* MyTextField.m */; };
@@ -410,6 +410,7 @@
 		688359F21E4CEA64006A31FB /* NewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsViewController.m; sourceTree = "<group>"; };
 		68B151201E4A6339006621E4 /* UIImage+HPImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+HPImage.h"; sourceTree = "<group>"; };
 		68B151211E4A6339006621E4 /* UIImage+HPImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+HPImage.m"; sourceTree = "<group>"; };
+		96999CB21E5A053E00D832E3 /* Main-iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Main-iPad.storyboard"; sourceTree = "<group>"; };
 		969C7A8E1E53877B009B0123 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		969C7A8F1E53877B009B0123 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		969C7A901E53877B009B0123 /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
@@ -453,7 +454,6 @@
 		96CFE2211E54CB9200190322 /* CustomSelPack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSelPack.m; sourceTree = "<group>"; };
 		96CFE2231E54D30E00190322 /* CustomModePay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomModePay.h; sourceTree = "<group>"; };
 		96CFE2241E54D30E00190322 /* CustomModePay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomModePay.m; sourceTree = "<group>"; };
-		96D1BE2A1E56297500921555 /* Main-iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Main-iPad.storyboard"; sourceTree = "<group>"; };
 		96DB25911E561078007506AD /* TransactionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionVC.h; sourceTree = "<group>"; };
 		96DB25921E561078007506AD /* TransactionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionVC.m; sourceTree = "<group>"; };
 		96DCBD271E55FCDA00746E07 /* ConfirmVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmVC.h; sourceTree = "<group>"; };
@@ -869,7 +869,7 @@
 			isa = PBXGroup;
 			children = (
 				BBED81C51E45A73200CD980E /* Main.storyboard */,
-				96D1BE2A1E56297500921555 /* Main-iPad.storyboard */,
+				96999CB21E5A053E00D832E3 /* Main-iPad.storyboard */,
 				969C7A8D1E538755009B0123 /* SDWebimage */,
 				BB33971B1E433191007A3EEE /* mjpopup */,
 				043817111DD74AD700FCEB7D /* Images */,
@@ -1612,7 +1612,7 @@
 				BBED81C61E45A73200CD980E /* Main.storyboard in Resources */,
 				0438175A1DD80BD400FCEB7D /* checked_checkbox.png in Resources */,
 				BBF8331C1E3B1AC700CF91E8 /* helpactive.png in Resources */,
-				96D1BE2B1E56297500921555 /* Main-iPad.storyboard in Resources */,
+				96999CB31E5A053E00D832E3 /* Main-iPad.storyboard in Resources */,
 				684D9F491E4888BE00DA3A0F /* dro_emc_active_ico.png in Resources */,
 				BBF8331A1E3B1AC700CF91E8 /* calenderactive.png in Resources */,
 				BB4BDBC61E3C91BB008775E1 /* sad_portfolio_ico.png in Resources */,
