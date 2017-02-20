@@ -260,7 +260,6 @@
     }];
 }
 
-
 -(void)deleteAllFromAlert
 {
     NSString *query = [NSString stringWithFormat:@"delete from Alert"];
@@ -293,7 +292,6 @@
 
 -(void)MethodForUpdateDataIntoDB:(NSDictionary*)dic
 {
-    
     CommodityName= [dic valueForKey:@"CommodityName"];//string
     Condition   = [dic valueForKey:@"Condition"];//(String)
     //ScriptCode =  [dicResponse valueForKey:@"ScriptCode"];
@@ -448,20 +446,21 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
 }
-- (IBAction)createAlertVIew:(id)sender {
+    
+- (IBAction)createAlertVIew:(id)sender
+{
     CreateAlertVC *createAlertvc = [self.storyboard instantiateViewControllerWithIdentifier:@"CreateAlertVC"];
     [self.navigationController pushViewController:createAlertvc animated:YES];
 }
 
-
 #pragma tableview delegate methods
+    
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-   
     //return ArrGetCurrentAlertList.count;
     return ArrayGetAlertFromDB.count;
 }
@@ -513,7 +512,6 @@
     strText = [self removeHtmlTags:strText];
     cell.lblCommodityAlert.text = strText;
     
-    
     //IMP NSATTRIBUTE STRING
     /*
     NSMutableAttributedString *text =
@@ -528,13 +526,14 @@
      
     NSString *dateString = [NSString stringWithFormat:@"%@",[object stringForColumnName:@"CreatedDateTime"]];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    // this is imporant - we set our input date format to match our input string
-    // if format doesn't match you'll get nil from your string, so be careful
-    [dateFormatter setDateFormat:@"dd-MM-yyyy"];//2017-02-03T13:36:08
-    NSDate *dateFromString = [[NSDate alloc] init];
-    dateFromString = [dateFormatter dateFromString:dateString];
-    cell.lbldate.text = dateString;
     
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS"];//2017-02-03T13:36:08
+    NSDate *dateFromString = [dateFormatter dateFromString:dateString];
+    
+    [dateFormatter setDateFormat:@"dd MMM,yyyy HH:mm"];
+    dateString = [dateFormatter stringFromDate:dateFromString];
+    
+    cell.lbldate.text = dateString;
     
     strCommodityName = [NSString stringWithFormat:@"%@",[object stringForColumnName:@"CommodityName"]];
     strAlertID = [NSString stringWithFormat:@"%@",[object stringForColumnName:@"AlertID"]];
@@ -554,7 +553,6 @@
     NSString *strAlertIDd = [NSString stringWithFormat:@"%@",[object stringForColumnName:@"AlertID"]];
     NSString *strCommodityID = [NSString stringWithFormat:@"%@",[object stringForColumnName:@"CommodityID"]];
     NSString *strscriptcode = [NSString stringWithFormat:@"%@",[object stringForColumnName:@"ScriptCode"]];
-    
     
     NSMutableDictionary *dictSelectedAlert = [NSMutableDictionary dictionary];
     [dictSelectedAlert setObject:strCondition forKey:@"Condition"];

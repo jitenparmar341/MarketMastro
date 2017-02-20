@@ -37,13 +37,17 @@ NSString *selctedOptionMarket;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)selectCommoditeBtnClick:(id)sender {
+- (IBAction)selectCommoditeBtnClick:(id)sender
+    {
     if([selctedOptionMarket length] > 0)
     {
         [_selectCondition setTitle:[NSString stringWithFormat:@"  %@",selctedOptionMarket] forState:UIControlStateNormal];
     }
     CreatePortflioVC *createAlert = [self.storyboard instantiateViewControllerWithIdentifier:@"CreatePortflioVC"];
-    createAlert.isCreateAlert = YES;
+    createAlert.isFromAlert = YES;
+    createAlert.isFromPortfolio = false;
+    createAlert.isFromMarket = false;
+        
     [self.navigationController pushViewController:createAlert animated:YES];
 }
 - (IBAction)btnSelectConditionBtnClick:(id)sender {

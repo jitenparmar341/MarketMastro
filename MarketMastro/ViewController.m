@@ -1022,7 +1022,6 @@
 
 - (IBAction)btnRegisterTapped:(id)sender
 {
-   
      if([_strIsSigned isEqualToString:@"SignedIN"])
      {
          [self mathodUpdatedetails];

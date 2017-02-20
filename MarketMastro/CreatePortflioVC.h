@@ -14,6 +14,8 @@
     
 }
 
+@property (nonatomic,readwrite)BOOL isFromMarket,isFromPortfolio,isFromAlert;
+
 @property (weak, nonatomic) IBOutlet UISearchBar *srcBar;
 
 @property (weak, nonatomic) IBOutlet UIButton *btn1;
@@ -25,8 +27,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *btn7;
 @property (weak, nonatomic) IBOutlet UIButton *btn8;
 @property (weak, nonatomic) IBOutlet UIButton *btnSave;
-
-@property (nonatomic) BOOL isCreateAlert;
 
 @property (nonatomic, copy)NSString *isFromVC;
 

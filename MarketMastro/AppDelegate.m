@@ -12,6 +12,7 @@
 #import "SWRevealViewController.h"
 #import "AccountsViewController.h"
 #import "SidebarTableViewController.h"
+#import <UserNotifications/UserNotifications.h>
 
 #import "Firebase.h"
 
@@ -34,7 +35,18 @@ int indexOfDrawer;
     NSString * DocumentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
     NSString *Path=[DocumentsPath stringByAppendingPathComponent:@"LKSDB.db"];//@"staffDB.sqlite"
     NSString *bundlepath=[[NSBundle mainBundle]pathForResource:@"LKSDB" ofType:@"db"];
-   // NSLog(@"library path= %@",libraryPath);
+   
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    
+    center.delegate = self;
+    
+    [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error)
+    {
+        if( !error )
+        {
+            [[UIApplication sharedApplication] registerForRemoteNotifications];
+        }
+    }];
     
     if([[NSFileManager defaultManager]fileExistsAtPath:Path])
     {
@@ -47,8 +59,6 @@ int indexOfDrawer;
     NSLog(@"database path = %@",Path);
     
     [[NSUserDefaults standardUserDefaults]setObject:Path forKey:@"DBPath"];
-    
-    
     
     //0C1014  >>12, 16 ,20
     //[[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:12/255.0 green:16/255.0 blue:20/255.0 alpha:1.0]];
@@ -105,10 +115,33 @@ int indexOfDrawer;
 //    NSLog(@"Device Token = %@", str);
 //}
 
+#pragma mark - Push Notifications delegate
+
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler
+{
+    //Called when a notification is delivered to a foreground app.
+    
+    NSLog(@"Userinfo %@",notification.request.content.userInfo);
+    
+    completionHandler(UNNotificationPresentationOptionAlert);
+}
+
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler
+{
+    //Called to let your app know which action was selected by the user for a given notification.
+    
+    NSLog(@"Userinfo %@",response.notification.request.content.userInfo);
+}
+
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
     NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    [[NSUserDefaults standardUserDefaults]setValue:token forKey:@"deviceToken"];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+    
     // Send token to server
 }
 

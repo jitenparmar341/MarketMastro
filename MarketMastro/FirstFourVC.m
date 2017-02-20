@@ -238,7 +238,11 @@
     [Search setImage:[UIImage imageNamed:@"search_ico"] forState:UIControlStateNormal];
     [Search setImage:[UIImage imageNamed:@"search_ico"] forState:UIControlStateHighlighted];
     [Search.imageView setContentMode:UIViewContentModeScaleAspectFit];
-    [Search addTarget:self action:@selector(BtnSearchTapped) forControlEvents:UIControlEventTouchUpInside];
+    
+    if (indexOfDrawer == 1)
+        [Search addTarget:self action:@selector(BtnSearchTappedFromMarket) forControlEvents:UIControlEventTouchUpInside];
+    else
+        [Search addTarget:self action:@selector(BtnSearchTappedFromMarket) forControlEvents:UIControlEventTouchUpInside];
     
     CGRect frameimg3 = CGRectMake(0, 0, 35, 25);
     UIButton *list = [[UIButton alloc] initWithFrame:frameimg3];
@@ -262,7 +266,7 @@
         [plusButton setImage:[UIImage imageNamed:@"act_addcommodities_ico"] forState:UIControlStateNormal];
         [plusButton setImage:[UIImage imageNamed:@"act_addcommodities_ico"] forState:UIControlStateHighlighted];
         [plusButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
-        [plusButton addTarget:self action:@selector(BtnSearchTapped) forControlEvents:UIControlEventTouchUpInside];
+        [plusButton addTarget:self action:@selector(BtnAddTapped) forControlEvents:UIControlEventTouchUpInside];
         
         CGRect frameimg4 = CGRectMake(0, 0, 35, 25);
         UIButton *editButton = [[UIButton alloc] initWithFrame:frameimg4];
@@ -303,10 +307,26 @@
     sender.selected =! sender.selected;
 }
 
--(void)BtnSearchTapped
+- (void)BtnAddTapped
+{
+    // From Portfolio Tab
+    
+    CreatePortflioVC *commodityPage = [self.storyboard instantiateViewControllerWithIdentifier:@"CreatePortflioVC"];
+    commodityPage.isFromVC = @"Dashboard";
+    commodityPage.isFromPortfolio = true;
+    commodityPage.isFromAlert = false;
+    commodityPage.isFromMarket = false;
+    
+    [self.navigationController pushViewController:commodityPage animated:YES];
+}
+
+-(void)BtnSearchTappedFromMarket
 {
     CreatePortflioVC *commodityPage = [self.storyboard instantiateViewControllerWithIdentifier:@"CreatePortflioVC"];
     commodityPage.isFromVC = @"Dashboard";
+    commodityPage.isFromPortfolio = false;
+    commodityPage.isFromAlert = false;
+    commodityPage.isFromMarket = true;
     
     [[NSUserDefaults standardUserDefaults]setObject:@"Dashboard" forKey:@"isFromVC"];
     

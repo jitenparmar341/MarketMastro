@@ -19,7 +19,7 @@
 @end
 
 @implementation CreateAlertVC
-NSString *selctedOption;
+NSString *selectedOption;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -40,7 +40,6 @@ NSString *selctedOption;
         NSString *strcommodityName = [_DicSelectedAlert valueForKey:@"CommodityName"];
         NSString *strConditionn = [_DicSelectedAlert valueForKey:@"Condition"];
         NSString *strprice = [_DicSelectedAlert valueForKey:@"Value"];
-        
         
         if ([strCondition isEqualToString:@"isLT"])
         {
@@ -64,17 +63,22 @@ NSString *selctedOption;
         }
         
         _txtFieldPrice.text = strprice;
-        [_selectCondition setTitle:strConditionn forState:UIControlStateNormal];
-        [_btnSelectComm setTitle:strcommodityName forState:UIControlStateNormal];
+        [_selectCondition setTitle:[NSString stringWithFormat:@"  %@",strConditionn] forState:UIControlStateNormal];
+        [_btnSelectComm setTitle:[NSString stringWithFormat:@"  %@",strcommodityName] forState:UIControlStateNormal];
     }
     else
     {
          self.title = @"Set Alert";
     }
-    selctedOption = @"";
+    
+    selectedOption = @"";
     
     [_txtFieldPrice setReturnKeyType:UIReturnKeyDone];
     [self setDoneKeypad];
+    
+    UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 7, 20)];
+    _txtFieldPrice.leftView = paddingView;
+    _txtFieldPrice.leftViewMode = UITextFieldViewModeAlways;
     
     //AdBanner
     [self bannerAd];
@@ -141,9 +145,9 @@ NSString *selctedOption;
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    if([selctedOption length] > 0)
+    if([selectedOption length] > 0)
     {
-        [_btnSelectComm setTitle:[NSString stringWithFormat:@"  %@",selctedOption] forState:UIControlStateNormal];
+        [_btnSelectComm setTitle:[NSString stringWithFormat:@"  %@",selectedOption] forState:UIControlStateNormal];
     }
     
     if([_selectedItem length] > 0)
@@ -151,6 +155,7 @@ NSString *selctedOption;
         [_btnSelectComm setTitle:[NSString stringWithFormat:@"  %@",_selectedItem] forState:UIControlStateNormal];
     }
 }
+    
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -163,16 +168,19 @@ NSString *selctedOption;
 {
     [_txtFieldPrice resignFirstResponder];
     
-    if([selctedOption length] > 0)
+    if([selectedOption length] > 0)
     {
-        [_selectCondition setTitle:[NSString stringWithFormat:@"  %@",selctedOption] forState:UIControlStateNormal];
+        [_selectCondition setTitle:[NSString stringWithFormat:@"  %@",selectedOption] forState:UIControlStateNormal];
         [_selectCondition setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _selectCondition.font = [UIFont fontWithName:@"Lato-Bold" size:15.0];
     }
     
     CreatePortflioVC *createAlert = [self.storyboard instantiateViewControllerWithIdentifier:@"CreatePortflioVC"];
-    createAlert.isCreateAlert = YES;
     createAlert.isFromVC = @"Alert";
+    createAlert.isFromAlert = true;
+    createAlert.isFromMarket = false;
+    createAlert.isFromPortfolio = false;
+    
     [[NSUserDefaults standardUserDefaults]setObject:@"Alert" forKey:@"isFromVC"];
     
     [self.navigationController pushViewController:createAlert animated:YES];

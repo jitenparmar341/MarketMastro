@@ -190,8 +190,6 @@
     [_object.navigationController pushViewController:detail animated:YES];
 }
 
-
-
 /*
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 10;

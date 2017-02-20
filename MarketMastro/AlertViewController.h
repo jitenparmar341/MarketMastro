@@ -16,7 +16,7 @@
     __weak IBOutlet GADBannerView *adBannerView;
 }
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
-@property (nonatomic) BOOL is_NotFromDraw;
+@property (nonatomic,readwrite) BOOL is_NotFromDraw;
 @property (weak, nonatomic) IBOutlet UITableView *tableCurrentAlerts;
 
 @end

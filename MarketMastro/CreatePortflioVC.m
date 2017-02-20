@@ -19,7 +19,7 @@
 
 - (void)viewDidLoad
 {
-    selctedOption = @"";
+    selectedOption = @"";
     
     self.title = @"Choose Community";
     
@@ -58,9 +58,19 @@
     _btn8.layer.borderColor = RGB(41, 84, 134).CGColor;
     _btn8.layer.borderWidth = 1;
     
-    if(_isCreateAlert)
+    self.btnSave.hidden = true;
+    
+    if (self.isFromPortfolio == true)
     {
-        self.btnSave.hidden = YES;
+        self.btnSave.hidden = false;
+    }
+    else if(self.isFromMarket == true)
+    {
+        
+    }
+    else if (self.isFromAlert == true)
+    {
+        
     }
     
     [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setDefaultTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
@@ -80,21 +90,27 @@
 
 -(IBAction)btnClick:(UIButton *)sender
 {
+    if (self.isFromMarket == true)
+    {
+        return;
+    }
+    
     sender.selected =! sender.selected;
     
     if(!sender.selected)
     {
         [sender setBackgroundColor:[UIColor clearColor]];
-        
-        if(_isCreateAlert)
-        {
-            selctedOption = sender.currentTitle;
-            [self.navigationController popViewControllerAnimated:YES];
-        }
     }
     else
     {
         [sender setBackgroundColor:RGB(41, 84, 134)];
+        
+        if(self.isFromAlert)
+        {
+            NSLog(@"%@",selectedOption);
+            selectedOption = sender.currentTitle;
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     }
 }
 

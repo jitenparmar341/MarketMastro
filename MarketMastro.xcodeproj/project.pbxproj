@@ -117,7 +117,6 @@
 		04D5F83E1DD4BDE100CE1091 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F83D1DD4BDE100CE1091 /* AppDelegate.m */; };
 		04D5F8411DD4BDE100CE1091 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F8401DD4BDE100CE1091 /* ViewController.m */; };
 		04D5F8461DD4BDE200CE1091 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04D5F8451DD4BDE200CE1091 /* Assets.xcassets */; };
-		04D5F8491DD4BDE200CE1091 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04D5F8471DD4BDE200CE1091 /* LaunchScreen.storyboard */; };
 		04D5F8541DD4BDE200CE1091 /* MarketMastroTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F8531DD4BDE200CE1091 /* MarketMastroTests.m */; };
 		04D5F85F1DD4BDE200CE1091 /* MarketMastroUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F85E1DD4BDE200CE1091 /* MarketMastroUITests.m */; };
 		68316F881E44915600198929 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 68316F871E44915600198929 /* GoogleService-Info.plist */; };
@@ -159,6 +158,7 @@
 		96CFE2251E54D30E00190322 /* CustomModePay.m in Sources */ = {isa = PBXBuildFile; fileRef = 96CFE2241E54D30E00190322 /* CustomModePay.m */; };
 		96DB25931E561078007506AD /* TransactionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DB25921E561078007506AD /* TransactionVC.m */; };
 		96DCBD291E55FCDA00746E07 /* ConfirmVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DCBD281E55FCDA00746E07 /* ConfirmVC.m */; };
+		96FB31481E5B61A800A8A759 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB01CCBF1E2629C100DFFB63 /* UserNotifications.framework */; };
 		AB314E501DE51BAC00228701 /* MyTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = AB314E4D1DE51BAC00228701 /* MyTextField.m */; };
 		AB314E511DE51BAC00228701 /* SubscriptionHistoryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AB314E4F1DE51BAC00228701 /* SubscriptionHistoryVC.m */; };
 		AB314E541DE526BC00228701 /* UpgradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB314E531DE526BC00228701 /* UpgradeViewController.m */; };
@@ -387,7 +387,6 @@
 		04D5F83F1DD4BDE100CE1091 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		04D5F8401DD4BDE100CE1091 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		04D5F8451DD4BDE200CE1091 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		04D5F8481DD4BDE200CE1091 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04D5F84A1DD4BDE200CE1091 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04D5F84F1DD4BDE200CE1091 /* MarketMastroTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarketMastroTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		04D5F8531DD4BDE200CE1091 /* MarketMastroTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MarketMastroTests.m; sourceTree = "<group>"; };
@@ -709,6 +708,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96FB31481E5B61A800A8A759 /* UserNotifications.framework in Frameworks */,
 				68316F8B1E44948300198929 /* CoreLocation.framework in Frameworks */,
 				BB50CAD81E3B9C7000778D1D /* Foundation.framework in Frameworks */,
 				BBED81C41E459D1300CD980E /* GoogleMobileAds.framework in Frameworks */,
@@ -917,7 +917,6 @@
 				68316F861E44909C00198929 /* Firebase.h */,
 				AB91F1C01DE073A00032AD9A /* ChangePassword.png */,
 				04D5F8451DD4BDE200CE1091 /* Assets.xcassets */,
-				04D5F8471DD4BDE200CE1091 /* LaunchScreen.storyboard */,
 				04D5F84A1DD4BDE200CE1091 /* Info.plist */,
 				68316F871E44915600198929 /* GoogleService-Info.plist */,
 				04D5F8391DD4BDE100CE1091 /* Supporting Files */,
@@ -1497,18 +1496,18 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
 					04D5F84E1DD4BDE200CE1091 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = "CHAIN-NINE COMTRADE PRIVATE LIMITED";
+						DevelopmentTeam = 9LGV33Q478;
 						TestTargetID = 04D5F8351DD4BDE100CE1091;
 					};
 					04D5F8591DD4BDE200CE1091 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = "CHAIN-NINE COMTRADE PRIVATE LIMITED";
+						DevelopmentTeam = 9LGV33Q478;
 						TestTargetID = 04D5F8351DD4BDE100CE1091;
 					};
 				};
@@ -1560,7 +1559,6 @@
 				BB33971A1E4323EA007A3EEE /* MyAlertViewController.xib in Resources */,
 				BB50CACE1E3B961D00778D1D /* more.png in Resources */,
 				BB1AE4F61E27AB2F006C2F22 /* act_back_ico.png in Resources */,
-				04D5F8491DD4BDE200CE1091 /* LaunchScreen.storyboard in Resources */,
 				043817451DD7664700FCEB7D /* reg_user_icon@3x.png in Resources */,
 				BB1AE4F41E27AB2F006C2F22 /* act_addcommodities_ico.png in Resources */,
 				043817791DD9F84600FCEB7D /* otp_time_icon@2x.png in Resources */,
@@ -1882,17 +1880,6 @@
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		04D5F8471DD4BDE200CE1091 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				04D5F8481DD4BDE200CE1091 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		04D5F8611DD4BDE200CE1091 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1918,7 +1905,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: CHAIN-NINE COMTRADE PRIVATE LIMITED (9LGV33Q478)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "CHAIN-NINE COMTRADE PRIVATE LIMITED";
+				DEVELOPMENT_TEAM = 9LGV33Q478;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1939,7 +1926,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "8d9b6aa0-ee5d-49da-9609-071183fa8417";
+				PROVISIONING_PROFILE = "1a17dfbd-0d54-4f01-a5a9-e975cdc2558a";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1970,7 +1957,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: CHAIN-NINE COMTRADE PRIVATE LIMITED (9LGV33Q478)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "CHAIN-NINE COMTRADE PRIVATE LIMITED";
+				DEVELOPMENT_TEAM = 9LGV33Q478;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1984,7 +1971,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "8d9b6aa0-ee5d-49da-9609-071183fa8417";
+				PROVISIONING_PROFILE = "1a17dfbd-0d54-4f01-a5a9-e975cdc2558a";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1996,6 +1983,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = MarketMastro/MarketMastro.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: CHAIN-NINE COMTRADE PRIVATE LIMITED (9LGV33Q478)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 9LGV33Q478;
@@ -2026,6 +2015,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = MarketMastro/MarketMastro.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: CHAIN-NINE COMTRADE PRIVATE LIMITED (9LGV33Q478)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 9LGV33Q478;
