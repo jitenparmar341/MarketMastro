@@ -19,18 +19,18 @@
 @end
 
 @implementation CreateAlertVC
-NSString *selectedOption;
+NSString *selctedOption;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setPrizeValidation];
     [[UINavigationBar appearance] setBarTintColor:[UIColor blackColor]];
     
-   /*
-    @"Condition"];
-    [dictSelectedAlert setObject:strCommodity forKey:@"CommodityName"];
-    [dictSelectedAlert setObject:strPrice forKey:@"Value"];
-    */
+    /*
+     @"Condition"];
+     [dictSelectedAlert setObject:strCommodity forKey:@"CommodityName"];
+     [dictSelectedAlert setObject:strPrice forKey:@"Value"];
+     */
     
     if (_isFromAertViewController)
     {
@@ -40,6 +40,7 @@ NSString *selectedOption;
         NSString *strcommodityName = [_DicSelectedAlert valueForKey:@"CommodityName"];
         NSString *strConditionn = [_DicSelectedAlert valueForKey:@"Condition"];
         NSString *strprice = [_DicSelectedAlert valueForKey:@"Value"];
+        
         
         if ([strCondition isEqualToString:@"isLT"])
         {
@@ -63,22 +64,17 @@ NSString *selectedOption;
         }
         
         _txtFieldPrice.text = strprice;
-        [_selectCondition setTitle:[NSString stringWithFormat:@"  %@",strConditionn] forState:UIControlStateNormal];
-        [_btnSelectComm setTitle:[NSString stringWithFormat:@"  %@",strcommodityName] forState:UIControlStateNormal];
+        [_selectCondition setTitle:strConditionn forState:UIControlStateNormal];
+        [_btnSelectComm setTitle:strcommodityName forState:UIControlStateNormal];
     }
     else
     {
-         self.title = @"Set Alert";
+        self.title = @"Set Alert";
     }
-    
-    selectedOption = @"";
+    selctedOption = @"";
     
     [_txtFieldPrice setReturnKeyType:UIReturnKeyDone];
     [self setDoneKeypad];
-    
-    UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 7, 20)];
-    _txtFieldPrice.leftView = paddingView;
-    _txtFieldPrice.leftViewMode = UITextFieldViewModeAlways;
     
     //AdBanner
     [self bannerAd];
@@ -86,27 +82,27 @@ NSString *selectedOption;
 
 -(void)setPrizeValidation
 {/*
-    float twofortythreetwentyfive = 234.25;
-    float onetwothreefourtwentyfive = 1234.25;
-    float eleventwothreefourtwentyfive = 11234.25;
+  float twofortythreetwentyfive = 234.25;
+  float onetwothreefourtwentyfive = 1234.25;
+  float eleventwothreefourtwentyfive = 11234.25;
+  
+  NSNumberFormatter * formatter =  [[NSNumberFormatter alloc] init];
+  [formatter setUsesSignificantDigits:YES];
+  [formatter setMaximumSignificantDigits:5];
+  [formatter setMaximumFractionDigits:2];
+  [formatter setRoundingMode:NSNumberFormatterRoundCeiling];
+  
+  NSLog(@"%@", [formatter stringFromNumber:[NSNumber numberWithFloat:twofortythreetwentyfive]]);
+  NSLog(@"%@", [formatter stringFromNumber:[NSNumber numberWithFloat:onetwothreefourtwentyfive]]);
+  NSLog(@"%@", [formatter stringFromNumber:[NSNumber numberWithFloat:eleventwothreefourtwentyfive]]);
+  */
+    
     
     NSNumberFormatter * formatter =  [[NSNumberFormatter alloc] init];
     [formatter setUsesSignificantDigits:YES];
-    [formatter setMaximumSignificantDigits:5];
+    [formatter setMaximumSignificantDigits:6];
     [formatter setMaximumFractionDigits:2];
     [formatter setRoundingMode:NSNumberFormatterRoundCeiling];
-    
-    NSLog(@"%@", [formatter stringFromNumber:[NSNumber numberWithFloat:twofortythreetwentyfive]]);
-    NSLog(@"%@", [formatter stringFromNumber:[NSNumber numberWithFloat:onetwothreefourtwentyfive]]);
-    NSLog(@"%@", [formatter stringFromNumber:[NSNumber numberWithFloat:eleventwothreefourtwentyfive]]);
-  */
-    
-   
-     NSNumberFormatter * formatter =  [[NSNumberFormatter alloc] init];
-     [formatter setUsesSignificantDigits:YES];
-     [formatter setMaximumSignificantDigits:6];
-     [formatter setMaximumFractionDigits:2];
-     [formatter setRoundingMode:NSNumberFormatterRoundCeiling];
     
     float prize = [_txtFieldPrice.text floatValue];
     UILabel *lblPrize;
@@ -125,7 +121,7 @@ NSString *selectedOption;
     [numberToolbar sizeToFit];
     
     _txtFieldPrice.inputAccessoryView = numberToolbar;
-   
+    
 }
 
 -(void)cancelNumberPad
@@ -145,9 +141,9 @@ NSString *selectedOption;
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    if([selectedOption length] > 0)
+    if([selctedOption length] > 0)
     {
-        [_btnSelectComm setTitle:[NSString stringWithFormat:@"  %@",selectedOption] forState:UIControlStateNormal];
+        [_btnSelectComm setTitle:[NSString stringWithFormat:@"  %@",selctedOption] forState:UIControlStateNormal];
     }
     
     if([_selectedItem length] > 0)
@@ -155,7 +151,6 @@ NSString *selectedOption;
         [_btnSelectComm setTitle:[NSString stringWithFormat:@"  %@",_selectedItem] forState:UIControlStateNormal];
     }
 }
-    
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -167,20 +162,16 @@ NSString *selectedOption;
 - (IBAction)selectCommoditeBtnClick:(id)sender
 {
     [_txtFieldPrice resignFirstResponder];
-    
-    if([selectedOption length] > 0)
+    if([selctedOption length] > 0)
     {
-        [_selectCondition setTitle:[NSString stringWithFormat:@"  %@",selectedOption] forState:UIControlStateNormal];
+        [_selectCondition setTitle:[NSString stringWithFormat:@"  %@",selctedOption] forState:UIControlStateNormal];
         [_selectCondition setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _selectCondition.font = [UIFont fontWithName:@"Lato-Bold" size:15.0];
     }
     
     CreatePortflioVC *createAlert = [self.storyboard instantiateViewControllerWithIdentifier:@"CreatePortflioVC"];
+    createAlert.isCreateAlert = YES;
     createAlert.isFromVC = @"Alert";
-    createAlert.isFromAlert = true;
-    createAlert.isFromMarket = false;
-    createAlert.isFromPortfolio = false;
-    
     [[NSUserDefaults standardUserDefaults]setObject:@"Alert" forKey:@"isFromVC"];
     
     [self.navigationController pushViewController:createAlert animated:YES];
@@ -195,18 +186,18 @@ NSString *selectedOption;
 - (IBAction)setAlertBtnClick:(id)sender
 {
     /*
-    //imp code for validation of prize ..while implementation check this.
-    NSNumberFormatter * formatter =  [[NSNumberFormatter alloc] init];
-    [formatter setUsesSignificantDigits:YES];
-    [formatter setMaximumSignificantDigits:8];
-    [formatter setMaximumFractionDigits:2];
-    [formatter setRoundingMode:NSNumberFormatterRoundCeiling];
-    
-    float prize = [_txtFieldPrice.text floatValue];
-    UILabel *lblPrize;
-    lblPrize.text = [formatter stringFromNumber:[NSNumber numberWithFloat:prize]];
-    _txtFieldPrice.text = lblPrize.text;
-    */
+     //imp code for validation of prize ..while implementation check this.
+     NSNumberFormatter * formatter =  [[NSNumberFormatter alloc] init];
+     [formatter setUsesSignificantDigits:YES];
+     [formatter setMaximumSignificantDigits:8];
+     [formatter setMaximumFractionDigits:2];
+     [formatter setRoundingMode:NSNumberFormatterRoundCeiling];
+     
+     float prize = [_txtFieldPrice.text floatValue];
+     UILabel *lblPrize;
+     lblPrize.text = [formatter stringFromNumber:[NSNumber numberWithFloat:prize]];
+     _txtFieldPrice.text = lblPrize.text;
+     */
     
     /*
      check this condition
@@ -257,18 +248,18 @@ NSString *selectedOption;
      parameters ::
      
      UserID- User ID of user
-    // AlertID - Alert id of selected alert, to be updated
-   //  CommodityID- Commodity ID of Commodity selected for alert
-    // ScriptCode- Script code fo commodity
-   //  Condition- Condition set by user
-   //  Price- Entered by user
+     // AlertID - Alert id of selected alert, to be updated
+     //  CommodityID- Commodity ID of Commodity selected for alert
+     // ScriptCode- Script code fo commodity
+     //  Condition- Condition set by user
+     //  Price- Entered by user
      ExpiresInDays- Set seven date by default
      Exch- Exchange of commodity
      PauseAlerts- false
-    */
+     */
     
     NSString *strUserID = [[NSUserDefaults standardUserDefaults]valueForKey:@"UserID"];
-   // NSString *strcommodityName = [_DicSelectedAlert valueForKey:@"CommodityName"];
+    // NSString *strcommodityName = [_DicSelectedAlert valueForKey:@"CommodityName"];
     NSString *strConditionn = [_DicSelectedAlert valueForKey:@"Condition"];
     NSString *strprice = [_DicSelectedAlert valueForKey:@"Value"];
     NSString *strAlertID =  [_DicSelectedAlert valueForKey:@"AlertID"];
@@ -289,19 +280,19 @@ NSString *selectedOption;
                                 };
     
     [[webManager sharedObject]CallPostMethod:parameter withMethod:@"api/UpdateAlert" successResponce:^(id response)
-    {
-        NSLog(@"update alert response = %@",response);
-        [[[UIAlertView alloc]initWithTitle:@"Success" message:@"Alert updated successfully" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil]show];
-        
-        MyAlertViewController *alert = [[MyAlertViewController alloc]initWithNibName:@"MyAlertViewController" bundle:nil];
-        alert.delegate = self;
-        [self presentPopupViewController:alert animationType:MJPopupViewAnimationFade];
-        
-    }
-    failure:^(NSError *error)
-    {
-        NSLog(@"update alert error = %@",error.description);
-    }];
+     {
+         NSLog(@"update alert response = %@",response);
+         [[[UIAlertView alloc]initWithTitle:@"Success" message:@"Alert updated successfully" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil]show];
+         
+         MyAlertViewController *alert = [[MyAlertViewController alloc]initWithNibName:@"MyAlertViewController" bundle:nil];
+         alert.delegate = self;
+         [self presentPopupViewController:alert animationType:MJPopupViewAnimationFade];
+         
+     }
+                                     failure:^(NSError *error)
+     {
+         NSLog(@"update alert error = %@",error.description);
+     }];
 }
 
 -(void)CallsetAlertApi
@@ -354,13 +345,13 @@ NSString *selectedOption;
              [[MethodsManager sharedManager]StopAnimating];
              NSLog(@"create alert response = %@",response);
              
-            strUpdateAlert = @"NewAlertCreated";
+             strUpdateAlert = @"NewAlertCreated";
              
              MyAlertViewController *alert = [[MyAlertViewController alloc]initWithNibName:@"MyAlertViewController" bundle:nil];
              alert.delegate = self;
              [self presentPopupViewController:alert animationType:MJPopupViewAnimationFade];
          }
-        failure:^(NSError *error)
+                                         failure:^(NSError *error)
          {
              [[MethodsManager sharedManager]StopAnimating];
              NSLog(@"create alert error = %@",error.description);
@@ -462,13 +453,13 @@ NSString *selectedOption;
     [adBannerView setFrame:CGRectMake(0, SCREEN_HEIGHT-height, SCREEN_WIDTH, height)];
     
     adBannerView.hidden = NO;
-
-//    self.viewForEMC.frame = CGRectMake(0, 135,SCREEN_WIDTH, SCREEN_HEIGHT-135-height);
+    
+    //    self.viewForEMC.frame = CGRectMake(0, 135,SCREEN_WIDTH, SCREEN_HEIGHT-135-height);
     NSLog(@"adViewDidReceiveAd");
 }
 - (void)adView:(GADBannerView *)bannerView didFailToReceiveAdWithError:(GADRequestError *)error {
     adBannerView.hidden = YES;
-//    self.viewForEMC.frame = CGRectMake(0, 135,SCREEN_WIDTH, SCREEN_HEIGHT-135);
+    //    self.viewForEMC.frame = CGRectMake(0, 135,SCREEN_WIDTH, SCREEN_HEIGHT-135);
     NSLog(@"didFailToReceiveAdWithError");
 }
 - (void)adViewWillPresentScreen:(GADBannerView *)bannerView {

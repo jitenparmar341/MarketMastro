@@ -22,14 +22,14 @@
     NSString *title=[NSString stringWithFormat:@"%@",[news stringForColumnName:@"title"]];
     self.lblLastUpdate.hidden=YES;
     self.lblOfTitle.text = title;
-   // self.imgVIew.image = _imageLoad;
+    // self.imgVIew.image = _imageLoad;
     NSString *currentDateString=[NSString stringWithFormat:@"%@",[news stringForColumnName:@"pubDate"]];
     
     NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
     [formatter setDateStyle:NSDateFormatterShortStyle];
     [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
     NSDate *currentDate = [formatter dateFromString:currentDateString];
-   
+    
     [formatter setDateFormat:@"EEE dd MMM, yyyy hh:mm a"];
     NSString *dateStr = [formatter stringFromDate:currentDate];
     self.lblDateTime.text=dateStr;
@@ -40,7 +40,7 @@
             UIImage *image = [UIImage imageWithData:data];
             if (image) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                        self.imgVIew.image  = image;
+                    self.imgVIew.image  = image;
                 });
             }
         }
@@ -62,13 +62,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

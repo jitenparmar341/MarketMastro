@@ -9,9 +9,7 @@
 #import "UIColor+HPColor.h"
 
 @implementation UIColor (HPColor)
-
-+ (UIColor *)colorwithHexString:(NSString *)hexStr
-{
++ (UIColor *)colorwithHexString:(NSString *)hexStr {
     return [self colorwithHexString:hexStr alpha:1.0];
 }
 

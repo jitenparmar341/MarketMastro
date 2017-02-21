@@ -59,7 +59,7 @@
          }
          [_tableAlertHistory reloadData];
      }
-     failure:^(NSString *errorMessage)
+                                          failure:^(NSString *errorMessage)
      {
          [[MethodsManager sharedManager]StopAnimating];
          NSLog(@"Could not fetch rows , %@",errorMessage);
@@ -152,12 +152,12 @@
     
     _tableAlertHistory.frame = CGRectMake(CGRectGetMinX(_tableAlertHistory.frame), CGRectGetMinY(_tableAlertHistory.frame), CGRectGetWidth(_tableAlertHistory.frame), CGRectGetHeight(_tableAlertHistory.frame)-height);
     
-//    self.viewForEMC.frame = CGRectMake(0, 135,SCREEN_WIDTH, SCREEN_HEIGHT-135-height);
+    //    self.viewForEMC.frame = CGRectMake(0, 135,SCREEN_WIDTH, SCREEN_HEIGHT-135-height);
     NSLog(@"adViewDidReceiveAd");
 }
 - (void)adView:(GADBannerView *)bannerView didFailToReceiveAdWithError:(GADRequestError *)error {
     adBannerView.hidden = YES;
-
+    
     _tableAlertHistory.frame = CGRectMake(CGRectGetMinX(_tableAlertHistory.frame), CGRectGetMinY(_tableAlertHistory.frame), CGRectGetWidth(_tableAlertHistory.frame), SCREEN_HEIGHT-CGRectGetMinY(_tableAlertHistory.frame));
     
     NSLog(@"didFailToReceiveAdWithError");

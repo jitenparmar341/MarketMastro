@@ -64,11 +64,11 @@ static SQLiteDatabase *_instance;
         NSString *documentsDirectory = [paths objectAtIndex:0];
         NSString *fileName = [self.databaseFileName hasSuffix:@".db"] ? self.databaseFileName : [NSString stringWithFormat:@"%@.db",self.databaseFileName];
         NSString *sqliteDB = [documentsDirectory stringByAppendingPathComponent:fileName];
- 
+        
         // to get .db file form bundle
-//        NSString *sqliteDB = [[NSBundle mainBundle] pathForResource:@"KIFS" ofType:@"db"];
-//        NSURL *url = [NSURL fileURLWithPath:filePath];
-
+        //        NSString *sqliteDB = [[NSBundle mainBundle] pathForResource:@"KIFS" ofType:@"db"];
+        //        NSURL *url = [NSURL fileURLWithPath:filePath];
+        
         
         if ([fileManager fileExistsAtPath:sqliteDB] == NO) {
             NSArray *parts = [fileName componentsSeparatedByString:@"."];

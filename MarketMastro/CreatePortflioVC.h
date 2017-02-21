@@ -8,16 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CreateAlertVC.h"
-
-@interface CreatePortflioVC : UIViewController<UISearchBarDelegate>
-{
-    
-}
-
-@property (nonatomic,readwrite)BOOL isFromMarket,isFromPortfolio,isFromAlert;
-
-@property (weak, nonatomic) IBOutlet UISearchBar *srcBar;
-
+@interface CreatePortflioVC : UIViewController
 @property (weak, nonatomic) IBOutlet UIButton *btn1;
 @property (weak, nonatomic) IBOutlet UIButton *btn2;
 @property (weak, nonatomic) IBOutlet UIButton *btn3;
@@ -27,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *btn7;
 @property (weak, nonatomic) IBOutlet UIButton *btn8;
 @property (weak, nonatomic) IBOutlet UIButton *btnSave;
+@property (nonatomic) BOOL isCreateAlert;
+
 
 @property (nonatomic, copy)NSString *isFromVC;
 

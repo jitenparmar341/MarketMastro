@@ -86,7 +86,7 @@ int secondsLeft;
 -(void)cancelNumberPad
 {
     [_txtOtp resignFirstResponder];
-   
+    
     
     if (_txtOtp)
     {
@@ -135,7 +135,7 @@ int secondsLeft;
 {
     secondsLeft = hours = minutes = seconds = 0;
     if([timer isValid]) {
-       
+        
     }
     timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateCounter:) userInfo:nil repeats:YES];
     
@@ -190,7 +190,7 @@ int secondsLeft;
     
     if (_txtOtp.text.length >0)
     {
-       // [timer invalidate];
+        // [timer invalidate];
         
         NSString *strUserID = [[NSUserDefaults standardUserDefaults] valueForKey:@"UserID"];
         strUserID = [NSString stringWithFormat:@"%@",strUserID];
@@ -200,11 +200,11 @@ int secondsLeft;
         
         if (isNetworkAvailable)
         {
-             [[MethodsManager sharedManager]loadingView:self.view];
+            [[MethodsManager sharedManager]loadingView:self.view];
             [[webManager sharedObject] CallPostMethod:nil withMethod:[NSString stringWithFormat:@"api/UserDetails/ValidateOTP/%@/%@",strUserID,_txtOtp.text]
                                       successResponce:^(id response)
              {
-                  [[MethodsManager sharedManager]StopAnimating];
+                 [[MethodsManager sharedManager]StopAnimating];
                  NSLog(@"response = %@",response);
                  BOOL isVerified = [[response valueForKey:@"isVerified"] boolValue];
                  if (isVerified == false)
@@ -218,9 +218,9 @@ int secondsLeft;
                      [self MethodForGenerateToken];
                  }
              }
-            failure:^(NSError *error)
+                                              failure:^(NSError *error)
              {
-                [[MethodsManager sharedManager]StopAnimating];
+                 [[MethodsManager sharedManager]StopAnimating];
                  NSLog(@"response error = %@",error);
                  [[[UIAlertView alloc]initWithTitle:@"Error" message:error.description delegate:self cancelButtonTitle:nil otherButtonTitles:@"ok", nil]show];
              }];
@@ -255,7 +255,7 @@ int secondsLeft;
     if (isNetworkAvailable)
     {
         [[webManager sharedObject] CallPostMethod:parameter withMethod:[NSString stringWithFormat:@"/api/GenerateToken"]
-         successResponce:^(id response)
+                                  successResponce:^(id response)
          {
              
              NSLog(@"response = %@",response);
@@ -266,7 +266,7 @@ int secondsLeft;
                  [self MethodForUpdateDeviceDetails];
              }
          }
-         failure:^(NSError *error)
+                                          failure:^(NSError *error)
          {
              
              NSLog(@"response error = %@",error);
@@ -288,7 +288,7 @@ int secondsLeft;
      [manager.requestSerializer setValue:iOSVersion forHTTPHeaderField:@"AppVer"];
      [manager.requestSerializer setValue:UUID forHTTPHeaderField:@"UUID"];
      [manager.requestSerializer setValue:iOSVersion forHTTPHeaderField:@"DeviceOS"];
-    
+     
      */
     
     
@@ -300,10 +300,10 @@ int secondsLeft;
     
     [[NSUserDefaults standardUserDefaults] setObject:iOSVersion forKey:@"SavedIosVersion"];
     
-     [[NSUserDefaults standardUserDefaults] setObject:UUID forKey:@"SavedUUID"];
+    [[NSUserDefaults standardUserDefaults] setObject:UUID forKey:@"SavedUUID"];
     
     NSString *strUserID = [[NSUserDefaults standardUserDefaults] valueForKey:@"UserID"];
-  
+    
     if (strUserID!=nil)
     {
         NSDictionary *parameter = @{
@@ -326,7 +326,7 @@ int secondsLeft;
         {
             
             [[webManager sharedObject] CallPostMethod:parameter withMethod:[NSString stringWithFormat:@"/api/UserDetails/PutDeviceDetails"]
-             successResponce:^(id response)
+                                      successResponce:^(id response)
              {
                  
                  NSLog(@"response = %@",response);
@@ -341,9 +341,9 @@ int secondsLeft;
                      [self.navigationController pushViewController:Dashboard animated:YES];
                  }
              }
-              failure:^(NSError *error)
+                                              failure:^(NSError *error)
              {
-                
+                 
                  NSLog(@"response error = %@",error);
                  [[[UIAlertView alloc]initWithTitle:@"Error" message:error.description delegate:self cancelButtonTitle:nil otherButtonTitles:@"ok", nil]show];
              }];
@@ -351,14 +351,14 @@ int secondsLeft;
     }
     else
     {
-//        [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Couldnt get device token" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil]show];
+        //        [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Couldnt get device token" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil]show];
     }
 }
 
 
 - (void)viewWillAppear:(BOOL)animated
 {
-     strUserIDD = [[NSUserDefaults standardUserDefaults] valueForKey:@"UserID"];
+    strUserIDD = [[NSUserDefaults standardUserDefaults] valueForKey:@"UserID"];
     
     [super viewWillAppear:YES];
     [self.navigationController.navigationBar setHidden:YES];
@@ -366,7 +366,7 @@ int secondsLeft;
 - (void)viewWillDisappear:(BOOL)animated
 {
     [UIApplication sharedApplication].statusBarHidden = false;
-
+    
     [super viewWillDisappear:YES];
     [self.navigationController.navigationBar setHidden:NO];
     [ChanegeMobileNumberDelegate sendDataToA:@"YES"];
@@ -382,21 +382,21 @@ int secondsLeft;
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 - (IBAction)btnVerifyTapped:(id)sender
 {
     //remove following after testing
-//    FirstFourVC *Dashboard = [self.storyboard instantiateViewControllerWithIdentifier:@"FirstFourVC"];
-//    [self.navigationController pushViewController:Dashboard animated:YES];
-//    return;
+    //    FirstFourVC *Dashboard = [self.storyboard instantiateViewControllerWithIdentifier:@"FirstFourVC"];
+    //    [self.navigationController pushViewController:Dashboard animated:YES];
+    //    return;
     
     [_txtOtp resignFirstResponder];
     [self CallVerifyOtpMethod];
@@ -421,14 +421,14 @@ int secondsLeft;
      */
     
     
-   
+    
     
     BOOL isNetworkAvailable = [[MethodsManager sharedManager]isInternetAvailable];
     
     if (isNetworkAvailable)
     {
         
-         [[MethodsManager sharedManager]loadingView:self.view];
+        [[MethodsManager sharedManager]loadingView:self.view];
         [[webManager sharedObject] CallPostMethod:nil withMethod:[NSString stringWithFormat:@"/api/UserDetails/ResendOTP/%@",strUserIDD]
                                   successResponce:^(id response)
          {
@@ -442,7 +442,7 @@ int secondsLeft;
                  timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateCounter:) userInfo:nil repeats:YES];
              }
          }
-        failure:^(NSError *error)
+                                          failure:^(NSError *error)
          {
              [[MethodsManager sharedManager]StopAnimating];
              NSLog(@"response error = %@",error);

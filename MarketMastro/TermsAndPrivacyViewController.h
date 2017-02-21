@@ -10,8 +10,8 @@
 
 @interface TermsAndPrivacyViewController : UIViewController
 {
-     __weak IBOutlet UIProgressView *progressView;
-     NSTimer *myTimer;
+    __weak IBOutlet UIProgressView *progressView;
+    NSTimer *myTimer;
 }
 @property (weak, nonatomic) IBOutlet UIWebView *Webview;
 @property (weak, nonatomic) NSString *strPrivacyOrService;

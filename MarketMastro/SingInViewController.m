@@ -32,9 +32,9 @@
     self.view.backgroundColor = [UIColor colorWithRed:22/255.0 green:25/255.0 blue:27/255.0 alpha:1.0];
     [_txtFieldMobileNumber setReturnKeyType:UIReturnKeyDone];
     
-   
+    
     // Do any additional setup after loading the view.
-//    self.txtFieldMobileNumber = [self borderColor:self.txtFieldMobileNumber withMask:YES];
+    //    self.txtFieldMobileNumber = [self borderColor:self.txtFieldMobileNumber withMask:YES];
     self.txtFieldMobileNumber = [self placeHolderColor:self.txtFieldMobileNumber withSting:@"Enter your registered Mobile No."];
     self.txtFieldMobileNumber.leftView =[self paddingView:self.txtFieldMobileNumber withImageNamed:@"reg_mobile_icon.png"];
     self.btnContinue.layer.cornerRadius = 3.0f; // this value vary as per your desire
@@ -150,8 +150,8 @@
 
 - (IBAction)MethodDontHaveAccount:(id)sender
 {
-//    ViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
-//    [self.navigationController pushViewController:vc animated:YES];
+    //    ViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController"];
+    //    [self.navigationController pushViewController:vc animated:YES];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -201,16 +201,16 @@
      MobileNo - of user
      generateOTP - true
      */
-   
-   // LoaderImageview.hidden = NO;
-     [[MethodsManager sharedManager]loadingView:self.view];
+    
+    // LoaderImageview.hidden = NO;
+    [[MethodsManager sharedManager]loadingView:self.view];
     
     BOOL isNetworkAvailable = [[MethodsManager sharedManager]isInternetAvailable];
     
     if (isNetworkAvailable)
     {
         [[webManager sharedObject]loginRequest:nil withMethod:[NSString stringWithFormat:@"api/UserDetails/ByMobileNo/%@?generateOTP=true",_txtFieldMobileNumber.text]
-         successResponce:^(id response)
+                               successResponce:^(id response)
          {
              //LoaderImageview.hidden = YES;
              
@@ -226,17 +226,17 @@
               mobile number
               */
              
-        //$$$ 26 jan
-         NSString *strName = [DicLoggedInUser valueForKey:@"Name"];
-         NSString *strEmail = [DicLoggedInUser valueForKey:@"Email"];
-         NSString *strMobileNumber = [DicLoggedInUser valueForKey:@"MobileNo"];
-         NSString *strCityID = [DicLoggedInUser valueForKey:@"CityID"];
-        
+             //$$$ 26 jan
+             NSString *strName = [DicLoggedInUser valueForKey:@"Name"];
+             NSString *strEmail = [DicLoggedInUser valueForKey:@"Email"];
+             NSString *strMobileNumber = [DicLoggedInUser valueForKey:@"MobileNo"];
+             NSString *strCityID = [DicLoggedInUser valueForKey:@"CityID"];
              
-        [[NSUserDefaults standardUserDefaults] setObject:strName forKey:@"Name"];
-        [[NSUserDefaults standardUserDefaults] setObject:strEmail forKey:@"Email"];
-        [[NSUserDefaults standardUserDefaults] setObject:strMobileNumber forKey:@"MobileNo"];
-        [[NSUserDefaults standardUserDefaults] setObject:strCityID forKey:@"CityID"];
+             
+             [[NSUserDefaults standardUserDefaults] setObject:strName forKey:@"Name"];
+             [[NSUserDefaults standardUserDefaults] setObject:strEmail forKey:@"Email"];
+             [[NSUserDefaults standardUserDefaults] setObject:strMobileNumber forKey:@"MobileNo"];
+             [[NSUserDefaults standardUserDefaults] setObject:strCityID forKey:@"CityID"];
              
              
              BOOL success = [[response valueForKey:@"Status"] boolValue];
@@ -264,9 +264,9 @@
              }
              
          }
-         failure:^(NSError *error)
+                                       failure:^(NSError *error)
          {
-            [[MethodsManager sharedManager]StopAnimating];
+             [[MethodsManager sharedManager]StopAnimating];
              //LoaderImageview.hidden = YES;
              NSLog(@"response error = %@",error);
          }];

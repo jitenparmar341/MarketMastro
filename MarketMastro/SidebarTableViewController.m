@@ -27,17 +27,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    _tableSideMenu.allowsMultipleSelection = NO;
+    //    _tableSideMenu.allowsMultipleSelection = NO;
     
     self.view.backgroundColor = [UIColor colorWithRed:22/255.0 green:25/255.0 blue:27/255.0 alpha:1.0];
     
-    
-    [self setUpForDrawerList];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
     
     NSString *strName = [[NSUserDefaults standardUserDefaults] valueForKey:@"Name"];
     _lblname.text = strName;
@@ -46,6 +39,12 @@
     NSString *strCredit = [dicOfLoggedInuser valueForKey:@"CreditPoints"];
     _lblcredit.text = [NSString stringWithFormat:@"Credit : %@",strCredit];
     _imgProfile.image = [UIImage imageNamed:@"accountImage.png"];
+    
+    [self setUpForDrawerList];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
     if (lastSelectedIndex && lastSelectedIndex.section == 0) {
         NSIndexPath *tIndexPath = lastSelectedIndex;
@@ -79,14 +78,14 @@
     [tArr3 addObject:@{@"CellID":@"aboutus", @"SelectedImg":@"dro_about_active_ico.png", @"DeselectedImg":@"dro_about_ico.png"}];
     [tArr3 addObject:@{@"CellID":@"contactus", @"SelectedImg":@"dro_contact_active_ico.png", @"DeselectedImg":@"dro_contact_ico.png"}];
     [tArr3 addObject:@{@"CellID":@"request", @"SelectedImg":@"dro_request_active_ico.png", @"DeselectedImg":@"dro_request_ico.png"}];
-
+    
     [dictSection setObject:tArr1 forKey:@"First"];
     [dictSection setObject:tArr2 forKey:@"Second"];
     [dictSection setObject:tArr3 forKey:@"Third"];
     
-//    [dictSection setObject:@[@"market",@"portfolio",@"EMC",@"calendar"] forKey:@"First"];
-//    [dictSection setObject:@[@"news",@"accounts",@"subscription",@"alertcenter",@"referfriend"] forKey:@"Second"];
-//    [dictSection setObject:@[@"help",@"aboutus",@"contactus",@"request"] forKey:@"Third"];
+    //    [dictSection setObject:@[@"market",@"portfolio",@"EMC",@"calendar"] forKey:@"First"];
+    //    [dictSection setObject:@[@"news",@"accounts",@"subscription",@"alertcenter",@"referfriend"] forKey:@"Second"];
+    //    [dictSection setObject:@[@"help",@"aboutus",@"contactus",@"request"] forKey:@"Third"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -163,28 +162,28 @@
             break;
     }
     
-//    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-//    cell.backgroundColor = [UIColor clearColor];
-//    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+    //    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+    //    cell.backgroundColor = [UIColor clearColor];
+    //    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
     
-   // cell.contentView.backgroundColor = [UIColor colorWithRed:21/255.0 green:85/255.0 blue:140/255.0 alpha:1.0];
+    // cell.contentView.backgroundColor = [UIColor colorWithRed:21/255.0 green:85/255.0 blue:140/255.0 alpha:1.0];
     
     if (lastSelectedIndex.row == indexPath.row && lastSelectedIndex.section == indexPath.section) {
         cell.contentView.backgroundColor = [UIColor colorWithRed:21.0/255.0 green:85.0/255.0 blue:140.0/255.0 alpha:1.0];
         [(UILabel*)[cell.contentView viewWithTag:102] setTextColor:[UIColor colorwithHexString:@"#ffffff"]];
         [(UILabel*)[cell.contentView viewWithTag:102] setFont:[UIFont fontWithName:@"Lato-Regular" size:13.0]];
-//        cell.textLabel.font = [UIFont fontWithName:@"Lato-Regular" size:13.0];
+        //        cell.textLabel.font = [UIFont fontWithName:@"Lato-Regular" size:13.0];
         [(UIImageView*)[cell.contentView viewWithTag:101] setImage:[UIImage imageNamed:[selectDict objectForKey:@"SelectedImg"]]];
-//        cell.imageView.image = [UIImage imageNamed:[selectDict objectForKey:@"SelectedImg"]];
+        //        cell.imageView.image = [UIImage imageNamed:[selectDict objectForKey:@"SelectedImg"]];
     }
     else {
         cell.contentView.backgroundColor = [UIColor colorWithRed:22.0/255.0 green:25.0/255.0 blue:27.0/255.0 alpha:1.0];
         [(UILabel*)[cell.contentView viewWithTag:102] setTextColor:[UIColor colorWithRed:149.0/255.0 green:149.0/255.0 blue:149.0/255.0 alpha:1.0]];
         [(UILabel*)[cell.contentView viewWithTag:102] setFont:[UIFont fontWithName:@"Lato-Regular" size:13.0]];
-//        cell.textLabel.textColor = [UIColor colorWithRed:149/255 green:149/255 blue:149/255 alpha:1.0];
-//        cell.textLabel.font = [UIFont fontWithName:@"Lato-Regular" size:13.0];
+        //        cell.textLabel.textColor = [UIColor colorWithRed:149/255 green:149/255 blue:149/255 alpha:1.0];
+        //        cell.textLabel.font = [UIFont fontWithName:@"Lato-Regular" size:13.0];
         [(UIImageView*)[cell.contentView viewWithTag:101] setImage:[UIImage imageNamed:[selectDict objectForKey:@"DeselectedImg"]]];
-//        cell.imageView.image = [UIImage imageNamed:[selectDict objectForKey:@"DeselectedImg"]];
+        //        cell.imageView.image = [UIImage imageNamed:[selectDict objectForKey:@"DeselectedImg"]];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
@@ -219,18 +218,18 @@
     indexOfDrawer = (int)indexPath.row;
     UINavigationController *destViewController = (UINavigationController*)segue.destinationViewController;
     destViewController.title = [strTitle capitalizedString];
-
-//    destViewController.title = [[menuItems objectAtIndex:indexPath.row] capitalizedString];
+    
+    //    destViewController.title = [[menuItems objectAtIndex:indexPath.row] capitalizedString];
     
     
     
-//    // Set the photo if it navigates to the PhotoView
-//    if ([segue.identifier isEqualToString:@"showPhoto"]) {
-//        UINavigationController *navController = segue.destinationViewController;
-//        PhotoViewController *photoController = [navController childViewControllers].firstObject;
-//        NSString *photoFilename = [NSString stringWithFormat:@"%@_photo", [menuItems objectAtIndex:indexPath.row]];
-//        photoController.photoFilename = photoFilename;
-//    }
+    //    // Set the photo if it navigates to the PhotoView
+    //    if ([segue.identifier isEqualToString:@"showPhoto"]) {
+    //        UINavigationController *navController = segue.destinationViewController;
+    //        PhotoViewController *photoController = [navController childViewControllers].firstObject;
+    //        NSString *photoFilename = [NSString stringWithFormat:@"%@_photo", [menuItems objectAtIndex:indexPath.row]];
+    //        photoController.photoFilename = photoFilename;
+    //    }
 }
 
 
@@ -245,16 +244,16 @@
     else {
         lastSelectedIndex = indexPath;
         [tableView reloadData];
-//        [tableView reloadRowsAtIndexPaths:@[lastSelectedIndex] withRowAnimation:UITableViewRowAnimationNone];
+        //        [tableView reloadRowsAtIndexPaths:@[lastSelectedIndex] withRowAnimation:UITableViewRowAnimationNone];
     }
-//    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    //    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
-//    NSString *CellIdentifier = [menuItems objectAtIndex:indexPath.row];
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[[dictSection objectForKey:@"Second"] objectAtIndex:indexPath.row] forIndexPath:indexPath];
-
-//    cell.contentView.backgroundColor = [UIColor colorWithRed:21/255.0 green:85/255.0 blue:140/255.0 alpha:1.0];
-//    cell.textLabel.textColor = [UIColor whiteColor];
-//    lastSelectedIndex = indexPath;
+    //    NSString *CellIdentifier = [menuItems objectAtIndex:indexPath.row];
+    //    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[[dictSection objectForKey:@"Second"] objectAtIndex:indexPath.row] forIndexPath:indexPath];
+    
+    //    cell.contentView.backgroundColor = [UIColor colorWithRed:21/255.0 green:85/255.0 blue:140/255.0 alpha:1.0];
+    //    cell.textLabel.textColor = [UIColor whiteColor];
+    //    lastSelectedIndex = indexPath;
 }
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section {
     return 11.0;
@@ -268,42 +267,42 @@
 }
 
 /*
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSString *CellIdentifier = [menuItems objectAtIndex:indexPath.row];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-}
-
-- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-
-- (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    NSString *CellIdentifier = [menuItems objectAtIndex:indexPath.row];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    cell.contentView.backgroundColor = [UIColor whiteColor];
-    cell.textLabel.textColor = [UIColor blackColor];
-    
-    if ([cell isHighlighted])
-    {
-        cell.contentView.backgroundColor = [UIColor colorWithRed:21/255.0 green:85/255.0 blue:140/255.0 alpha:1.0];
-        cell.textLabel.textColor = [UIColor redColor];
-    }
-}
-
-- (void)tableView:(UITableView *)tableView didUnhighlightRowAtIndexPath:(NSIndexPath *)indexPath
-{
-//    NSString *CellIdentifier = [menuItems objectAtIndex:indexPath.row];
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-//    cell.contentView.backgroundColor = [UIColor clearColor];
-//    cell.textLabel.textColor = [UIColor whiteColor];
-}
-*/
+ - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ NSString *CellIdentifier = [menuItems objectAtIndex:indexPath.row];
+ UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+ cell.selectionStyle = UITableViewCellSelectionStyleNone;
+ }
  
+ - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+ return YES;
+ }
  
+ - (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ 
+ NSString *CellIdentifier = [menuItems objectAtIndex:indexPath.row];
+ UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+ cell.selectionStyle = UITableViewCellSelectionStyleNone;
+ 
+ cell.contentView.backgroundColor = [UIColor whiteColor];
+ cell.textLabel.textColor = [UIColor blackColor];
+ 
+ if ([cell isHighlighted])
+ {
+ cell.contentView.backgroundColor = [UIColor colorWithRed:21/255.0 green:85/255.0 blue:140/255.0 alpha:1.0];
+ cell.textLabel.textColor = [UIColor redColor];
+ }
+ }
+ 
+ - (void)tableView:(UITableView *)tableView didUnhighlightRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ //    NSString *CellIdentifier = [menuItems objectAtIndex:indexPath.row];
+ //    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+ //    cell.contentView.backgroundColor = [UIColor clearColor];
+ //    cell.textLabel.textColor = [UIColor whiteColor];
+ }
+ */
+
+
 @end

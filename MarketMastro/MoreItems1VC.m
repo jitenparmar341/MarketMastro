@@ -23,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   // self.title = @"More Items";
+    // self.title = @"More Items";
     self.title = _strSelectedItem;
     
     self.view.backgroundColor = ViewBackgroundColor;
@@ -123,7 +123,7 @@
     else
     {
         //IF GROUP ID NOT PRESENT THEN
-          NSString *query = [NSString stringWithFormat:@"select * fromCommodityGroup where GroupType='%@' AND ParentGroupID=0",strGroupName];
+        NSString *query = [NSString stringWithFormat:@"select * fromCommodityGroup where GroupType='%@' AND ParentGroupID=0",strGroupName];
         
         [[MethodsManager sharedManager]loadingView:self.view];
         [[SQLiteDatabase sharedInstance] executeQuery:query withParams:nil success:^(SQLiteResult *result)
@@ -131,7 +131,7 @@
              [[MethodsManager sharedManager]StopAnimating];
              NSLog(@"select all from commodity group where group id is nil result = %@",result);
          }
-          failure:^(NSString *errorMessage)
+                                              failure:^(NSString *errorMessage)
          {
              [[MethodsManager sharedManager]StopAnimating];
              NSLog(@"Could not fetch rows from commodity group where group id is nil,error = %@",errorMessage);

@@ -12,7 +12,6 @@
 #import "SWRevealViewController.h"
 #import "AccountsViewController.h"
 #import "SidebarTableViewController.h"
-#import <UserNotifications/UserNotifications.h>
 
 #import "Firebase.h"
 
@@ -35,18 +34,7 @@ int indexOfDrawer;
     NSString * DocumentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
     NSString *Path=[DocumentsPath stringByAppendingPathComponent:@"LKSDB.db"];//@"staffDB.sqlite"
     NSString *bundlepath=[[NSBundle mainBundle]pathForResource:@"LKSDB" ofType:@"db"];
-   
-    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-    
-    center.delegate = self;
-    
-    [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error)
-    {
-        if( !error )
-        {
-            [[UIApplication sharedApplication] registerForRemoteNotifications];
-        }
-    }];
+    // NSLog(@"library path= %@",libraryPath);
     
     if([[NSFileManager defaultManager]fileExistsAtPath:Path])
     {
@@ -56,6 +44,7 @@ int indexOfDrawer;
     {
         [[NSFileManager defaultManager]copyItemAtPath:bundlepath toPath:Path error:nil];
     }
+    
     NSLog(@"database path = %@",Path);
     
     [[NSUserDefaults standardUserDefaults]setObject:Path forKey:@"DBPath"];
@@ -72,13 +61,13 @@ int indexOfDrawer;
     
     if(isAlreadyLogin == YES)
     {
-       // [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"AlreadyLogin"];
+        // [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"AlreadyLogin"];
         UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         // this any item in list you want navigate to
         FirstFourVC *home = (FirstFourVC *) [storyboard instantiateViewControllerWithIdentifier:@"FirstFourVC"];
         SidebarTableViewController *slidemenu = (SidebarTableViewController *)[storyboard instantiateViewControllerWithIdentifier:@"SidebarTableViewController"];
         UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:home];
-//        UINavigationController *smVC = [[UINavigationController alloc]initWithRootViewController:slidemenu];
+        //        UINavigationController *smVC = [[UINavigationController alloc]initWithRootViewController:slidemenu];
         // define rear and frontviewcontroller
         SWRevealViewController *revealController = [[SWRevealViewController alloc]initWithRearViewController:slidemenu frontViewController:nav];
         // make it as root
@@ -115,33 +104,10 @@ int indexOfDrawer;
 //    NSLog(@"Device Token = %@", str);
 //}
 
-#pragma mark - Push Notifications delegate
-
--(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler
-{
-    //Called when a notification is delivered to a foreground app.
-    
-    NSLog(@"Userinfo %@",notification.request.content.userInfo);
-    
-    completionHandler(UNNotificationPresentationOptionAlert);
-}
-
--(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler
-{
-    //Called to let your app know which action was selected by the user for a given notification.
-    
-    NSLog(@"Userinfo %@",response.notification.request.content.userInfo);
-}
-
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
     NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
-    
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
-    
-    [[NSUserDefaults standardUserDefaults]setValue:token forKey:@"deviceToken"];
-    [[NSUserDefaults standardUserDefaults]synchronize];
-    
     // Send token to server
 }
 
@@ -171,7 +137,7 @@ int indexOfDrawer;
 
 - (void)firebaseSetUp {
     [FIRApp configure];
-//    Live//    ca-app-pub-7827419066044802~1199975779
+    //    Live//    ca-app-pub-7827419066044802~1199975779
     [GADMobileAds configureWithApplicationID:@"ca-app-pub-7827419066044802~1199975779"];
     [FIRAnalytics setUserID:@"Demo101"];
     [FIRAnalytics logEventWithName:kFIREventSelectContent

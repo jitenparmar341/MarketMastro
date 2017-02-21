@@ -39,20 +39,20 @@
     btnAll.selected = NO;
     btnPaid.selected = NO;
     btnReceive.selected = NO;
-        
-//    self.imgArrow.frame = CGRectMake((btn.frame.size.width / 2) - (self.imgArrow.frame.size.width / 2), btn.frame.origin.y+btn.frame.size.height-6, self.imgArrow.frame.size.width, self.imgArrow.frame.size.height);
-
+    
+    //    self.imgArrow.frame = CGRectMake((btn.frame.size.width / 2) - (self.imgArrow.frame.size.width / 2), btn.frame.origin.y+btn.frame.size.height-6, self.imgArrow.frame.size.width, self.imgArrow.frame.size.height);
+    
     self.imgArrow.frame = CGRectMake((btn.frame.origin.x+btn.frame.size.width)/2, btn.frame.origin.y+btn.frame.size.height-6, self.imgArrow.frame.size.width, self.imgArrow.frame.size.height);
     
     if(btn == btnAll)
     {
-//        self.imgArrow.frame = CGRectMake(btn.frame.size.width/2, btn.frame.size.height+2, 20, 20);
-//        
+        //        self.imgArrow.frame = CGRectMake(btn.frame.size.width/2, btn.frame.size.height+2, 20, 20);
+        //
         btnAll.selected = YES;
     }
     else if(btn == btnReceive)
     {
-//        self.imgArrow.frame = CGRectMake(btn.frame.size.width/2, 80, 20, 20);
+        //        self.imgArrow.frame = CGRectMake(btn.frame.size.width/2, 80, 20, 20);
         
         btnReceive.selected = YES;
     }

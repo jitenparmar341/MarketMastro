@@ -24,20 +24,20 @@
     
     
     //DB
-     NSString *CommodityName;
-     NSString *Condition;
-     NSString *ScriptCodee;
-     NSString *Text;
-     NSString *CreatedDateTime;
-     NSString *ExpiryDateTime;
-     NSString *Value;
-     NSString *HistoryText;
-     NSString *AlertID;
-     int CommodityID;
-     NSString *PauseAlerts;
-     NSString *CreatedOn;
-     int isExecuted;
-     int isRead;
+    NSString *CommodityName;
+    NSString *Condition;
+    NSString *ScriptCodee;
+    NSString *Text;
+    NSString *CreatedDateTime;
+    NSString *ExpiryDateTime;
+    NSString *Value;
+    NSString *HistoryText;
+    NSString *AlertID;
+    int CommodityID;
+    NSString *PauseAlerts;
+    NSString *CreatedOn;
+    int isExecuted;
+    int isRead;
     
     //AdMob
     CGFloat tableY;
@@ -57,9 +57,9 @@
      @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
     /*
-    [self.navigationController.navigationBar setTitleTextAttributes:
+     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    */
+     */
     
     [[UINavigationBar appearance] setBarTintColor:[UIColor blackColor]];
     ArrayGetAlertFromDB = [[NSMutableArray alloc] init];
@@ -101,14 +101,14 @@
         [self CallGetAlertListApi];
     }
     
-//    if (ArrayGetAlertFromDB.count >0)
-//    {
-        if ([str isEqualToString:@"NewAlertCreated"])
-        {
-            //get alert list api
-            [self CallLastRequestDateTime];
-        }
-   // }
+    //    if (ArrayGetAlertFromDB.count >0)
+    //    {
+    if ([str isEqualToString:@"NewAlertCreated"])
+    {
+        //get alert list api
+        [self CallLastRequestDateTime];
+    }
+    // }
 }
 
 -(void)CallLastRequestDateTime
@@ -129,7 +129,7 @@
     
     //GET >>
     [[webManager sharedObject]loginRequest:nil withMethod:[NSString stringWithFormat:@"api/getAllAlertForUser/%@/%@/%@",strUserID,strLUDTdate,strLUDTtime]
-     successResponce:^(id response)
+                           successResponce:^(id response)
      {
          NSString *strLUDT = [response valueForKey:@"LUDT"];
          NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
@@ -173,17 +173,17 @@
          }
          
          //update issue pending >>
-        
-        if (ArrayUpdateWithLudt.count >0)
-             {
-                 NSDictionary *dic = [ArrayUpdateWithLudt objectAtIndex:0];
-                 [self MethodForUpdateDataIntoDB:dic];
-             }
          
-      } failure:^(NSError *error)
-      {
-        NSLog(@"get alert list with last updated date time error = %@",error);
-      }];
+         if (ArrayUpdateWithLudt.count >0)
+         {
+             NSDictionary *dic = [ArrayUpdateWithLudt objectAtIndex:0];
+             [self MethodForUpdateDataIntoDB:dic];
+         }
+         
+     } failure:^(NSError *error)
+     {
+         NSLog(@"get alert list with last updated date time error = %@",error);
+     }];
 }
 
 -(void)DeleteAlertIDFromTable:(NSString*)strDeletedAlertID
@@ -195,7 +195,7 @@
          NSLog(@"Deleted Alert id from alert table = %@",result);
          [self MethodSelectAllAlertsFromDB];
      }
-     failure:^(NSString *errorMessage)
+                                          failure:^(NSString *errorMessage)
      {
          NSLog(@"delete alert id error message = %@",errorMessage);
      }];
@@ -212,7 +212,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateAlertList:) name:@"UpdateAlert" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateAlertList:) name:@"UpdateAlert" object:nil];
 }
 
 -(void)CallGetAlertListApi
@@ -225,73 +225,75 @@
     [[MethodsManager sharedManager]loadingView:self.view];
     
     [[webManager sharedObject]loginRequest:nil withMethod:[NSString stringWithFormat:@"api/getAllAlertForUser/%@",strUserId] successResponce:^(id response)
-    {
-        [[MethodsManager sharedManager]StopAnimating];
-        NSLog(@"Get alert list response = %@",response);
-        ArrGetCurrentAlertList = [response valueForKey:@"insert"];
-        
-        NSString *strLUDT = [response valueForKey:@"LUDT"];
-        NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
-        [dateFormatter setDateStyle:NSDateFormatterShortStyle];
-        NSString *currentDateString = strLUDT;
-        [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZ"];
-        NSDate *currentDate = [dateFormatter dateFromString:currentDateString];
-        
-        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-        NSString *dateStr = [dateFormatter stringFromDate:currentDate];
-        [dateFormatter setDateFormat:@"HH-mm-ss"];
-        NSString *timeStr = [dateFormatter stringFromDate:currentDate];
-        NSLog(@"CurrentDate:%@", currentDate);
-        NSLog(@"DATE - %@",dateStr);
-        NSLog(@"TIME - %@",timeStr);
-        strLastUpdatedDate = dateStr;
-        strLastUpdatedTime = timeStr;
-        
-        [[NSUserDefaults standardUserDefaults]setObject:strLastUpdatedDate forKey:@"LastUpdatedDate"];
-        [[NSUserDefaults standardUserDefaults]setObject:strLastUpdatedTime forKey:@"LastUpdatedTime"];
-        
-        //before inserting all data into table ,delete all rows from table
-        [self deleteAllFromAlert];
-    }
-    failure:^(NSError *error)
-    {
+     {
+         [[MethodsManager sharedManager]StopAnimating];
+         NSLog(@"Get alert list response = %@",response);
+         ArrGetCurrentAlertList = [response valueForKey:@"insert"];
+         
+         NSString *strLUDT = [response valueForKey:@"LUDT"];
+         NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
+         [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+         NSString *currentDateString = strLUDT;
+         [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZ"];
+         NSDate *currentDate = [dateFormatter dateFromString:currentDateString];
+         
+         [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+         NSString *dateStr = [dateFormatter stringFromDate:currentDate];
+         [dateFormatter setDateFormat:@"HH-mm-ss"];
+         NSString *timeStr = [dateFormatter stringFromDate:currentDate];
+         NSLog(@"CurrentDate:%@", currentDate);
+         NSLog(@"DATE - %@",dateStr);
+         NSLog(@"TIME - %@",timeStr);
+         strLastUpdatedDate = dateStr;
+         strLastUpdatedTime = timeStr;
+         
+         [[NSUserDefaults standardUserDefaults]setObject:strLastUpdatedDate forKey:@"LastUpdatedDate"];
+         [[NSUserDefaults standardUserDefaults]setObject:strLastUpdatedTime forKey:@"LastUpdatedTime"];
+         
+         //before inserting all data into table ,delete all rows from table
+         [self deleteAllFromAlert];
+     }
+                                   failure:^(NSError *error)
+     {
          [[MethodsManager sharedManager]StopAnimating];
          NSLog(@"Get alert list error = %@",error.description);
-    }];
+     }];
 }
+
 
 -(void)deleteAllFromAlert
 {
     NSString *query = [NSString stringWithFormat:@"delete from Alert"];
     
     [[SQLiteDatabase sharedInstance]executeUpdate:query withParams:nil success:^(SQLiteResult *result)
-    {
-        NSMutableArray *Array = result.rows;
-        
-        if (Array.count == 0)
-        {
-            for (int i =0; i<ArrGetCurrentAlertList.count; i++)
-            {
-                NSDictionary *dic = [ArrGetCurrentAlertList objectAtIndex:i];
-                // insert api response into database
-                [self MethodForInsertDataIntoDB:dic];
-            }
-        }
-        
-        if (ArrayInsertWithLudt.count >0)
-        {
-            NSDictionary *dic = [ArrayInsertWithLudt objectAtIndex:0];
-            [self MethodForInsertDataIntoDB:dic];
-        }
-    }
-    failure:^(NSString *errorMessage)
-    {
+     {
+         NSMutableArray *Array = result.rows;
+         
+         if (Array.count == 0)
+         {
+             for (int i =0; i<ArrGetCurrentAlertList.count; i++)
+             {
+                 NSDictionary *dic = [ArrGetCurrentAlertList objectAtIndex:i];
+                 // insert api response into database
+                 [self MethodForInsertDataIntoDB:dic];
+             }
+         }
+         
+         if (ArrayInsertWithLudt.count >0)
+         {
+             NSDictionary *dic = [ArrayInsertWithLudt objectAtIndex:0];
+             [self MethodForInsertDataIntoDB:dic];
+         }
+     }
+                                          failure:^(NSString *errorMessage)
+     {
          NSLog(@"delete all error message = %@",errorMessage);
-    }];
+     }];
 }
 
 -(void)MethodForUpdateDataIntoDB:(NSDictionary*)dic
 {
+    
     CommodityName= [dic valueForKey:@"CommodityName"];//string
     Condition   = [dic valueForKey:@"Condition"];//(String)
     //ScriptCode =  [dicResponse valueForKey:@"ScriptCode"];
@@ -314,12 +316,12 @@
     
     NSString *query1 = [NSString stringWithFormat:@"UPDATE Alert set PauseAlerts = %@ where AlertID = %@",PauseAlerts,AlertID];
     [[SQLiteDatabase sharedInstance] executeUpdate:query1 withParams:nil
-     success:^(SQLiteResult *result)
+                                           success:^(SQLiteResult *result)
      {
          NSLog(@"response of update alert = %@",result);
          [self MethodSelectAllAlertsFromDB];
      }
-     failure:^(NSString *errorMessage)
+                                           failure:^(NSString *errorMessage)
      {
          NSLog(@"error of update alert = %@",errorMessage);
      }];
@@ -338,7 +340,7 @@
     
     AlertID = [NSString stringWithFormat:@"%@",[dicResponse valueForKey:@"AlertID"]];
     PauseAlerts = [NSString stringWithFormat:@"%@",[dicResponse valueForKey:@"PauseAlerts"]];
-   
+    
     CommodityID = [[dicResponse valueForKey:@"CommodityID"] intValue];
     CreatedOn = [dicResponse valueForKey:@"CreatedDateTime"];
     HistoryText= [dicResponse valueForKey:@"HistoryText"];
@@ -365,14 +367,14 @@
                                 @"CreatedOn":CreatedOn,
                                 @"HistoryText":[NSString stringWithFormat:@"%@",HistoryText]
                                 };
-
+    
     [[SQLiteDatabase sharedInstance] executeUpdate:query withParams:parameter
-     success:^(SQLiteResult *result)
+                                           success:^(SQLiteResult *result)
      {
          NSLog(@"response of insert into alert = %@",result);
          [self MethodSelectAllAlertsFromDB];
      }
-     failure:^(NSString *errorMessage)
+                                           failure:^(NSString *errorMessage)
      {
          NSLog(@"error of insert into alert = %@",errorMessage);
      }];
@@ -382,15 +384,15 @@
 {
     
     /*
-    if (isExecuted=0)
-    {
-      // for showing currentalert list
-    }
-    else if (isExecuted=1)
-    {
-         // for showing alert history list
-    }
-    */
+     if (isExecuted=0)
+     {
+     // for showing currentalert list
+     }
+     else if (isExecuted=1)
+     {
+     // for showing alert history list
+     }
+     */
     // NSString *query = [NSString stringWithFormat:@ "select * from Alert where isExecuted=0 order by CreatedOn DESC"];
     
     
@@ -400,17 +402,17 @@
     
     [[SQLiteDatabase sharedInstance] executeQuery:query1 withParams:nil success:^(SQLiteResult *result)
      {
-        [[MethodsManager sharedManager]StopAnimating];
-        NSLog(@"select all rows from database = %@",result);
-        
-        ArrayGetAlertFromDB = result.rows;
-        NSLog(@"Arraydatabase = %@",ArrayGetAlertFromDB);
-        [_tableCurrentAlerts reloadData];
+         [[MethodsManager sharedManager]StopAnimating];
+         NSLog(@"select all rows from database = %@",result);
          
-    }
-     failure:^(NSString *errorMessage)
+         ArrayGetAlertFromDB = result.rows;
+         NSLog(@"Arraydatabase = %@",ArrayGetAlertFromDB);
+         [_tableCurrentAlerts reloadData];
+         
+     }
+                                          failure:^(NSString *errorMessage)
      {
-        [[MethodsManager sharedManager]StopAnimating];
+         [[MethodsManager sharedManager]StopAnimating];
          NSLog(@"Could not fetch rows , %@",errorMessage);
      }];
 }
@@ -419,24 +421,24 @@
 -(void)getCreatedOnInSeconds:(NSString *)str
 {
     /*
-    NSString *dateString = str;
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+     NSString *dateString = str;
+     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
      [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
      [dateFormatter setLocale:[NSLocale currentLocale]];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
-    [dateFormatter setFormatterBehavior:NSDateFormatterBehaviorDefault];
-    
-    NSDate *dateFromString = [[NSDate alloc] init];
-    dateFromString = [dateFormatter dateFromString:dateString];
-    NSTimeInterval timeInMiliseconds = [dateFromString timeIntervalSince1970]*1000;
-    NSLog(@"%f",timeInMiliseconds);
+     [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
+     [dateFormatter setFormatterBehavior:NSDateFormatterBehaviorDefault];
+     
+     NSDate *dateFromString = [[NSDate alloc] init];
+     dateFromString = [dateFormatter dateFromString:dateString];
+     NSTimeInterval timeInMiliseconds = [dateFromString timeIntervalSince1970]*1000;
+     NSLog(@"%f",timeInMiliseconds);
      */
     
     
-   //or descending order of date >>
-  // NSSortDescriptor *descriptor=[[NSSortDescriptor alloc] initWithKey:@"self" ascending:NO];
-  //  NSArray *descriptors=[NSArray arrayWithObject: descriptor];
-  // NSArray *reverseOrder=[dateArray sortedArrayUsingDescriptors:descriptors];
+    //or descending order of date >>
+    // NSSortDescriptor *descriptor=[[NSSortDescriptor alloc] initWithKey:@"self" ascending:NO];
+    //  NSArray *descriptors=[NSArray arrayWithObject: descriptor];
+    // NSArray *reverseOrder=[dateArray sortedArrayUsingDescriptors:descriptors];
     
 }
 
@@ -446,21 +448,20 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)didReceiveMemoryWarning
-{
+
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
-    
-- (IBAction)createAlertVIew:(id)sender
-{
+- (IBAction)createAlertVIew:(id)sender {
     CreateAlertVC *createAlertvc = [self.storyboard instantiateViewControllerWithIdentifier:@"CreateAlertVC"];
     [self.navigationController pushViewController:createAlertvc animated:YES];
 }
 
+
 #pragma tableview delegate methods
-    
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    
     //return ArrGetCurrentAlertList.count;
     return ArrayGetAlertFromDB.count;
 }
@@ -474,36 +475,36 @@
     if (cell == nil)
     {
         cell = [[CurrentAlertListCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                   reuseIdentifier:MyIdentifier] ;
+                                           reuseIdentifier:MyIdentifier] ;
     }
     /*
-    NSDictionary *dic = [ArrGetCurrentAlertList objectAtIndex:indexPath.row];
-    strCommodityName = [dic valueForKey:@"CommodityName"];
-    NSString *strHistoryText = [dic valueForKey:@"Text"];
-    //remove html tags from strhistorytext
-    strHistoryText = [self removeHtmlTags:strHistoryText];
-    cell.lblCommodityAlert.text = strHistoryText;
-    NSString *datestring = [dic valueForKey:@"CreatedDateTime"];
-    cell.lbldate.text = datestring;
-    //149,149,149
-    cell.lblCommodityAlert.textColor = [UIColor colorWithRed:149/255.0 green:149/255.0 blue:149/255.0 alpha:1.0];
-    
-    
-    NSMutableAttributedString *text =
-    [[NSMutableAttributedString alloc]
+     NSDictionary *dic = [ArrGetCurrentAlertList objectAtIndex:indexPath.row];
+     strCommodityName = [dic valueForKey:@"CommodityName"];
+     NSString *strHistoryText = [dic valueForKey:@"Text"];
+     //remove html tags from strhistorytext
+     strHistoryText = [self removeHtmlTags:strHistoryText];
+     cell.lblCommodityAlert.text = strHistoryText;
+     NSString *datestring = [dic valueForKey:@"CreatedDateTime"];
+     cell.lbldate.text = datestring;
+     //149,149,149
+     cell.lblCommodityAlert.textColor = [UIColor colorWithRed:149/255.0 green:149/255.0 blue:149/255.0 alpha:1.0];
+     
+     
+     NSMutableAttributedString *text =
+     [[NSMutableAttributedString alloc]
      initWithAttributedString: cell.lblCommodityAlert.attributedText];
-    
-    [text addAttribute:NSForegroundColorAttributeName
-                 value:[UIColor whiteColor]
-                 range:NSMakeRange(11, 20)];
-    
-//    NSString *str = [NSString stringWithFormat:@"%@",cell.lblCommodityAlert.attributedText];
-//    UIFont *font = [UIFont fontWithName:@"Lato-Bold" size:14.0];
-//    NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:font
-//                                                                forKey:NSFontAttributeName];
-//    text = [[NSMutableAttributedString alloc] initWithString:str attributes:attrsDictionary];
-    [cell.lblCommodityAlert setAttributedText: text];
-    */
+     
+     [text addAttribute:NSForegroundColorAttributeName
+     value:[UIColor whiteColor]
+     range:NSMakeRange(11, 20)];
+     
+     //    NSString *str = [NSString stringWithFormat:@"%@",cell.lblCommodityAlert.attributedText];
+     //    UIFont *font = [UIFont fontWithName:@"Lato-Bold" size:14.0];
+     //    NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:font
+     //                                                                forKey:NSFontAttributeName];
+     //    text = [[NSMutableAttributedString alloc] initWithString:str attributes:attrsDictionary];
+     [cell.lblCommodityAlert setAttributedText: text];
+     */
     
     
     SQLiteRow *object = [ArrayGetAlertFromDB objectAtIndex:indexPath.row];
@@ -512,28 +513,28 @@
     strText = [self removeHtmlTags:strText];
     cell.lblCommodityAlert.text = strText;
     
+    
     //IMP NSATTRIBUTE STRING
     /*
-    NSMutableAttributedString *text =
-    [[NSMutableAttributedString alloc]
+     NSMutableAttributedString *text =
+     [[NSMutableAttributedString alloc]
      initWithAttributedString: cell.lblCommodityAlert.attributedText];
-    
-    [text addAttribute:NSForegroundColorAttributeName
-                 value:[UIColor whiteColor]
-                 range:NSMakeRange(11, 20)];
-    [cell.lblCommodityAlert setAttributedText: text];
-    */
      
+     [text addAttribute:NSForegroundColorAttributeName
+     value:[UIColor whiteColor]
+     range:NSMakeRange(11, 20)];
+     [cell.lblCommodityAlert setAttributedText: text];
+     */
+    
     NSString *dateString = [NSString stringWithFormat:@"%@",[object stringForColumnName:@"CreatedDateTime"]];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    
-    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS"];//2017-02-03T13:36:08
-    NSDate *dateFromString = [dateFormatter dateFromString:dateString];
-    
-    [dateFormatter setDateFormat:@"dd MMM,yyyy HH:mm"];
-    dateString = [dateFormatter stringFromDate:dateFromString];
-    
+    // this is imporant - we set our input date format to match our input string
+    // if format doesn't match you'll get nil from your string, so be careful
+    [dateFormatter setDateFormat:@"dd-MM-yyyy"];//2017-02-03T13:36:08
+    NSDate *dateFromString = [[NSDate alloc] init];
+    dateFromString = [dateFormatter dateFromString:dateString];
     cell.lbldate.text = dateString;
+    
     
     strCommodityName = [NSString stringWithFormat:@"%@",[object stringForColumnName:@"CommodityName"]];
     strAlertID = [NSString stringWithFormat:@"%@",[object stringForColumnName:@"AlertID"]];
@@ -554,13 +555,14 @@
     NSString *strCommodityID = [NSString stringWithFormat:@"%@",[object stringForColumnName:@"CommodityID"]];
     NSString *strscriptcode = [NSString stringWithFormat:@"%@",[object stringForColumnName:@"ScriptCode"]];
     
+    
     NSMutableDictionary *dictSelectedAlert = [NSMutableDictionary dictionary];
     [dictSelectedAlert setObject:strCondition forKey:@"Condition"];
     [dictSelectedAlert setObject:strCommodity forKey:@"CommodityName"];
     [dictSelectedAlert setObject:strPrice forKey:@"Value"];
     [dictSelectedAlert setObject:strAlertIDd forKey:@"AlertID"];
-     [dictSelectedAlert setObject:strCommodityID forKey:@"CommodityID"];
-     [dictSelectedAlert setObject:strscriptcode forKey:@"ScriptCode"];
+    [dictSelectedAlert setObject:strCommodityID forKey:@"CommodityID"];
+    [dictSelectedAlert setObject:strscriptcode forKey:@"ScriptCode"];
     
     ////////
     CreateAlertVC *alert = [self.storyboard instantiateViewControllerWithIdentifier:@"CreateAlertVC"];
@@ -599,20 +601,20 @@
 
 
 /*
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return YES;
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete)
-    {
-       //add code here for when you hit delete
-        [[[UIAlertView alloc]initWithTitle:nil message:@"Remove Alerts for SILVER 03 MAR 2017" delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil]show];
-    }
-}
-*/
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ return YES;
+ }
+ 
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ if (editingStyle == UITableViewCellEditingStyleDelete)
+ {
+ //add code here for when you hit delete
+ [[[UIAlertView alloc]initWithTitle:nil message:@"Remove Alerts for SILVER 03 MAR 2017" delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil]show];
+ }
+ }
+ */
 
 
 -(NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -649,12 +651,12 @@
     //arbitrary color
     UITableViewRowAction *button2 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:strTitle handler:^(UITableViewRowAction *action, NSIndexPath *indexPath)
                                      {
-                                        NSLog(@"Action to perform with Button2!");
+                                         NSLog(@"Action to perform with Button2!");
                                          
                                          if ([strPauseAlerts isEqualToString:@"0"])
                                          {
                                              button2.title = @"Pause";
-                                               UIAlertView *deleteAlert = [[UIAlertView alloc]initWithTitle:nil message:[NSString stringWithFormat:@"Pause Alerts for %@",strCommodityName] delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
+                                             UIAlertView *deleteAlert = [[UIAlertView alloc]initWithTitle:nil message:[NSString stringWithFormat:@"Pause Alerts for %@",strCommodityName] delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
                                              deleteAlert.delegate= self;
                                              deleteAlert.tag = 2;
                                              [deleteAlert show];
@@ -742,12 +744,12 @@
         //api/PauseAlert/{AlertID}/true
         //para : AlertID - alertID of the alert to be paused
         //POST
-
-       //pause button action
+        
+        //pause button action
         [[webManager sharedObject]CallPostMethod:nil withMethod:[NSString stringWithFormat:@"api/PauseAlert/%@/true",strAlertID] successResponce:^(id response)
          {
              NSLog(@"pause alert response = %@",response);
-            [self CallLastRequestDateTime];
+             [self CallLastRequestDateTime];
              [[[UIAlertView alloc] initWithTitle:@"Success" message:@"Alert paused Successfully" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil]show];
              
          } failure:^(NSError *error)
@@ -762,7 +764,7 @@
         [[webManager sharedObject]CallPostMethod:nil withMethod:[NSString stringWithFormat:@"api/PauseAlert/%@/false",strAlertID] successResponce:^(id response)
          {
              NSLog(@"resume alert response = %@",response);
-            [self CallLastRequestDateTime];
+             [self CallLastRequestDateTime];
              [[[UIAlertView alloc] initWithTitle:@"Success" message:@"Alert resumed Successfully" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil]show];
          } failure:^(NSError *error)
          {
@@ -790,12 +792,12 @@
     
     adBannerView.hidden = NO;
     
-//    self.viewForEMC.frame = CGRectMake(0, 135,SCREEN_WIDTH, SCREEN_HEIGHT-135-height);
+    //    self.viewForEMC.frame = CGRectMake(0, 135,SCREEN_WIDTH, SCREEN_HEIGHT-135-height);
     _tableCurrentAlerts.frame = CGRectMake(CGRectGetMinX(_tableCurrentAlerts.frame), CGRectGetMinY(_tableCurrentAlerts.frame), CGRectGetWidth(_tableCurrentAlerts.frame), CGRectGetHeight(_tableCurrentAlerts.frame)-height);
     NSLog(@"adViewDidReceiveAd");
 }
 - (void)adView:(GADBannerView *)bannerView didFailToReceiveAdWithError:(GADRequestError *)error {
-//    CGFloat height = CGRectGetHeight(adBannerView.frame);
+    //    CGFloat height = CGRectGetHeight(adBannerView.frame);
     adBannerView.hidden = YES;
     _tableCurrentAlerts.frame = CGRectMake(CGRectGetMinX(_tableCurrentAlerts.frame), CGRectGetMinY(_tableCurrentAlerts.frame), CGRectGetWidth(_tableCurrentAlerts.frame), SCREEN_HEIGHT-CGRectGetMinY(_tableCurrentAlerts.frame));
     NSLog(@"didFailToReceiveAdWithError");

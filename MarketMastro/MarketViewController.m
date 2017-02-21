@@ -31,7 +31,7 @@
     
     tableViewMarket.backgroundColor = [UIColor colorwithHexString:@"#16191B"];
     self.view.backgroundColor = [UIColor colorwithHexString:@"#16191B"];
-//    tableViewMarket.backgroundColor = [UIColor clearColor];
+    //    tableViewMarket.backgroundColor = [UIColor clearColor];
     rateDownColor = [UIColor colorwithHexString:@"#15558C"];
     rateUpColor = [UIColor colorwithHexString:@"#BA1E1A"];
 }
@@ -39,65 +39,60 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     NSLog(@"Appear");
-   arrMarketData = [[NSMutableArray alloc] init];
-  /*  [arrMarketData addObject:@"MarketCellID"];
-    [arrMarketData addObject:@"MarketCellID"];
-    [arrMarketData addObject:@"MarketCellID"];
-    [arrMarketData addObject:@"MarketCellID"];
-    [arrMarketData addObject:@"MarketCellID"];
-    [arrMarketData addObject:@"MarketCellID"];
-    [arrMarketData addObject:@"MarketCellID"];
-    [arrMarketData addObject:@"MarketCellID"];
-    [arrMarketData addObject:@"MarketCellID"];
-    [arrMarketData addObject:@"MarketCellID"];
-    [arrMarketData addObject:@"MarketCellID"];
-    [arrMarketData addObject:@"MarketCellID"];
-    [arrMarketData addObject:@"MarketCellID"];
-    [arrMarketData addObject:@"MarketCellID"];
-    [arrMarketData addObject:@"MarketCellID"];
-    [arrMarketData addObject:@"MarketCellID"];
-    [arrMarketData addObject:@"MarketCellID"];
-    [arrMarketData addObject:@"MarketCellID"];
-    [arrMarketData addObject:@"MarketCellID"];
-    [arrMarketData addObject:@"MarketCellID"];
-    [arrMarketData addObject:@"MarketCellID"];
-    [arrMarketData addObject:@"MarketCellID"];
-    [arrMarketData addObject:@"MarketCellID"];
-    [arrMarketData addObject:@"MarketCellID"];
-    [arrMarketData addObject:@"MarketCellID"];
-    [arrMarketData addObject:@"MarketCellID"];
-    [arrMarketData addObject:@"MarketCellID"];
-    [arrMarketData addObject:@"MarketCellID"];
-    [arrMarketData addObject:@"MarketCellID"];
-    [arrMarketData addObject:@"MarketCellID"];
-    [arrMarketData addObject:@"MarketCellID"];
-    [arrMarketData addObject:@"MarketCellID"];*/
+    arrMarketData = [[NSMutableArray alloc] init];
     
     [self connectToDB];
     
-    NSMutableArray *arrOfTypes =  [[NSUserDefaults standardUserDefaults] valueForKey:@"commodity_types"];
-    
-    for (int i =0; i<arrOfTypes.count; i++)
-    {
-        NSDictionary *dic = [arrOfTypes objectAtIndex:i];
-        NSString *groupID=[dic valueForKey:@"GroupID"];
-         NSString *groupName=[dic valueForKey:@"GroupName"];
-        if([self.title isEqualToString:groupName]) {
-            // select query
-            NSString *query1 =[NSString stringWithFormat:@"SELECT * from Commodity where isPopular=1 AND CommodityType=%@ order by SortOrder",groupID];
-
-            [[SQLiteDatabase sharedInstance] executeQuery:query1 withParams:nil success:^(SQLiteResult *result) {
-                arrMarketData = result.rows;
-                [tableViewMarket reloadData];
-            } failure:^(NSString *errorMessage) {
-                NSLog(@"Could not fetch rows , %@",errorMessage);
-            }];
-            NSLog(@"Query %@ ",query1);
-            break;
+    if([self.title isEqualToString:@"ProfolioList"]){
+        NSString *query1 =[NSString stringWithFormat:@"SELECT * from UserPortfolio"];
+        
+        [[SQLiteDatabase sharedInstance] executeQuery:query1 withParams:nil success:^(SQLiteResult *result) {
+            arrMarketData = result.rows;
+            /* for (int i =0; i<result.rows.count; i++)
+             {
+             NSString *id= [NSString stringWithFormat:@"%@",[result.rows[i] stringForColumnName:@"CommodityID"]];
+             NSString *query1 =[NSString stringWithFormat:@"SELECT * from Commodity where Status=1 AND CommodityID=%@",id];
+             [[SQLiteDatabase sharedInstance] executeQuery:query1 withParams:nil success:^(SQLiteResult *result) {
+             if(result.rows.count>0){
+             [arrMarketData addObject:result.rows[0]];
+             }
+             
+             } failure:^(NSString *errorMessage) {
+             NSLog(@"Could not fetch rows , %@",errorMessage);
+             }];
+             }*/
+            
+            [tableViewMarket reloadData];
+        } failure:^(NSString *errorMessage) {
+            NSLog(@"Could not fetch rows , %@",errorMessage);
+        }];
+        NSLog(@"Query %@ ",query1);
+    }else{
+        
+        NSMutableArray *arrOfTypes =  [[NSUserDefaults standardUserDefaults] valueForKey:@"commodity_types"];
+        
+        
+        for (int i =0; i<arrOfTypes.count; i++)
+        {
+            NSDictionary *dic = [arrOfTypes objectAtIndex:i];
+            NSString *groupID=[dic valueForKey:@"GroupID"];
+            NSString *groupName=[dic valueForKey:@"GroupName"];
+            if([self.title isEqualToString:groupName]) {
+                // select query
+                NSString *query1 =[NSString stringWithFormat:@"SELECT * from Commodity where isPopular=1 AND CommodityType=%@ order by SortOrder",groupID];
+                
+                [[SQLiteDatabase sharedInstance] executeQuery:query1 withParams:nil success:^(SQLiteResult *result) {
+                    arrMarketData = result.rows;
+                    [tableViewMarket reloadData];
+                } failure:^(NSString *errorMessage) {
+                    NSLog(@"Could not fetch rows , %@",errorMessage);
+                }];
+                NSLog(@"Query %@ ",query1);
+                break;
+            }
         }
     }
     
-  
     //[tableViewMarket reloadData];
     
 }
@@ -118,31 +113,30 @@
     
 }
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 - (void)reloadTableData {
     [tableViewMarket reloadData];
 }
 
 #pragma mark - UITableViewDataSource
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return arrMarketData.count;
 }
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     UITableViewCell *cell;
     
-   if([self.title isEqualToString:@"Bullion"]) {
+    
+    if([self.title isEqualToString:@"Bullion"]) {
         cell = [self shareCellDesignTableView:tableView indexPath:indexPath];
     }
     else if ([self.title isEqualToString:@"Expected MCX"]) {
@@ -171,6 +165,8 @@
     }
     else if ([self.title isEqualToString:@"Costing & Difference"]) {
         cell = [self shareCellEditableDesignTableView:tableView indexPath:indexPath];
+    }else if([self.title isEqualToString:@"ProfolioList"]){
+        cell = [self shareCellEditableDesignTableView:tableView indexPath:indexPath];
     }
     //HP Temp Condition(Remove After Every Thing Done)
     else {
@@ -190,14 +186,16 @@
     [_object.navigationController pushViewController:detail animated:YES];
 }
 
+
+
 /*
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 10;
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 10;
-}
-*/
+ - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+ return 10;
+ }
+ - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+ return 10;
+ }
+ */
 
 - (UITableViewCell*)shareCellDesignTableView:(UITableView*)tableView indexPath:(NSIndexPath*)indexPath
 {
@@ -211,11 +209,11 @@
     }
     
     //Data Fitting
-   /* [mCell.lblName_Date setAttributedText:[self productName:@"SILVER" productDate:@"27 Feb 2017"]];
-    [mCell.lblStartEndRate setAttributedText:[self rateStart:@"41207.00" rateEnd:@"41215.00"]];
-    [mCell.btnOTime_Delete setTitle:@"19:18:17" forState:UIControlStateNormal]; */
+    /* [mCell.lblName_Date setAttributedText:[self productName:@"SILVER" productDate:@"27 Feb 2017"]];
+     [mCell.lblStartEndRate setAttributedText:[self rateStart:@"41207.00" rateEnd:@"41215.00"]];
+     [mCell.btnOTime_Delete setTitle:@"19:18:17" forState:UIControlStateNormal]; */
     
-
+    
     [mCell.lblStartEndRate setAttributedText:[self rateStart:@"41207.00" rateEnd:@"41215.00"]];
     [mCell.btnOTime_Delete setTitle:@"19:18:17" forState:UIControlStateNormal];
     
@@ -224,7 +222,7 @@
     NSLog(@"SCRIPCODE - %@",[object stringForColumnName:@"ScriptCode"]);
     NSLog(@"EXCH - %@",[object stringForColumnName:@"Exch"]);
     NSLog(@"ExchType - %@",[object stringForColumnName:@"ExchType"]);
-
+    
     
     
     if (indexPath.row%2==0) {
@@ -249,8 +247,11 @@
         [self colorUpForView:mCell.lblLiveRate];
     }
     
+    SQLiteRow *object = arrMarketData[indexPath.row];
+    mCell.lblName_Date.text = [NSString stringWithFormat:@"%@",[object stringForColumnName:@"Name"]];
+    
     //Data Fitting
-    [mCell.lblName_Date setAttributedText:[self productName:@"SILVER" productDate:@"27 Feb 2017"]];
+    // [mCell.lblName_Date setAttributedText:[self productName:@"SILVER" productDate:@"27 Feb 2017"]];
     [mCell.lblStartEndRate setAttributedText:[self rateStart:@"41207.00" rateEnd:@"41215.00"]];
     [mCell.btnOTime_Delete setTitle:@"19:18:17" forState:UIControlStateNormal];
     
@@ -315,6 +316,25 @@
 }
 
 - (void)btnDelete:(UIButton*)sender {
+    
+    
+    SQLiteRow *object = arrMarketData[sender.tag];
+    NSString *str = [NSString stringWithFormat:@"%@",[object stringForColumnName:@"CommodityID"]];
+    
+    
+    
+    NSString *query1 =[NSString stringWithFormat:@"delete from UserPortfolio where CommodityID=%@",str];
+    
+    [[SQLiteDatabase sharedInstance] executeQuery:query1 withParams:nil success:^(SQLiteResult *result) {
+        
+        NSLog(@"deleted %@",str);
+        
+    } failure:^(NSString *errorMessage) {
+        NSLog(@"Could not fetch rows , %@",errorMessage);
+    }];
+    
+    
+    
     [arrMarketData removeObjectAtIndex:sender.tag];
     [self reloadTableData];
 }
@@ -328,7 +348,7 @@
         } completion:^(BOOL finished) {
             [self colorDownForView:idView];
         }];
-         }];
+    }];
 }
 
 - (void)colorDownForView:(UIView*)idView {
@@ -340,7 +360,7 @@
         } completion:^(BOOL finished) {
             [self colorUpForView:idView];
         }];
-        }];
+    }];
 }
 
 #pragma mark - UpDownRateColor

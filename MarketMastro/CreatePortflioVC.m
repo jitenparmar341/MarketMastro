@@ -15,105 +15,74 @@
 
 @implementation CreatePortflioVC
 
-#pragma mark - View Life Cycle
-
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     selectedOption = @"";
     
-    self.title = @"Choose Community";
-    
+    self.title = @"Create Commodities";
     [super viewDidLoad];
-    _btn1.layer.borderColor = RGB(41, 84, 134).CGColor;
+    
+    _btn1.layer.borderColor = RGB(0, 122, 255).CGColor;
     _btn1.layer.borderWidth = 1;
     
-    _btn1.layer.borderColor = RGB(41, 84, 134).CGColor;
+    _btn1.layer.borderColor = RGB(0, 122, 255).CGColor;
     _btn1.layer.borderWidth = 1;
-
     
-    _btn2.layer.borderColor = RGB(41, 84, 134).CGColor;
+    
+    _btn2.layer.borderColor = RGB(0, 122, 255).CGColor;
     _btn2.layer.borderWidth = 1;
-
     
-    _btn3.layer.borderColor = RGB(41, 84, 134).CGColor;
+    
+    _btn3.layer.borderColor = RGB(0, 122, 255).CGColor;
     _btn3.layer.borderWidth = 1;
-
     
-    _btn4.layer.borderColor = RGB(41, 84, 134).CGColor;
+    
+    _btn4.layer.borderColor = RGB(0, 122, 255).CGColor;
     _btn4.layer.borderWidth = 1;
-
     
-    _btn5.layer.borderColor = RGB(41, 84, 134).CGColor;
+    
+    _btn5.layer.borderColor = RGB(0, 122, 255).CGColor;
     _btn5.layer.borderWidth = 1;
-
     
-    _btn6.layer.borderColor = RGB(41, 84, 134).CGColor;
+    
+    _btn6.layer.borderColor = RGB(0, 122, 255).CGColor;
     _btn6.layer.borderWidth = 1;
-
     
-    _btn7.layer.borderColor = RGB(41, 84, 134).CGColor;
+    
+    _btn7.layer.borderColor = RGB(0, 122, 255).CGColor;
     _btn7.layer.borderWidth = 1;
-
     
-    _btn8.layer.borderColor = RGB(41, 84, 134).CGColor;
+    
+    _btn8.layer.borderColor = RGB(0, 122, 255).CGColor;
     _btn8.layer.borderWidth = 1;
     
-    self.btnSave.hidden = true;
-    
-    if (self.isFromPortfolio == true)
+    if(_isCreateAlert)
     {
-        self.btnSave.hidden = false;
-    }
-    else if(self.isFromMarket == true)
-    {
-        
-    }
-    else if (self.isFromAlert == true)
-    {
-        
+        self.btnSave.hidden = YES;
     }
     
-    [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setDefaultTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-
     // Do any additional setup after loading the view.
 }
 
-#pragma mark - Received Memory Warning
-
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-#pragma mark - Button Click Method
-
--(IBAction)btnClick:(UIButton *)sender
+-(IBAction)btnClick:(id)sender
 {
-    if (self.isFromMarket == true)
+    UIButton *btn = (UIButton*)sender;
+    if(btn.selected)
     {
-        return;
+        btn.selected = NO;
     }
-    
-    sender.selected =! sender.selected;
-    
-    if(!sender.selected)
-    {
-        [sender setBackgroundColor:[UIColor clearColor]];
-    }
-    else
-    {
-        [sender setBackgroundColor:RGB(41, 84, 134)];
-        
-        if(self.isFromAlert)
+    else{
+        btn.selected = YES;
+        if(_isCreateAlert)
         {
-            NSLog(@"%@",selectedOption);
-            selectedOption = sender.currentTitle;
+            selectedOption = btn.currentTitle;
             [self.navigationController popViewControllerAnimated:YES];
         }
     }
 }
-
 -(IBAction)goBack:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
@@ -126,22 +95,9 @@
         MoreItemsViewController *more = (MoreItemsViewController*)[segue destinationViewController];
         more.isFromVC = _isFromVC;
         
-          [[NSUserDefaults standardUserDefaults]setObject:_isFromVC forKey:@"isFromVC"];
+        [[NSUserDefaults standardUserDefaults]setObject:_isFromVC forKey:@"isFromVC"];
         
-         [[NSUserDefaults standardUserDefaults]setObject:_isFromVC forKey:@"isFromVC"];
+        [[NSUserDefaults standardUserDefaults]setObject:_isFromVC forKey:@"isFromVC"];
     }
 }
-
-#pragma mark - Search Delegate
-
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
-{
-    [self.srcBar resignFirstResponder];
-}
-
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
-{
-    [self.srcBar resignFirstResponder];
-}
-
 @end

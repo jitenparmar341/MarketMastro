@@ -12,7 +12,7 @@
 {
     __weak IBOutlet UIWebView *webview;
     __weak IBOutlet UIProgressView *progressView;
-      NSTimer *myTimer;
+    NSTimer *myTimer;
     
 }
 

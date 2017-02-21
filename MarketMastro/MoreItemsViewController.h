@@ -11,13 +11,13 @@
 @interface MoreItemsViewController : UIViewController
 
 /*
-@property (weak, nonatomic) IBOutlet UIButton *btnMCX;
-@property (weak, nonatomic) IBOutlet UIImageView *imgMcx;
-@property (weak, nonatomic) IBOutlet UIButton *btnexcel;
-@property (weak, nonatomic) IBOutlet UIImageView *imgExcel;
-@property (weak, nonatomic) IBOutlet UIButton *btnlocalspot;
-@property (weak, nonatomic) IBOutlet UIImageView *imgLocalSpot;
-*/
+ @property (weak, nonatomic) IBOutlet UIButton *btnMCX;
+ @property (weak, nonatomic) IBOutlet UIImageView *imgMcx;
+ @property (weak, nonatomic) IBOutlet UIButton *btnexcel;
+ @property (weak, nonatomic) IBOutlet UIImageView *imgExcel;
+ @property (weak, nonatomic) IBOutlet UIButton *btnlocalspot;
+ @property (weak, nonatomic) IBOutlet UIImageView *imgLocalSpot;
+ */
 
 @property (weak, nonatomic) IBOutlet UITableView *tableMoreItems;
 @property (copy, nonatomic) NSString *isFromVC;

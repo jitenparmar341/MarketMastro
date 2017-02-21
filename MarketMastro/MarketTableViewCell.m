@@ -14,23 +14,23 @@
     [super awakeFromNib];
     // Initialization code
     
-//    UILabel *tLbl;
-//    [_lblLiveRate addConstraint:[NSLayoutConstraint constraintWithItem:_lblLiveRate attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:20.0f]];
+    //    UILabel *tLbl;
+    //    [_lblLiveRate addConstraint:[NSLayoutConstraint constraintWithItem:_lblLiveRate attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:20.0f]];
     [_btnOTime_Delete.titleLabel setTextAlignment:NSTextAlignmentRight];
     
     
     
     /*
-    _viewBG.layer.shadowColor = [[UIColor whiteColor] colorWithAlphaComponent:.7].CGColor;
-    _viewBG.layer.shadowOffset = CGSizeMake(-10.0, 10.0);
-    _viewBG.layer.masksToBounds = NO;
-    */
-//    [self setUpperDipper];
+     _viewBG.layer.shadowColor = [[UIColor whiteColor] colorWithAlphaComponent:.7].CGColor;
+     _viewBG.layer.shadowOffset = CGSizeMake(-10.0, 10.0);
+     _viewBG.layer.masksToBounds = NO;
+     */
+    //    [self setUpperDipper];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 
@@ -59,6 +59,6 @@
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
     maskLayer.frame = _viewBG.bounds;
     maskLayer.path  = maskPath.CGPath;
-//    _viewBG.layer.mask = maskLayer;
+    //    _viewBG.layer.mask = maskLayer;
 }
 @end

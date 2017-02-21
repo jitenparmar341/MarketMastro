@@ -10,7 +10,7 @@
 
 @interface CreditCardHistoryVC : UIViewController
 {
-
+    
 }
 
 @property (nonatomic,weak)IBOutlet UIImageView *imgArrow;

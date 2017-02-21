@@ -64,7 +64,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"commodity_types"];
     
     [self checkNetwork];
@@ -76,49 +76,49 @@
     
     
     /*[self setUpPageUI];
-    
-    marketTabs = @[@"Bullion", @"Expected MCX", @"Costing & Difference", @"Base metals", @"Energy", @"Local Spot", @"International Markets"];
-    eMCTabs = @[@"Expected MCX", @"Costing & Difference"];
-    
-    seletedPageViewsDic = [[NSMutableDictionary alloc] init];
-    [seletedPageViewsDic setObject:marketTabs forKey:@"Market Mastro"];
-    [seletedPageViewsDic setObject:eMCTabs forKey:@"EMC"];
-    
-    [self reloadView];*/
-  
-    
- /*   [self.navigationController setNavigationBarHidden:NO animated:NO];
-//    [self.navigationController setToolbarHidden:NO animated:NO];
+     
+     marketTabs = @[@"Bullion", @"Expected MCX", @"Costing & Difference", @"Base metals", @"Energy", @"Local Spot", @"International Markets"];
+     eMCTabs = @[@"Expected MCX", @"Costing & Difference"];
+     
+     seletedPageViewsDic = [[NSMutableDictionary alloc] init];
+     [seletedPageViewsDic setObject:marketTabs forKey:@"Market Mastro"];
+     [seletedPageViewsDic setObject:eMCTabs forKey:@"EMC"];
+     
+     [self reloadView];*/
     
     
-   // [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:13/255.0 green:16/255.0 blue:20/255.0 alpha:1.0]];
-    
-    [self.navigationController.navigationBar setTitleTextAttributes:
+    /*   [self.navigationController setNavigationBarHidden:NO animated:NO];
+     //    [self.navigationController setToolbarHidden:NO animated:NO];
+     
+     
+     // [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:13/255.0 green:16/255.0 blue:20/255.0 alpha:1.0]];
+     
+     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    
-    menuItems = @[@"market",@"market1",@"market2",@"market3",@"market4",@"market5",@"market6"];
-    
-    arrOfCollctionList = @[@"Agri",@"Costing & Difference",@"Expected MCX",@"Local Spot",@"International",@"Bullion",@"Base Metals",@"Energy"];
-    [_collectionView reloadData];
-
-   // [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:13/255.0 green:16/255.0 blue:20/255.0 alpha:1.0]];
-    
-    
-    // Do any additional setup after loading the view.
-    SWRevealViewController *revealViewController = self.revealViewController;
-    
-    if ( revealViewController )
-    {
-        [self.sidebarButton setTarget: self.revealViewController];
-        [self.sidebarButton setAction: @selector( revealToggle: )];
-        [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
-    }
-    
-    //HP
-    [self initialSetUpForMarketPage];
-    
-    //AdBanner
-    [self bannerAd];*/
+     
+     menuItems = @[@"market",@"market1",@"market2",@"market3",@"market4",@"market5",@"market6"];
+     
+     arrOfCollctionList = @[@"Agri",@"Costing & Difference",@"Expected MCX",@"Local Spot",@"International",@"Bullion",@"Base Metals",@"Energy"];
+     [_collectionView reloadData];
+     
+     // [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:13/255.0 green:16/255.0 blue:20/255.0 alpha:1.0]];
+     
+     
+     // Do any additional setup after loading the view.
+     SWRevealViewController *revealViewController = self.revealViewController;
+     
+     if ( revealViewController )
+     {
+     [self.sidebarButton setTarget: self.revealViewController];
+     [self.sidebarButton setAction: @selector( revealToggle: )];
+     [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+     }
+     
+     //HP
+     [self initialSetUpForMarketPage];
+     
+     //AdBanner
+     [self bannerAd];*/
 }
 
 -(void)loadData{
@@ -128,7 +128,7 @@
     eMCTabs = [[NSMutableArray alloc] init];
     
     NSMutableArray *arrOfTypes =  [[NSUserDefaults standardUserDefaults] valueForKey:@"commodity_types"];
-
+    
     
     for (int i =0; i<arrOfTypes.count; i++)
     {
@@ -168,7 +168,7 @@
     
     menuItems = @[@"market",@"market1",@"market2",@"market3",@"market4",@"market5",@"market6"];
     
-   arrOfCollctionList = @[@"Agri",@"Costing & Difference",@"Expected MCX",@"Local Spot",@"International",@"Bullion",@"Base Metals",@"Energy"];
+    arrOfCollctionList = @[@"Agri",@"Costing & Difference",@"Expected MCX",@"Local Spot",@"International",@"Bullion",@"Base Metals",@"Energy"];
     [_collectionView reloadData];
     
     // [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:13/255.0 green:16/255.0 blue:20/255.0 alpha:1.0]];
@@ -223,7 +223,7 @@
     }
     
     //alert button in navigation bar
-
+    
     CGRect frameimg = CGRectMake(0, 0, 40, 25);
     UIButton *Alert = [[UIButton alloc] initWithFrame:frameimg];
     [Alert setImage:[UIImage imageNamed:@"act_alert_ico"] forState:UIControlStateNormal];
@@ -232,17 +232,13 @@
     [Alert addTarget:self action:@selector(BtnAlertTapped) forControlEvents:UIControlEventTouchUpInside];
     
     //search button in navigation bar
-
+    
     CGRect frameimg2 = CGRectMake(0, 0, 35, 25);
     UIButton *Search = [[UIButton alloc] initWithFrame:frameimg2];
     [Search setImage:[UIImage imageNamed:@"search_ico"] forState:UIControlStateNormal];
     [Search setImage:[UIImage imageNamed:@"search_ico"] forState:UIControlStateHighlighted];
     [Search.imageView setContentMode:UIViewContentModeScaleAspectFit];
-    
-    if (indexOfDrawer == 1)
-        [Search addTarget:self action:@selector(BtnSearchTappedFromMarket) forControlEvents:UIControlEventTouchUpInside];
-    else
-        [Search addTarget:self action:@selector(BtnSearchTappedFromMarket) forControlEvents:UIControlEventTouchUpInside];
+    [Search addTarget:self action:@selector(BtnSearchTapped) forControlEvents:UIControlEventTouchUpInside];
     
     CGRect frameimg3 = CGRectMake(0, 0, 35, 25);
     UIButton *list = [[UIButton alloc] initWithFrame:frameimg3];
@@ -266,14 +262,14 @@
         [plusButton setImage:[UIImage imageNamed:@"act_addcommodities_ico"] forState:UIControlStateNormal];
         [plusButton setImage:[UIImage imageNamed:@"act_addcommodities_ico"] forState:UIControlStateHighlighted];
         [plusButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
-        [plusButton addTarget:self action:@selector(BtnAddTapped) forControlEvents:UIControlEventTouchUpInside];
+        [plusButton addTarget:self action:@selector(BtnSearchTapped) forControlEvents:UIControlEventTouchUpInside];
         
         CGRect frameimg4 = CGRectMake(0, 0, 35, 25);
         UIButton *editButton = [[UIButton alloc] initWithFrame:frameimg4];
         [editButton setImage:[UIImage imageNamed:@"act_edit_ico"] forState:UIControlStateNormal];
-        [editButton setImage:[UIImage imageNamed:@"act_tick_ico"] forState:UIControlStateSelected];
+        [editButton setImage:[UIImage imageNamed:@"act_edit_ico"] forState:UIControlStateHighlighted];
         [editButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
-        [editButton addTarget:self action:@selector(editClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [editButton addTarget:self action:@selector(editClicked) forControlEvents:UIControlEventTouchUpInside];
         
         CGRect frameimg5 = CGRectMake(0, 0, 35, 25);
         UIButton *list = [[UIButton alloc] initWithFrame:frameimg5];
@@ -302,41 +298,23 @@
     sender.selected =! sender.selected;
 }
 
-- (void)editClicked:(UIButton *)sender
+- (void)editClicked
 {
-    sender.selected =! sender.selected;
+    
 }
 
-- (void)BtnAddTapped
-{
-    // From Portfolio Tab
-    
-    CreatePortflioVC *commodityPage = [self.storyboard instantiateViewControllerWithIdentifier:@"CreatePortflioVC"];
-    commodityPage.isFromVC = @"Dashboard";
-    commodityPage.isFromPortfolio = true;
-    commodityPage.isFromAlert = false;
-    commodityPage.isFromMarket = false;
-    
-    [self.navigationController pushViewController:commodityPage animated:YES];
-}
-
--(void)BtnSearchTappedFromMarket
+-(void)BtnSearchTapped
 {
     CreatePortflioVC *commodityPage = [self.storyboard instantiateViewControllerWithIdentifier:@"CreatePortflioVC"];
     commodityPage.isFromVC = @"Dashboard";
-    commodityPage.isFromPortfolio = false;
-    commodityPage.isFromAlert = false;
-    commodityPage.isFromMarket = true;
     
     [[NSUserDefaults standardUserDefaults]setObject:@"Dashboard" forKey:@"isFromVC"];
     
     [self.navigationController pushViewController:commodityPage animated:YES];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
     UIImage *tSImg = [UIImage imageFromColor:[UIColor colorwithHexString:@"16191B"] size:_btnMarket.frame.size];
     [_btnMarket setBackgroundImage:tSImg forState:UIControlStateSelected];
     [_btnNews setBackgroundImage:tSImg forState:UIControlStateSelected];
@@ -407,7 +385,7 @@
                  [self MethodGetcurrentActivePackage];
                  
              }
-            failure:^(NSError *error)
+                                              failure:^(NSError *error)
              {
                  NSLog(@"Generate token error = %@",error);
              }];
@@ -422,9 +400,9 @@
 /*
  
  /api/getActiveUserSubscription/{UserID}
-  UserID
+ UserID
  get
-*/
+ */
 
 -(void)MethodGetcurrentActivePackage
 {
@@ -438,12 +416,12 @@
         if (strUserID !=nil)
         {
             
-             [[MethodsManager sharedManager]loadingView:self.view];
+            [[MethodsManager sharedManager]loadingView:self.view];
             
             [[webManager sharedObject]loginRequest:nil withMethod:[NSString stringWithFormat:@"api/getActiveUserSubscription/%@",strUserID]
                                    successResponce:^(id response)
              {
-                [[MethodsManager sharedManager]StopAnimating];
+                 [[MethodsManager sharedManager]StopAnimating];
                  NSLog(@"get current active package response = %@",response);
                  
                  NSDictionary *DicwithCurreentActivePackDetails = @{
@@ -468,23 +446,20 @@
                  
                  if(arrOfTypes==nil)
                  {
-                 
-                   [self MethodGetCommodityTypes];
+                     
+                     [self MethodGetCommodityTypes];
                  }
                  
              }
-              failure:^(NSError *error)
+                                           failure:^(NSError *error)
              {
                  [[MethodsManager sharedManager]StopAnimating];
                  NSLog(@"get current active package error = %@",error);
-                 
                  if (error.code==602) {
                      [self redirectToRegistrationPage:error];
                  }
                  else
-                 {
                      [self MethodGetCommodityTypes];
-                 }
              }];
         }
         else
@@ -510,37 +485,37 @@
  [HUD hide:YES];
  NSLog(@"get current active package response = %@",response);
  
-
-NSDictionary *DicwithCurreentActivePackDetails = @{
-                                                   @"CPUsed":[response valueForKey:@"CPUsed"],
-                                                   @"ExpiredOn":[response valueForKey:@"ExpiredOn"],
-                                                   @"Groups":[response valueForKey:@"Groups"],
-                                                   @"PackageID": [response valueForKey:@"PackageID"],
-                                                   @"PackageName":[response valueForKey:@"PackageName"],
-                                                   @"Paid":[response valueForKey:@"Paid"],
-                                                   @"Price": [response valueForKey:@"Price"],
-                                                   @"PurchasedOn":[response valueForKey:@"PurchasedOn"],
-                                                   @"PurchasedStatus":[response valueForKey:@"PurchasedStatus"],
-                                                   @"USOrderID":[response valueForKey:@"USOrderID"],
-                                                   @"WithAd":[response valueForKey:@"WithAd"],
-                                                   @"isExpired":[response valueForKey:@"isExpired"]
-                                                   };
-
-
-[[NSUserDefaults standardUserDefaults]setObject:DicwithCurreentActivePackDetails forKey:@"DicwithCurreentActivePackDetails"];
-
-}
-failure:^(NSError *error)
-{
-    [HUD hide:YES];
-    NSLog(@"get current active package error = %@",error);
-}];
-}
-else
-{
-    [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil]show];
-}
-}
+ 
+ NSDictionary *DicwithCurreentActivePackDetails = @{
+ @"CPUsed":[response valueForKey:@"CPUsed"],
+ @"ExpiredOn":[response valueForKey:@"ExpiredOn"],
+ @"Groups":[response valueForKey:@"Groups"],
+ @"PackageID": [response valueForKey:@"PackageID"],
+ @"PackageName":[response valueForKey:@"PackageName"],
+ @"Paid":[response valueForKey:@"Paid"],
+ @"Price": [response valueForKey:@"Price"],
+ @"PurchasedOn":[response valueForKey:@"PurchasedOn"],
+ @"PurchasedStatus":[response valueForKey:@"PurchasedStatus"],
+ @"USOrderID":[response valueForKey:@"USOrderID"],
+ @"WithAd":[response valueForKey:@"WithAd"],
+ @"isExpired":[response valueForKey:@"isExpired"]
+ };
+ 
+ 
+ [[NSUserDefaults standardUserDefaults]setObject:DicwithCurreentActivePackDetails forKey:@"DicwithCurreentActivePackDetails"];
+ 
+ }
+ failure:^(NSError *error)
+ {
+ [HUD hide:YES];
+ NSLog(@"get current active package error = %@",error);
+ }];
+ }
+ else
+ {
+ [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil]show];
+ }
+ }
  */
 
 
@@ -557,7 +532,7 @@ else
     if(self.tableViewForNews == tableView)
     {
         return newsList.count;
-//        return menuItems.count;
+        //        return menuItems.count;
     }
     else {
         return 15;
@@ -566,29 +541,27 @@ else
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell;
-    
     if(tableView == self.tableViewForNews)
     {
         /*
-        NewsTableViewCell *nCell = [tableView dequeueReusableCellWithIdentifier:newsCellId];
-        if (!nCell) {
-            nCell = [[NewsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:newsCellId];
-        }
+         NewsTableViewCell *nCell = [tableView dequeueReusableCellWithIdentifier:newsCellId];
+         if (!nCell) {
+         nCell = [[NewsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:newsCellId];
+         }
+         
+         //        NewsTableViewCell *nCell = (NewsTableViewCell*)[tableView dequeueReusableCellWithIdentifier: forIndexPath:indexPath];
+         nCell.lblNewsTitle = [[newsList objectAtIndex:indexPath.row] objectForColumnName:@"title"];
+         nCell.lblNewsTime = [[newsList objectAtIndex:indexPath.row] objectForColumnName:@"pubDate"];
+         cell = nCell;
+         */
         
-        //        NewsTableViewCell *nCell = (NewsTableViewCell*)[tableView dequeueReusableCellWithIdentifier: forIndexPath:indexPath];
-        nCell.lblNewsTitle = [[newsList objectAtIndex:indexPath.row] objectForColumnName:@"title"];
-        nCell.lblNewsTime = [[newsList objectAtIndex:indexPath.row] objectForColumnName:@"pubDate"];
-        cell = nCell;
-        */
-        
-         NSString *CellIdentifier = [menuItems objectAtIndex:indexPath.row];
-         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-         cell.backgroundColor = [UIColor clearColor];
-         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-         cell.backgroundColor = [UIColor clearColor];
+        NSString *CellIdentifier = [menuItems objectAtIndex:indexPath.row];
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+        cell.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundColor = [UIColor clearColor];
         
     }
     else
@@ -599,16 +572,15 @@ else
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
     }
-   
+    
     return cell;
 }
-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(tableView == self.tableViewForNews)
     {
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-
+        
         UILabel *label = (UILabel*)[cell viewWithTag:21];
         UIImageView *imgView = (UIImageView*)[cell viewWithTag:20];
         
@@ -639,7 +611,7 @@ else
     btnPortfolio.selected = NO;
     btnNews.selected = NO;
     btnCalendar.selected = NO;
-
+    
     if (indexOfDrawer>3) {
         if (btnMarket.selected) {
             indexOfDrawer = 0;
@@ -657,7 +629,6 @@ else
             indexOfDrawer = 0;
         }
     }
-    
     if(indexOfDrawer == 0)
     {
         self.title = @"Market Mastro";
@@ -686,7 +657,7 @@ else
         [self.viewForPortflio setHidden:NO];
         
         self.viewForPortflio.frame = CGRectMake(0, 135, SCREEN_WIDTH, SCREEN_HEIGHT-135);
-        [self.view addSubview:self.viewForMarket];
+        [self.view addSubview:self.viewForPortflio];
         [self.viewForPortflio addSubview:ViewSelected3Commodity];
         
         [ViewSelected3Commodity setFrame:CGRectMake(ViewSelected3Commodity.frame.origin.x, ViewSelected3Commodity.frame.origin.y, SCREEN_WIDTH, ViewSelected3Commodity.frame.size.height)];
@@ -755,7 +726,7 @@ else
         self.title = @"Market Mastro";
         btnMarket.selected = YES;
         indexOfDrawer = 0;
-
+        
         [self.viewForNews setHidden:YES];
         [self.viewForCalendar setHidden:YES];
         [self.viewForPortflio setHidden:YES];
@@ -764,6 +735,23 @@ else
         [self.view addSubview:self.viewForMarket];
         [self.viewForMarket addSubview:ViewSelected3Commodity];
         [self setupMarketPageControl];
+    }
+    else if(btnSelectedTab == btnPortfolio)
+    {
+        self.title = @"Market Mastro";
+        btnPortfolio.selected = YES;
+        indexOfDrawer = 2;
+        
+        [self.viewForNews setHidden:YES];
+        [self.viewForCalendar setHidden:YES];
+        [self.viewForMarket setHidden:YES];
+        [self.viewForEMC setHidden:YES];
+        [self.viewForPortflio setHidden:NO];
+        //        self.viewForPortflio.frame = CGRectMake(0, 135,SCREEN_WIDTH, SCREEN_HEIGHT-135);
+        [self.view addSubview:self.viewForPortflio];
+        
+        [self.viewForPortflio addSubview:ViewSelected3Commodity];
+        [self setUpOnTapPortfolio];
     }
     else if(btnSelectedTab == btnNews)
     {
@@ -784,23 +772,6 @@ else
         
         //Harish
         //        [self newsPage];
-    }
-    else if(btnSelectedTab == btnPortfolio)
-    {
-        self.title = @"Market Portfolio";
-        btnPortfolio.selected = YES;
-        indexOfDrawer = 2;
-        
-        [self.viewForNews setHidden:YES];
-        [self.viewForCalendar setHidden:YES];
-        [self.viewForMarket setHidden:YES];
-        [self.viewForEMC setHidden:YES];
-        [self.viewForPortflio setHidden:NO];
-        //        self.viewForPortflio.frame = CGRectMake(0, 135,SCREEN_WIDTH, SCREEN_HEIGHT-135);
-        [self.view addSubview:self.viewForPortflio];
-        
-        [self.viewForPortflio addSubview:ViewSelected3Commodity];
-        [self setUpOnTapPortfolio];
     }
     else if(btnSelectedTab == btnCalendar)
     {
@@ -855,7 +826,7 @@ else
 {
     AlertViewController *calendarVC = [self.storyboard instantiateViewControllerWithIdentifier:@"AlertViewController"];
     calendarVC.is_NotFromDraw = YES;
-
+    
     [self.navigationController pushViewController:calendarVC animated:YES];
 }
 
@@ -887,7 +858,7 @@ else
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
         
         //swati
-//        [self.btnSideMenu addTarget:self.revealViewController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+        //        [self.btnSideMenu addTarget:self.revealViewController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
     }
 }
 
@@ -913,9 +884,8 @@ else
     /**** 1. Setup pages using model class "ADPageModel" ****/
     
     /*Bullion, Expected MCX, Costing & Difference, Base metals, Energy, Agri, Local Spot, International Markets
-    */
+     */
     NSMutableArray *arrPageModle = [[NSMutableArray alloc] init];
-    
     for (int i=0; i<pageArr.count; i++)
     {
         ADPageModel *pageModel = [[ADPageModel alloc] init];
@@ -976,7 +946,7 @@ else
     //_pageControl.iCustomTabWidth    =               [[UIScreen mainScreen] bounds].size.width/3;
     /**** 3. Add as subview ****/
     
-//    _pageControl.view.backgroundColor = [UIColor blackColor];
+    //    _pageControl.view.backgroundColor = [UIColor blackColor];
     
     if (pageArr.count>3) {
         marketPageControl = _pageControl;
@@ -987,13 +957,13 @@ else
         [viewEMCTables addSubview:eMCPageControl.view];
     }
     
-//    CGRect frame;
-//    frame.origin.x = 0;
-//    frame.origin.y = _pageControlView.frame.origin.y + 60;
-//    frame.size.width = width;
-//    frame.size.height = 80;
-//    GoldSilverView.frame = frame;
-//    [self.view addSubview:GoldSilverView];
+    //    CGRect frame;
+    //    frame.origin.x = 0;
+    //    frame.origin.y = _pageControlView.frame.origin.y + 60;
+    //    frame.size.width = width;
+    //    frame.size.height = 80;
+    //    GoldSilverView.frame = frame;
+    //    [self.view addSubview:GoldSilverView];
     
     
     // [self.view addSubview:_pageControl.view];
@@ -1033,71 +1003,71 @@ else
     page0.title = [pageArr objectAtIndex:pageModel.iPageNumber];
     
     /*
-    switch (pageModel.iPageNumber) {
-        case 0:
-        {
-            page0.view.backgroundColor =    [UIColor darkGrayColor];
-            return page0;
-        }
-            break;
-            
-        case 1:
-        {
-            page0.view.backgroundColor =    [UIColor darkGrayColor];
-            return page0;
-        }
-            break;
-            
-        case 2:
-        {
-            page0.view.backgroundColor =    [UIColor darkGrayColor];
-            return page0;
-        }
-            break;
-            
-        case 3:
-        {
-            page0.view.backgroundColor =    [UIColor darkGrayColor];
-            return page0;
-        }
-            break;
-            
-        case 4:
-        {
-            page0.view.backgroundColor =    [UIColor darkGrayColor];
-            return page0;
-        }
-            break;
-            
-        case 5:
-        {
-            page0.view.backgroundColor =    [UIColor darkGrayColor];
-            return page0;
-        }
-            break;
-            
-        case 6:
-        {
-            page0.view.backgroundColor =    [UIColor darkGrayColor];
-            return page0;
-        }
-            break;
-            
-        case 7:
-        {
-            page0.view.backgroundColor =    [UIColor darkGrayColor];
-            return page0;
-        }
-            break;
-            
-        default:
-        {
-            page0.view.backgroundColor =    [UIColor darkGrayColor];
-            return page0;
-        }
-            break;
-    }
-    */
+     switch (pageModel.iPageNumber) {
+     case 0:
+     {
+     page0.view.backgroundColor =    [UIColor darkGrayColor];
+     return page0;
+     }
+     break;
+     
+     case 1:
+     {
+     page0.view.backgroundColor =    [UIColor darkGrayColor];
+     return page0;
+     }
+     break;
+     
+     case 2:
+     {
+     page0.view.backgroundColor =    [UIColor darkGrayColor];
+     return page0;
+     }
+     break;
+     
+     case 3:
+     {
+     page0.view.backgroundColor =    [UIColor darkGrayColor];
+     return page0;
+     }
+     break;
+     
+     case 4:
+     {
+     page0.view.backgroundColor =    [UIColor darkGrayColor];
+     return page0;
+     }
+     break;
+     
+     case 5:
+     {
+     page0.view.backgroundColor =    [UIColor darkGrayColor];
+     return page0;
+     }
+     break;
+     
+     case 6:
+     {
+     page0.view.backgroundColor =    [UIColor darkGrayColor];
+     return page0;
+     }
+     break;
+     
+     case 7:
+     {
+     page0.view.backgroundColor =    [UIColor darkGrayColor];
+     return page0;
+     }
+     break;
+     
+     default:
+     {
+     page0.view.backgroundColor =    [UIColor darkGrayColor];
+     return page0;
+     }
+     break;
+     }
+     */
     return page0;
 }
 
@@ -1112,24 +1082,40 @@ else
 
 - (void)setUpOnTapPortfolio
 {
-//    [self emptyPortfolioViewHiddenStatus:NO];
-//    
-//    return;
-//    
+    //[self emptyPortfolioViewHiddenStatus:NO];
+    
+    // return;
+    
     //Temp Login
     
-//    if ([imgViewEmpty isHidden])
-//    {
-//        if (portfolioVCObj && [portfolioVCObj.title isEqualToString:@"ProfolioList"]) {
-//            [self showPortfolioEditable];
-//        }
-//        else {
-//            [self emptyPortfolioViewHiddenStatus:NO];
-//        }
-//    }
-//    else {
-        [self showPortfolioList];
-//    }
+    /* if ([imgViewEmpty isHidden]) {
+     if (portfolioVCObj && [portfolioVCObj.title isEqualToString:@"ProfolioList"]) {
+     [self showPortfolioEditable];
+     }
+     else {
+     [self emptyPortfolioViewHiddenStatus:NO];
+     }
+     }
+     else {
+     [self showPortfolioList];
+     }*/
+    
+    NSString *query1 =[NSString stringWithFormat:@"SELECT * from UserPortfolio"];
+    
+    [[SQLiteDatabase sharedInstance] executeQuery:query1 withParams:nil success:^(SQLiteResult *result) {
+        if(result.rows.count>0){
+            [self showPortfolioList];
+        }else{
+            [self emptyPortfolioViewHiddenStatus:NO];
+        }
+        
+        
+    } failure:^(NSString *errorMessage) {
+        NSLog(@"Could not fetch rows , %@",errorMessage);
+    }];
+    
+    
+    
 }
 
 - (void)emptyPortfolioViewHiddenStatus:(BOOL)isHide
@@ -1140,25 +1126,16 @@ else
     [lblEmptyDescripiton setHidden:isHide];
     [btnOCreatePortfolio setHidden:isHide];
 }
-
-- (void)showPortfolioList
-{
+- (void)showPortfolioList {
     [self emptyPortfolioViewHiddenStatus:YES];
-    
     portfolioVCObj =   [self.storyboard instantiateViewControllerWithIdentifier:@"MarketViewController"];
     portfolioVCObj.title = @"ProfolioList";
-    
     CGRect portfolioFrame = CGRectMake(0, CGRectGetMaxY(ViewSelected3Commodity.frame), SCREEN_WIDTH, CGRectGetHeight(_viewForPortflio.frame)-CGRectGetMaxY(ViewSelected3Commodity.frame));
-    
     portfolioVCObj.view.frame = portfolioFrame;
-    
     [_viewForPortflio addSubview:portfolioVCObj.view];
 }
-
-- (void)showPortfolioEditable
-{
+- (void)showPortfolioEditable {
     [self emptyPortfolioViewHiddenStatus:YES];
-    
     portfolioVCObj =   [self.storyboard instantiateViewControllerWithIdentifier:@"MarketViewController"];
     portfolioVCObj.title = @"ProfolioEditable";
     CGRect portfolioFrame = CGRectMake(0, CGRectGetMinY(ViewSelected3Commodity.frame), SCREEN_WIDTH, CGRectGetHeight(_viewForPortflio.frame)-CGRectGetMinY(ViewSelected3Commodity.frame));
@@ -1288,7 +1265,7 @@ else
 - (void)bannerAd {
     adBannerView.adUnitID = BannerAdUnitID;
     //    _adView.rootViewController = self;
-//    adBannerView.adSizeDelegate = self;
+    //    adBannerView.adSizeDelegate = self;
     [adBannerView loadRequest:[GADRequest request]];
     [[GADRequest request] setGender:kGADGenderMale];
     [[GADRequest request] setBirthday:[NSDate date]];
@@ -1375,13 +1352,13 @@ else
                  [[MethodsManager sharedManager]StopAnimating];
                  NSLog(@"get commodity type response = %@",response);
                  
-        
+                 
                  
                  NSMutableArray *ArrGetCurrentAlertList = [[NSMutableArray alloc] init];
                  ArrGetCurrentAlertList = response;
-             
-               //  marketTabs = [[NSMutableArray alloc] init];
-               //  eMCTabs = [[NSMutableArray alloc] init];
+                 
+                 //  marketTabs = [[NSMutableArray alloc] init];
+                 //  eMCTabs = [[NSMutableArray alloc] init];
                  
                  NSMutableArray *arrOfTypes = [[NSMutableArray alloc] init];
                  
@@ -1389,24 +1366,24 @@ else
                  {
                      NSDictionary *dic = [ArrGetCurrentAlertList objectAtIndex:i];
                      
-                    /* if([[dic valueForKey:@"GroupType"] isEqualToString:@"OTHERS"])
-                     {
-                           [eMCTabs addObject:[dic valueForKey:@"GroupName"]];
-                     }
-                     else
-                     {
-                            [marketTabs addObject:[dic valueForKey:@"GroupName"]];
-                     }*/
+                     /* if([[dic valueForKey:@"GroupType"] isEqualToString:@"OTHERS"])
+                      {
+                      [eMCTabs addObject:[dic valueForKey:@"GroupName"]];
+                      }
+                      else
+                      {
+                      [marketTabs addObject:[dic valueForKey:@"GroupName"]];
+                      }*/
                      
                      [arrOfTypes addObject:dic];
                      
-                    // [arrOfCollctionList addObject:[dic valueForKey:@"GroupName"]];
+                     // [arrOfCollctionList addObject:[dic valueForKey:@"GroupName"]];
                  }
                  
                  [[NSUserDefaults standardUserDefaults] setObject:arrOfTypes forKey:@"commodity_types"];
                  [self loadData];
              }
-            failure:^(NSError *error)
+                                           failure:^(NSError *error)
              {
                  [[MethodsManager sharedManager]StopAnimating];
                  NSLog(@"get current active package error = %@",error);
@@ -1447,5 +1424,4 @@ else
         }];
     }
 }
-
 @end

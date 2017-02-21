@@ -3064,74 +3064,11 @@ get 25 credit points in your wallet.</string>
                                                     <rect key="frame" x="1" y="0.0" width="371" height="85"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DO4-gn-Tlb">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DO4-gn-Tlb">
                                                             <rect key="frame" x="13" y="23" width="357" height="36"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                            <attributedString key="attributedText">
-                                                                <fragment content="Alert when">
-                                                                    <attributes>
-                                                                        <color key="NSColor" red="0.58431372550000005" green="0.58431372550000005" blue="0.58431372550000005" alpha="1" colorSpace="calibratedRGB"/>
-                                                                        <font key="NSFont" metaFont="system" size="14"/>
-                                                                        <font key="NSOriginalFont" metaFont="system"/>
-                                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                                <fragment content=" ">
-                                                                    <attributes>
-                                                                        <font key="NSFont" metaFont="menu" size="14"/>
-                                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                                <fragment content="SILVER 03 Mar 2017">
-                                                                    <attributes>
-                                                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                                        <font key="NSFont" metaFont="system" size="14"/>
-                                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                                <fragment content=" ">
-                                                                    <attributes>
-                                                                        <font key="NSFont" metaFont="menu" size="14"/>
-                                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                                <fragment content="is">
-                                                                    <attributes>
-                                                                        <color key="NSColor" red="0.58431372550000005" green="0.58431372550000005" blue="0.58431372550000005" alpha="1" colorSpace="calibratedRGB"/>
-                                                                        <font key="NSFont" metaFont="system" size="14"/>
-                                                                        <font key="NSOriginalFont" metaFont="system"/>
-                                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                                <fragment content=" ">
-                                                                    <attributes>
-                                                                        <font key="NSFont" metaFont="menu" size="14"/>
-                                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                                <fragment content="less than(&lt;)">
-                                                                    <attributes>
-                                                                        <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                                        <font key="NSFont" metaFont="system" size="14"/>
-                                                                        <font key="NSOriginalFont" metaFont="system" size="14"/>
-                                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                                <fragment content=" ">
-                                                                    <attributes>
-                                                                        <font key="NSFont" metaFont="menu" size="14"/>
-                                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                                <fragment content="Price value 25.00">
-                                                                    <attributes>
-                                                                        <color key="NSColor" red="0.58431372550000005" green="0.58431372550000005" blue="0.58431372550000005" alpha="1" colorSpace="calibratedRGB"/>
-                                                                        <font key="NSFont" metaFont="system" size="14"/>
-                                                                        <font key="NSOriginalFont" metaFont="system"/>
-                                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                            </attributedString>
+                                                            <fontDescription key="fontDescription" name="Lato-Regular" family="Lato" pointSize="15"/>
+                                                            <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="02 Feb,2017 11:47" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SRC-Yz-GPT">
@@ -3507,7 +3444,7 @@ get 25 credit points in your wallet.</string>
                                     <rect key="frame" x="0.0" y="28" width="312" height="70"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qPS-rE-k7j" id="EBb-Rg-ASt">
-                                        <rect key="frame" x="0.0" y="0.0" width="312" height="70"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="312" height="69"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="2oN-mO-EVe">
@@ -3542,7 +3479,7 @@ get 25 credit points in your wallet.</string>
                                     <rect key="frame" x="0.0" y="98" width="312" height="70"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PR8-5p-5ZD" id="G3I-ZL-YNU">
-                                        <rect key="frame" x="0.0" y="0.0" width="312" height="70"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="312" height="69"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="flf-wj-E7S">
@@ -3577,7 +3514,7 @@ get 25 credit points in your wallet.</string>
                                     <rect key="frame" x="0.0" y="168" width="312" height="70"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CSf-p9-MV0" id="AZc-qq-z1J">
-                                        <rect key="frame" x="0.0" y="0.0" width="312" height="70"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="312" height="69"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" tag="20" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="blE-FI-Puh">
@@ -3612,7 +3549,7 @@ get 25 credit points in your wallet.</string>
                                     <rect key="frame" x="0.0" y="238" width="312" height="70"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="E8I-sU-AGb" id="Lcq-DW-J4L">
-                                        <rect key="frame" x="0.0" y="0.0" width="312" height="70"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="312" height="69"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" tag="20" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="0UH-x0-6pc">
@@ -3647,7 +3584,7 @@ get 25 credit points in your wallet.</string>
                                     <rect key="frame" x="0.0" y="308" width="312" height="70"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UI5-2I-sNt" id="nqe-SS-2gg">
-                                        <rect key="frame" x="0.0" y="0.0" width="312" height="70"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="312" height="69"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" tag="20" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="33Z-lx-1Xj">
@@ -3682,7 +3619,7 @@ get 25 credit points in your wallet.</string>
                                     <rect key="frame" x="0.0" y="378" width="312" height="70"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YOf-dx-BOh" id="1rc-mK-Zhh">
-                                        <rect key="frame" x="0.0" y="0.0" width="312" height="70"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="312" height="69"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" tag="20" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="YZE-dP-RN2">
@@ -3717,7 +3654,7 @@ get 25 credit points in your wallet.</string>
                                     <rect key="frame" x="0.0" y="448" width="312" height="70"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Xi2-x3-2fo" id="h99-QJ-dTm">
-                                        <rect key="frame" x="0.0" y="0.0" width="312" height="70"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="312" height="69"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" tag="20" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="jFX-Lw-IC5">
@@ -4109,11 +4046,11 @@ get 25 credit points in your wallet.</string>
                                     <rect key="frame" x="0.0" y="28" width="312" height="58"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UXs-Mk-4UA" id="ZWW-YH-ie8">
-                                        <rect key="frame" x="0.0" y="0.0" width="312" height="58"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="312" height="57"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="zB7-CW-zJH">
-                                                <rect key="frame" x="2" y="0.0" width="308" height="24"/>
+                                                <rect key="frame" x="2" y="0.0" width="308" height="23"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </imageView>
@@ -7029,8 +6966,8 @@ get 25 credit points in your wallet.</string>
         <image name="dro_emc_ico.png" width="99" height="70"/>
         <image name="dro_help_active_ico" width="99" height="70"/>
         <image name="dro_help_ico" width="99" height="70"/>
-        <image name="dro_market_active_ico" width="33" height="23"/>
-        <image name="dro_market_ico" width="33" height="23"/>
+        <image name="dro_market_active_ico" width="25" height="18"/>
+        <image name="dro_market_ico" width="25" height="18"/>
         <image name="dro_news_active_ico" width="33" height="23"/>
         <image name="dro_news_ico" width="33" height="23"/>
         <image name="dro_portfolio_active_ico" width="33" height="23"/>

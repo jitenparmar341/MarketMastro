@@ -98,7 +98,7 @@
          NSMutableArray *responseArray = response;
          [self matchCommodityID:responseArray];
      }
-     failure:^(NSError *error)
+                                   failure:^(NSError *error)
      {
          [[MethodsManager sharedManager]StopAnimating];
          NSLog(@"moreItems fourth page>>GetCommoditiesByGroupID error = %@",error);
@@ -119,19 +119,19 @@
         
         [[SQLiteDatabase sharedInstance]executeQuery:query withParams:nil success:^(SQLiteResult *result)
          {
-            NSLog(@"match commodity id query response = %@",result);
-            resultArrayy = result.rows;
-            SQLiteRow *object = [resultArrayy objectAtIndex:0];
-           // ifExistinPortFolio =
-           [self presentInPortFolio:strCommodityID object:object];
+             NSLog(@"match commodity id query response = %@",result);
+             resultArrayy = result.rows;
+             SQLiteRow *object = [resultArrayy objectAtIndex:0];
+             // ifExistinPortFolio =
+             [self presentInPortFolio:strCommodityID object:object];
              
          }
-          failure:^(NSString *errorMessage)
+                                             failure:^(NSString *errorMessage)
          {
              NSLog(@"match commodity id query response = %@",errorMessage);
          }];
     }
-   // NSLog(@"detailsarray = %@",detailsArray);
+    // NSLog(@"detailsarray = %@",detailsArray);
 }
 
 -(void)presentInPortFolio:(NSString*)strCommoID object:(SQLiteRow*)object
@@ -140,51 +140,51 @@
     NSString *query =  [NSString stringWithFormat:@"select * from UserPortfolio where CommodityId ='%@'",strCommodityID];
     
     // [[MethodsManager sharedManager]loadingView:self.view];
-     [[SQLiteDatabase sharedInstance]executeQuery:query withParams:nil success:^(SQLiteResult *result)
+    [[SQLiteDatabase sharedInstance]executeQuery:query withParams:nil success:^(SQLiteResult *result)
      {
-     
-       NSLog(@"query = %@",query);
          
-     // [[MethodsManager sharedManager]StopAnimating];
-      NSMutableArray *ResultArray = result.rows;
-      NSLog(@"resultArray = %@",ResultArray);
-      NSString *status = @"NO";
-     
-    if (ResultArray.count >0)
-    {
-    status = @"YES";
-    }
-     
-     NSString *strName = [object stringForColumnName:@"Name"];
-     NSString *strScriptCode = [object stringForColumnName:@"ScriptCode"];
-     NSString *strCommodityType = [object stringForColumnName:@"CommodityType"];
-     NSString *strExpiry = [object stringForColumnName:@"Expiry"];
-     NSString *strExch = [object stringForColumnName:@"Exch"];
-     NSString *strExchType = [object stringForColumnName:@"ExchType"];
-     NSString *strSubTitle = [object stringForColumnName:@"SubTitle"];
-     NSString *strDigits = [object stringForColumnName:@"Digits"];
-     NSString *strCommodityID = [object stringForColumnName:@"CommodityID"];
-     [detailsArray addObject:@{@"Name":strName,
-                               @"CommodityID":strCommodityID,
-                               @"ScriptCode":strScriptCode,
-                               @"CommodityType":strCommodityType,
-                               @"Expiry":strExpiry,
-                               @"Exch":strExch,
-                               @"ExchType":strExchType,
-                               @"SubTitle":strSubTitle,
-                               @"Digits":strDigits,
-                               @"Status":status
-     }];
-     
-     NSLog(@"detailsArray = %@",detailsArray);
-     ArrayMain = detailsArray;
-     [_tableMoreitems reloadData];
-     
+         NSLog(@"query = %@",query);
+         
+         // [[MethodsManager sharedManager]StopAnimating];
+         NSMutableArray *ResultArray = result.rows;
+         NSLog(@"resultArray = %@",ResultArray);
+         NSString *status = @"NO";
+         
+         if (ResultArray.count >0)
+         {
+             status = @"YES";
+         }
+         
+         NSString *strName = [object stringForColumnName:@"Name"];
+         NSString *strScriptCode = [object stringForColumnName:@"ScriptCode"];
+         NSString *strCommodityType = [object stringForColumnName:@"CommodityType"];
+         NSString *strExpiry = [object stringForColumnName:@"Expiry"];
+         NSString *strExch = [object stringForColumnName:@"Exch"];
+         NSString *strExchType = [object stringForColumnName:@"ExchType"];
+         NSString *strSubTitle = [object stringForColumnName:@"SubTitle"];
+         NSString *strDigits = [object stringForColumnName:@"Digits"];
+         NSString *strCommodityID = [object stringForColumnName:@"CommodityID"];
+         [detailsArray addObject:@{@"Name":strName,
+                                   @"CommodityID":strCommodityID,
+                                   @"ScriptCode":strScriptCode,
+                                   @"CommodityType":strCommodityType,
+                                   @"Expiry":strExpiry,
+                                   @"Exch":strExch,
+                                   @"ExchType":strExchType,
+                                   @"SubTitle":strSubTitle,
+                                   @"Digits":strDigits,
+                                   @"Status":status
+                                   }];
+         
+         NSLog(@"detailsArray = %@",detailsArray);
+         ArrayMain = detailsArray;
+         [_tableMoreitems reloadData];
+         
      }
-     failure:^(NSString *errorMessage)
+                                         failure:^(NSString *errorMessage)
      {
-    // [[MethodsManager sharedManager]StopAnimating];
-     NSLog(@"select all from user portfolio table error = %@",errorMessage);
+         // [[MethodsManager sharedManager]StopAnimating];
+         NSLog(@"select all from user portfolio table error = %@",errorMessage);
      }];
 }
 
@@ -210,7 +210,7 @@
             }
         } failure:^(NSString *errorMessage)
          {
-            [[MethodsManager sharedManager]StopAnimating];
+             [[MethodsManager sharedManager]StopAnimating];
              NSLog(@"select all from user portfolio table error = %@",errorMessage);
          }];
     }
@@ -248,7 +248,7 @@
         
         NSString *StatusPlusMinus = [[ArrayMain objectAtIndex:indexPath.row] valueForKey:@"Status"];
         
-       if ([StatusPlusMinus isEqualToString:@"YES"])
+        if ([StatusPlusMinus isEqualToString:@"YES"])
         {
             [cell.btnPlus setBackgroundImage:[UIImage imageNamed:@"act_remove_ico.png"] forState:UIControlStateNormal];
         }
@@ -322,12 +322,12 @@
         
         
         [[SQLiteDatabase sharedInstance] executeUpdate:query withParams:parameter
-         success:^(SQLiteResult *result)
+                                               success:^(SQLiteResult *result)
          {
              NSLog(@"response of insert into user portfolio table = %@",result);
              [self.navigationController popViewControllerAnimated:YES];
          }
-         failure:^(NSString *errorMessage)
+                                               failure:^(NSString *errorMessage)
          {
              NSLog(@"error of insert into user portfolio table = %@",errorMessage);
          }];

@@ -46,10 +46,10 @@
 {
     static NSString *MyIdentifier = @"cell";
     DropDownCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-        if (cell == nil)
+    if (cell == nil)
     {
         cell = [[DropDownCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                       reuseIdentifier:MyIdentifier] ;
+                                   reuseIdentifier:MyIdentifier] ;
     }
     cell.label.text = [ArrayMain objectAtIndex:indexPath.row];
     return cell;

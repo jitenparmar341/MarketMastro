@@ -38,7 +38,7 @@
     [self MethodCallSubscriptionApi];
     
     menuItems = @[@"market",@"market2"];
-  
+    
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
 }
@@ -73,12 +73,12 @@
             [[MethodsManager sharedManager]loadingView:self.view];
             [[webManager sharedObject]loginRequest:nil withMethod:[NSString stringWithFormat:@"api/GetUserSubscriptionHistory/%@",strUserID] successResponce:^(id response)
              {
-                  [[MethodsManager sharedManager]StopAnimating];
+                 [[MethodsManager sharedManager]StopAnimating];
                  NSLog(@"get subscription histrory response = %@",response);
                  ArraySubscriptionhistory = [response mutableCopy];
                  [_tableviewSubscriptionHistory reloadData];
              }
-            failure:^(NSError *error)
+                                           failure:^(NSError *error)
              {
                  [[MethodsManager sharedManager]StopAnimating];
                  NSLog(@"get subscription histrory error = %@",error);
@@ -137,7 +137,7 @@
     
     NSDictionary *dic = [ArraySubscriptionhistory objectAtIndex:indexPath.row];
     
-  
+    
     BOOL isExpired = [[dic valueForKey:@"isExpired"] boolValue];
     
     cell.lblorderid.text = [NSString stringWithFormat:@"Order Id #%@",[dic valueForKey:@"USOrderID"]];
@@ -201,7 +201,7 @@
     {
         [cell.btnActive setTitle:@"Expired" forState:UIControlStateNormal];
         cell.btnActive.backgroundColor = [UIColor redColor];
-         cell.btnRenew.hidden = YES;
+        cell.btnRenew.hidden = YES;
     }
     else if ([strPurchasedStatus isEqualToString:@"Failed"])
     {

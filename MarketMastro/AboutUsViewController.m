@@ -23,7 +23,7 @@
     self.title = @"About Us";
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-
+    
     // Do any additional setup after loading the view.
     SWRevealViewController *revealViewController = self.revealViewController;
     if ( revealViewController )
@@ -36,7 +36,7 @@
     BOOL isInternetAvailable = [[MethodsManager sharedManager] isInternetAvailable];
     if(isInternetAvailable)
     {
-         [self MethodForLoadWebView];
+        [self MethodForLoadWebView];
     }
     else
     {
@@ -66,7 +66,7 @@
 {
     AlertViewController *calendarVC = [self.storyboard instantiateViewControllerWithIdentifier:@"AlertViewController"];
     calendarVC.is_NotFromDraw = YES;
-
+    
     [self.navigationController pushViewController:calendarVC animated:YES];
     
 }

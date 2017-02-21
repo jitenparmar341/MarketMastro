@@ -46,7 +46,7 @@
     if (cell == nil)
     {
         cell = [[DropDownCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                       reuseIdentifier:MyIdentifier] ;
+                                   reuseIdentifier:MyIdentifier] ;
     }
     
     cell.lblCityName.text = @"My Text";

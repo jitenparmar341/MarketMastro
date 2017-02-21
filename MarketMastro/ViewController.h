@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 @interface ViewController : UIViewController {
     BOOL keyboardIsShowing;
-
+    
 }
 
 @property(nonatomic,copy)NSString *strIsSigned;

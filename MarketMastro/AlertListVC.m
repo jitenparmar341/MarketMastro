@@ -24,9 +24,9 @@
     menuItems = @[@"market"];
     
     /*
-    [self.navigationController.navigationBar setTitleTextAttributes:
+     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    */
+     */
     [[UINavigationBar appearance] setBarTintColor:[UIColor blackColor]];
     ArrayAlertHistory = [[NSMutableArray alloc] init];
     
@@ -54,13 +54,13 @@
          NSLog(@"Array of history  = %@",ArrayAlertHistory);
          
          if(ArrayAlertHistory.count>0){
-         [_TableAlertHistory reloadData];
+             [_TableAlertHistory reloadData];
          }
          //SQLiteRow *object = [ArrayGetAlertFromDB objectAtIndex:0];
          //NSString *strName  = [NSString stringWithFormat:@"AlertID - %@",[object stringForColumnName:@"AlertID"]];
          //NSLog(@"alert ID = %@",strName);
      }
-      failure:^(NSString *errorMessage)
+                                          failure:^(NSString *errorMessage)
      {
          [[MethodsManager sharedManager]StopAnimating];
          NSLog(@"Could not fetch rows , %@",errorMessage);
@@ -90,12 +90,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     /*
-    NSString *CellIdentifier = @"HistoryCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor clearColor];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.backgroundColor = [UIColor clearColor];
-    */
+     NSString *CellIdentifier = @"HistoryCell";
+     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+     cell.backgroundColor = [UIColor clearColor];
+     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+     cell.backgroundColor = [UIColor clearColor];
+     */
     static NSString *MyIdentifier = @"HistoryCell";
     CurrentAlertListCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
     
@@ -149,13 +149,13 @@
 {
 }
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

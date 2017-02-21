@@ -144,10 +144,10 @@
     [_scrollViewTitle setBackgroundColor:_colorTitleBarBackground ? _colorTitleBarBackground : DEFAULT_COLOR_TITLE_BAR_BACKGROUND];
     
     //swati//Harish
-//    [_scrollViewTitle setBackgroundColor:[UIColor colorWithRed:22/255.0 green:25/255.0 blue:27/255.0 alpha:1.0]];
+    //    [_scrollViewTitle setBackgroundColor:[UIColor colorWithRed:22/255.0 green:25/255.0 blue:27/255.0 alpha:1.0]];
     
     [_viewPageIndicator setBackgroundColor:_colorPageIndicator ? _colorPageIndicator : DEFAULT_COLOR_PAGE_INDICATOR];
-   
+    
     _arrTabButtons = [[NSMutableArray alloc] init];
 }
 
@@ -175,7 +175,7 @@
     UIButton *button  = [_arrTabButtons objectAtIndex:index];
     int parentScrollViewHeight = _constraintTitleViewHeight.constant;
     int numberOfTabs = (int)_arrPageModel.count;
-
+    
     //WIDTH
     NSString *strWidth = [NSString stringWithFormat:@"H:[button(==%f)]",[[_arrTabWidth objectAtIndex:index] floatValue]];
     [button addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:strWidth
@@ -283,7 +283,7 @@
             }
             
             [_arrTabWidth addObject:[NSNumber numberWithFloat:expectedLabelWidth+30]];
-                
+            
             NSLog(@"ADPageControl :: TAB %d width : %f",index, expectedLabelWidth);
         }
     }
@@ -361,7 +361,7 @@
     else
     {
         [self.view bringSubviewToFront:_viewShadow];
-
+        
         NSArray *arrGradientColor = [NSArray arrayWithObjects:
                                      (id)[UIColor blackColor].CGColor,
                                      (id)[UIColor blackColor].CGColor,
@@ -385,7 +385,7 @@
         
         [gradient setStartPoint:darkPoint];
         [gradient setEndPoint:lightPoint];
-//        [_viewShadow.layer insertSublayer:gradient atIndex:0];//HP
+        //        [_viewShadow.layer insertSublayer:gradient atIndex:0];//HP
         
         //HP
         UIBezierPath *path = [UIBezierPath bezierPath];
@@ -397,7 +397,7 @@
         shapeLayer.strokeColor = [_separatorColorOfTab CGColor];
         shapeLayer.lineWidth = 1.0;
         shapeLayer.fillColor = [[UIColor clearColor] CGColor];
-
+        
         [_viewShadow.layer addSublayer:shapeLayer];
         _viewShadow.backgroundColor = [UIColor clearColor];
         //HP
@@ -416,25 +416,25 @@
     {
         fLeading = fLeading + [[_arrTabWidth objectAtIndex:index] floatValue];
     }
-
+    
     //Works similar to scrollRectToVisible:
     [UIView animateWithDuration:0.3
-     animations:
+                     animations:
      ^{
-        if(fLeading < _scrollViewTitle.contentOffset.x )
-        {
-            _scrollViewTitle.contentOffset = CGPointMake(fLeading, 0);
-        }
-        else if((fLeading + fWidth )> (_scrollViewTitle.contentOffset.x + _scrollViewTitle.frame.size.width))
-        {
-            _scrollViewTitle.contentOffset = CGPointMake(fLeading + fWidth - (_scrollViewTitle.frame.size.width), 0);
-        }
+         if(fLeading < _scrollViewTitle.contentOffset.x )
+         {
+             _scrollViewTitle.contentOffset = CGPointMake(fLeading, 0);
+         }
+         else if((fLeading + fWidth )> (_scrollViewTitle.contentOffset.x + _scrollViewTitle.frame.size.width))
+         {
+             _scrollViewTitle.contentOffset = CGPointMake(fLeading + fWidth - (_scrollViewTitle.frame.size.width), 0);
+         }
      }
-     completion:^(BOOL finished)
+                     completion:^(BOOL finished)
      {
          [self updateMoreTabAvailableIndicator];
      }
-    ];
+     ];
     
     [UIView animateWithDuration:0.2 animations:
      ^{
@@ -451,12 +451,12 @@
         for (UIButton *tabButton in _arrTabButtons)
         {
             //HP
-//            tabButton.alpha = 0.7;
+            //            tabButton.alpha = 0.7;
             [tabButton setTitleColor:_colorTabText forState:UIControlStateNormal];
         }
         
         UIButton *currentTabButton = [_arrTabButtons objectAtIndex:_iCurrentVisiblePage];
-//        currentTabButton.alpha = 1.0;
+        //        currentTabButton.alpha = 1.0;
         [currentTabButton setTitleColor:_seletedColorTabText?_seletedColorTabText:DEFAULT_SELECTED_COLOR_TAB_TEXT forState:UIControlStateNormal];
         
         if(_delegateADPageControl && [_delegateADPageControl respondsToSelector:@selector(adPageControlCurrentVisiblePageIndex:)])
@@ -541,7 +541,7 @@
 
 - (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
 {
-   if(_scrollViewPageController == scrollView)
+    if(_scrollViewPageController == scrollView)
     {
         if (_bEnablePagesEndBounceEffect == NO)
         {
@@ -584,16 +584,16 @@
     NSLog(@"ADPageControl :: Go to page : %d",iPageNumber );
     
     dispatch_async(dispatch_get_main_queue(),
-   ^{
-       ADPageModel *pageModel = [_arrPageModel objectAtIndex:iPageNumber];
-       //animate to next page
-       [_pageViewController setViewControllers:@[[self getViewControllerForPageModel:pageModel]]
-                                     direction: (_iCurrentVisiblePage < iPageNumber) ? UIPageViewControllerNavigationDirectionForward : UIPageViewControllerNavigationDirectionReverse
-                                      animated:NO
-                                    completion:^(BOOL finished){}];
-       
-       [self setPageIndicatorToPageNumber:iPageNumber andShouldHighlightCurrentPage:YES];
-   });
+                   ^{
+                       ADPageModel *pageModel = [_arrPageModel objectAtIndex:iPageNumber];
+                       //animate to next page
+                       [_pageViewController setViewControllers:@[[self getViewControllerForPageModel:pageModel]]
+                                                     direction: (_iCurrentVisiblePage < iPageNumber) ? UIPageViewControllerNavigationDirectionForward : UIPageViewControllerNavigationDirectionReverse
+                                                      animated:NO
+                                                    completion:^(BOOL finished){}];
+                       
+                       [self setPageIndicatorToPageNumber:iPageNumber andShouldHighlightCurrentPage:YES];
+                   });
 }
 
 
@@ -632,7 +632,7 @@
 {
     int pageNumber = [self getPageNumberForViewController:[pendingViewControllers lastObject]];
     NSLog(@"ADPageControl :: About to make transition to page number : %d",pageNumber);
-
+    
     [self setPageIndicatorToPageNumber:pageNumber andShouldHighlightCurrentPage:NO];
 }
 

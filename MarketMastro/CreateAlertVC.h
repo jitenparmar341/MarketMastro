@@ -15,7 +15,7 @@
     __weak IBOutlet GADBannerView *adBannerView;
 }
 @property (weak, nonatomic) IBOutlet UIButton *btnSelectComm;
-extern NSString *selectedOption;
+extern NSString *selctedOption;
 @property (weak, nonatomic) IBOutlet UIButton *selectCondition;
 @property (weak, nonatomic) IBOutlet UITextField *txtFieldPrice;
 @property (strong, nonatomic) IBOutlet UIView *viewForAlertOption;

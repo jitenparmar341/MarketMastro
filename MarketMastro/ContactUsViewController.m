@@ -32,7 +32,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   // [self setupProgress];
+    // [self setupProgress];
     
     [self setUpvalues];
     [self setDoneKeypad];
@@ -49,7 +49,7 @@
     self.title = @"Contact Us";
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-
+    
     // Do any additional setup after loading the view.
     SWRevealViewController *revealViewController = self.revealViewController;
     if ( revealViewController )
@@ -84,10 +84,10 @@
     _txtEmail.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Email" attributes:@{NSForegroundColorAttributeName: color}];
     _txtType.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"   Type" attributes:@{NSForegroundColorAttributeName: color}];
     
-     self.txtname.leftView =[self paddingView:self.txtname withImageNamed:@"reg_user_icon.png"];
+    self.txtname.leftView =[self paddingView:self.txtname withImageNamed:@"reg_user_icon.png"];
     
-     self.txtMobileNumber.leftView =[self paddingView:self.txtMobileNumber withImageNamed:@"reg_mobile_icon.png"];
-     self.txtEmail.leftView =[self paddingView:self.txtEmail withImageNamed:@"dro_contact_ico.png"];
+    self.txtMobileNumber.leftView =[self paddingView:self.txtMobileNumber withImageNamed:@"reg_mobile_icon.png"];
+    self.txtEmail.leftView =[self paddingView:self.txtEmail withImageNamed:@"dro_contact_ico.png"];
     
     _txtname.layer.cornerRadius = 3;
     _txtname.layer.masksToBounds=YES;
@@ -122,7 +122,7 @@
     _txtType.userInteractionEnabled = NO;
     
     _tableOfTypes.backgroundColor = _txtType.backgroundColor;
-     [_tableOfTypes reloadData];
+    [_tableOfTypes reloadData];
     
 }
 
@@ -163,7 +163,7 @@
     
     AlertViewController *calendarVC = [self.storyboard instantiateViewControllerWithIdentifier:@"AlertViewController"];
     calendarVC.is_NotFromDraw = YES;
-
+    
     [self.navigationController pushViewController:calendarVC animated:YES];
     
 }
@@ -216,48 +216,48 @@
     NSCharacterSet *whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
     NSString *trimmed = [rawString stringByTrimmingCharactersInSet:whitespace];
     
-   
-        
+    
+    
     if (matches)
     {
         if (_txtMobileNumber.text.length >0)
         {
-                if (![_txtType.text isEqualToString:@"Type"])
+            if (![_txtType.text isEqualToString:@"Type"])
+            {
+                if (_textViewDesciption.text.length >0)
                 {
-                    if (_textViewDesciption.text.length >0)
+                    if (isvalidEmail)
                     {
-                        if (isvalidEmail)
+                        if (_txtEmail.text.length >0)
                         {
-                            if (_txtEmail.text.length >0)
+                            if ([trimmed length] == 0)
                             {
-                                if ([trimmed length] == 0)
-                                {
-                                    [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please enter valid name" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil]show];
-                                }
-                                else
-                                {
-                                     [self MethodCallContactUs];
-                                }
+                                [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please enter valid name" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil]show];
                             }
                             else
                             {
-                                 [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please enter email id" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil]show];
+                                [self MethodCallContactUs];
                             }
                         }
                         else
                         {
-                             [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please enter valid email id" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil]show];
+                            [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please enter email id" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil]show];
                         }
                     }
                     else
                     {
-                          [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please enter description" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil]show];
+                        [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please enter valid email id" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil]show];
                     }
                 }
                 else
                 {
-                     [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please select type" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil]show];
+                    [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please enter description" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil]show];
                 }
+            }
+            else
+            {
+                [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please select type" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil]show];
+            }
         }
         else
         {
@@ -275,7 +275,7 @@
 {
     NSString *strUserId = [[NSUserDefaults standardUserDefaults] valueForKey:@"UserID"];
     
-   
+    
     NSDictionary *parameters = @{
                                  @"UserID":strUserId,
                                  @"FeedbackType":_txtType.text,
@@ -289,13 +289,13 @@
     {
         [[webManager sharedObject]CallPostMethod:parameters withMethod:@"api/PostContactUs" successResponce:^(id response)
          {
-            // LoaderImageview.hidden = YES;
-              [[MethodsManager sharedManager]StopAnimating];
+             // LoaderImageview.hidden = YES;
+             [[MethodsManager sharedManager]StopAnimating];
              
              NSLog(@"contact us api response = %@",response);
              [[[UIAlertView alloc]initWithTitle:@"Success" message:@"Request sent successfully" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil]show];
          }
-         failure:^(NSError *error)
+                                         failure:^(NSError *error)
          {
              [[MethodsManager sharedManager]StopAnimating];
              NSLog(@"contact us api error = %@",error);
@@ -314,7 +314,7 @@
         return [string isEqualToString:filtered];
     }
     
-   if (textField == _txtEmail)
+    if (textField == _txtEmail)
     {
         //abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@._
         NSCharacterSet *invalidCharSet = [[NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890@._"] invertedSet];
@@ -346,7 +346,7 @@
     if (cell == nil)
     {
         cell = [[TypeCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                   reuseIdentifier:MyIdentifier] ;
+                               reuseIdentifier:MyIdentifier] ;
     }
     
     cell.contentView.backgroundColor = [UIColor colorWithRed:15/255.0 green:17/255.0 blue:20/255.0 alpha:1.0];
@@ -377,7 +377,7 @@
 -(void)textViewDidChange:(UITextView *)textView
 {
     if(_textViewDesciption.text.length == 0){
-    _lblDescription.hidden = NO;
+        _lblDescription.hidden = NO;
         _textViewDesciption.textColor = _txtname.textColor;
         [_textViewDesciption resignFirstResponder];
     }

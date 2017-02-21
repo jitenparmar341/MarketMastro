@@ -58,10 +58,10 @@
                 Staff * stf = [[Staff alloc]init];
                 stf.name = [NSString stringWithUTF8String:(const char*)sqlite3_column_text(statement, 0)];
                 stf.uniqueId = [NSString stringWithUTF8String:(const char*)sqlite3_column_text(statement, 1)];
-
-               stf.emailId = [NSString stringWithUTF8String:(const char*)sqlite3_column_text(statement, 2)];
-               stf.PhoneNo = [NSString stringWithUTF8String:(const char*)sqlite3_column_text(statement, 3)];
-    
+                
+                stf.emailId = [NSString stringWithUTF8String:(const char*)sqlite3_column_text(statement, 2)];
+                stf.PhoneNo = [NSString stringWithUTF8String:(const char*)sqlite3_column_text(statement, 3)];
+                
                 [staffArray addObject:stf];
                 
             }
@@ -145,13 +145,13 @@
             {
                 
                 
-//                Contractor *con = [[Contractor alloc]init];
-//                con.name = [NSString stringWithUTF8String:(const char*)sqlite3_column_text(statement, 0)];
-//                con.uniqueId = [NSString stringWithUTF8String:(const char*)sqlite3_column_text(statement, 1)];
-//            con.emailId = [NSString stringWithUTF8String:(const char*)sqlite3_column_text(statement, 2)];
-//                con.address = [NSString stringWithUTF8String:(const char*)sqlite3_column_text(statement, 3)];
-//                
-//                [contractorArray addObject:con];
+                //                Contractor *con = [[Contractor alloc]init];
+                //                con.name = [NSString stringWithUTF8String:(const char*)sqlite3_column_text(statement, 0)];
+                //                con.uniqueId = [NSString stringWithUTF8String:(const char*)sqlite3_column_text(statement, 1)];
+                //            con.emailId = [NSString stringWithUTF8String:(const char*)sqlite3_column_text(statement, 2)];
+                //                con.address = [NSString stringWithUTF8String:(const char*)sqlite3_column_text(statement, 3)];
+                //
+                //                [contractorArray addObject:con];
             }
         }
         else

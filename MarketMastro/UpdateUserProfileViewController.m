@@ -37,11 +37,11 @@
     
     self.title = @"Update Profile";
     
-   // self.navigationController.navigationBarHidden = YES;
+    // self.navigationController.navigationBarHidden = YES;
     
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-
+    
     [self callGif];
     [self setUI];
     [self SetValues];
@@ -52,7 +52,8 @@
     [_mainScrollView contentSizeToFit];
     [_mainScrollView layoutIfNeeded];
     //self.mainScrollView.contentSize=self.mainView.bounds.size;
-     _mainScrollView.contentSize = CGSizeMake(_mainScrollView.frame.size.width, btnUpdate.frame.origin.y+btnUpdate.frame.size.height);
+    _mainScrollView.contentSize = CGSizeMake(_mainScrollView.frame.size.width, btnUpdate.frame.origin.y+btnUpdate.frame.size.height);
+    
 }
 
 -(IBAction)goBack:(id)sender
@@ -72,27 +73,35 @@
     [txtLocation setReturnKeyType:UIReturnKeyDone];
     [self setDoneKeypad];
     
-    dicOfLoggedInuser = [[[NSUserDefaults standardUserDefaults] valueForKey:@"DictOfLogedInuser"] mutableCopy];
+    dicOfLoggedInuser = [[NSUserDefaults standardUserDefaults] valueForKey:@"DictOfLogedInuser"];
     
-    strCityID =[NSString stringWithFormat:@"%@",[dicOfLoggedInuser valueForKey:@"CityID"]];
+    // NSString *strcityID =[NSString stringWithFormat:@"%@",[dicOfLoggedInuser valueForKey:@"CityID"]];
+    
+    NSString *strcityID = [NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults]valueForKey:@"CityID"]];
+    
     
     //CityList
     NSArray *ArrCity = [[NSArray alloc] init];
     ArrCity = [[NSUserDefaults standardUserDefaults]valueForKey:@"CityList"];
-    
     for (int i = 0; i<ArrCity.count; i++)
     {
         NSString *strgetCityID =[NSString stringWithFormat:@"%@",[[ArrCity valueForKey:@"CityID"] objectAtIndex:i]];
-        if ([strCityID isEqualToString:strgetCityID])
+        if ([strcityID isEqualToString:strgetCityID])
         {
             strcityName = [[ArrCity valueForKey:@"CityName"] objectAtIndex:i];
         }
     }
     
-    txtName.text = [dicOfLoggedInuser valueForKey:@"Name"];
-    txtEmail.text = [dicOfLoggedInuser valueForKey:@"Email"];
+    /*
+     txtName.text = [dicOfLoggedInuser valueForKey:@"Name"];
+     txtEmail.text = [dicOfLoggedInuser valueForKey:@"Email"];
+     txtLocation.text = strcityName;
+     */
     
+    txtName.text = [[NSUserDefaults standardUserDefaults]valueForKey:@"Name"];
+    txtEmail.text = [[NSUserDefaults standardUserDefaults]valueForKey:@"Email"];
     txtLocation.text = strcityName;
+    
 }
 
 -(void)setDoneKeypad
@@ -137,6 +146,7 @@
     [txtLocation resignFirstResponder];
 }
 
+
 -(void)callGif
 {
     NSString *filePath = [[NSBundle mainBundle] pathForResource: @"loading" ofType: @"gif"];
@@ -178,7 +188,7 @@
         //tf.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
         txt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
         
-         return paddingView;
+        return paddingView;
     }
     return paddingView;
 }
@@ -254,7 +264,7 @@
                 {
                     if (isValidEmail)
                     {
-                         [self CallUpdatedetailsApi];
+                        [self CallUpdatedetailsApi];
                     }
                     else
                     {
@@ -318,7 +328,6 @@
     NSString *strUSerID = [[NSUserDefaults standardUserDefaults] valueForKey:@"UserID"];
     
     NSDictionary *parameter;
-    
     if (strCityID != nil)
     {
         parameter = @{
@@ -340,41 +349,41 @@
                       };
     }
     
-   
+    
     
     
     BOOL isNetworkAvailable = [[MethodsManager sharedManager]isInternetAvailable];
     
     if (isNetworkAvailable)
     {
-         [[MethodsManager sharedManager]loadingView:self.view];
+        [[MethodsManager sharedManager]loadingView:self.view];
         
         [[webManager sharedObject]CallPutMethodwithParameters:parameter withMethod:[NSString stringWithFormat:@"api/UserDetails/%@/false",strUSerID]
-          successResponce:^(id response)
+                                              successResponce:^(id response)
          {
-            [[MethodsManager sharedManager]StopAnimating];
+             [[MethodsManager sharedManager]StopAnimating];
              NSLog(@"response = %@",response);
              ArrayUserDetails = [response mutableCopy];
              
              [[[UIAlertView alloc] initWithTitle:@"Success" message:@"Profile Updated successfully" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil]show];
              
+             NSString *strUserId;
              if ([response valueForKey:@"UserID"])
              {
-                 [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@",[response valueForKey:@"UserID"]] forKey:@"UserID"];
-                 
-                 [[NSUserDefaults standardUserDefaults]synchronize];
+                 strUserId = [NSString stringWithFormat:@"%@",[response valueForKey:@"UserID"]];
              }
+             [[NSUserDefaults standardUserDefaults] setObject:strUserId forKey:@"UserID"];
              
              [self saveUserInformation:response];
              //name,city,email
          }
-         failure:^(NSError *error)
+                                                      failure:^(NSError *error)
          {
-            [[MethodsManager sharedManager]StopAnimating];
+             [[MethodsManager sharedManager]StopAnimating];
              NSLog(@"response error = %@",error);
          }];
     }
- 
+    
 }
 
 
@@ -398,7 +407,7 @@
     }
     
     cell.contentView.backgroundColor = [UIColor colorWithRed:15/255.0 green:17/255.0 blue:20/255.0 alpha:1.0];
-     cell.lblCityName.text = [[locationArray valueForKey:@"CityName"] objectAtIndex:indexPath.row];
+    cell.lblCityName.text = [[locationArray valueForKey:@"CityName"] objectAtIndex:indexPath.row];
     return cell;
 }
 
@@ -440,7 +449,11 @@
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:invalidCharSet] componentsJoinedByString:@""];
         return [string isEqualToString:filtered];
     }
-
+    //    if (textField == _txtMobileNumber)
+    //    {
+    //        NSString *resultText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    //        return resultText.length <= 10;
+    //    }
     return YES;
 }
 
@@ -462,7 +475,6 @@
     //CityList
     NSArray *ArrCity = [[NSArray alloc] init];
     ArrCity = [[NSUserDefaults standardUserDefaults]valueForKey:@"CityList"];
-    
     for (int i = 0; i<ArrCity.count; i++)
     {
         NSString *strgetCityName =[NSString stringWithFormat:@"%@",[[ArrCity valueForKey:@"CityName"] objectAtIndex:i]];//CityID
@@ -471,17 +483,8 @@
             strCityIDd = [[ArrCity valueForKey:@"CityID"] objectAtIndex:i];
         }
     }
-    
     [[NSUserDefaults standardUserDefaults]setObject:strCityID forKey:@"CityID"];
     
-    [dicOfLoggedInuser setValue:strCityID forKey:@"CityID"];
-    [dicOfLoggedInuser setValue:txtName.text forKey:@"Name"];
-    [dicOfLoggedInuser setValue:txtEmail.text forKey:@"Email"];
-    
-    [[NSUserDefaults standardUserDefaults]setObject:dicOfLoggedInuser forKey:@"DictOfLogedInuser"];
-    [[NSUserDefaults standardUserDefaults]synchronize];
-    
-    [self goBack:nil];
 }
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField

@@ -51,7 +51,7 @@
 -(IBAction)addtionButtonClick:(id)sender
 {
     self.viewForAddOptions.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    [self.view addSubview:self.viewForAddOptions];    
+    [self.view addSubview:self.viewForAddOptions];
 }
 
 -(IBAction)addPortfolioButtonClick:(id)sender
@@ -66,23 +66,23 @@
 -(IBAction)addAlertButtonClick:(id)sender
 {
     [self.viewForAddOptions removeFromSuperview];
-
+    
     CreateAlertVC *createAlertvc = [self.storyboard instantiateViewControllerWithIdentifier:@"CreateAlertVC"];
     [self.navigationController pushViewController:createAlertvc animated:YES];
-
+    
 }
 - (IBAction)dismissPopView:(id)sender {
     [self.viewForPopupView removeFromSuperview];
 }
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 #pragma mark - FirebaseAdBanner
 - (void)bannerAd {
@@ -103,7 +103,7 @@
     
     adBannerView.hidden = NO;
     
-//    _tableCurrentAlerts.frame = CGRectMake(0, 135,SCREEN_WIDTH, SCREEN_HEIGHT-135-height);
+    //    _tableCurrentAlerts.frame = CGRectMake(0, 135,SCREEN_WIDTH, SCREEN_HEIGHT-135-height);
     
     _scrollView.frame = CGRectMake(CGRectGetMinX(_scrollView.frame), CGRectGetMinY(_scrollView.frame), CGRectGetWidth(_scrollView.frame), CGRectGetHeight(_scrollView.frame)-height);
     NSLog(@"adViewDidReceiveAd");
@@ -113,7 +113,7 @@
     
     _scrollView.frame = CGRectMake(CGRectGetMinX(_scrollView.frame), CGRectGetMinY(_scrollView.frame), CGRectGetWidth(_scrollView.frame), SCREEN_HEIGHT-CGRectGetMinY(_scrollView.frame));
     
-//    self.viewForEMC.frame = CGRectMake(0, 135,SCREEN_WIDTH, SCREEN_HEIGHT-135);
+    //    self.viewForEMC.frame = CGRectMake(0, 135,SCREEN_WIDTH, SCREEN_HEIGHT-135);
     NSLog(@"didFailToReceiveAdWithError");
 }
 - (void)adViewWillPresentScreen:(GADBannerView *)bannerView {

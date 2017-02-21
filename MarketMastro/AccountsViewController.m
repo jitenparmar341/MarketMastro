@@ -102,30 +102,30 @@
 
 -(void)MethodCallPackageListApi
 {
-        //api/GetPackages
-        [[webManager sharedObject]loginRequest:nil withMethod:@"api/GetPackages" successResponce:^(id response)
-         {
-             
-             NSLog(@"get package list api response = %@",response);
-             packageListArray = [response mutableCopy];
-             [[NSUserDefaults standardUserDefaults]setObject:packageListArray forKey:@"SavedPackageListArray"];
-             [self methodCheckPackageIdExistOrNot:packageListArray];
-         }
-         failure:^(NSError *error)
-         {
-             NSLog(@"get package list api error = %@",error);
-         }];
+    //api/GetPackages
+    [[webManager sharedObject]loginRequest:nil withMethod:@"api/GetPackages" successResponce:^(id response)
+     {
+         
+         NSLog(@"get package list api response = %@",response);
+         packageListArray = [response mutableCopy];
+         [[NSUserDefaults standardUserDefaults]setObject:packageListArray forKey:@"SavedPackageListArray"];
+         [self methodCheckPackageIdExistOrNot:packageListArray];
+     }
+                                   failure:^(NSError *error)
+     {
+         NSLog(@"get package list api error = %@",error);
+     }];
 }
 
 
 -(void)methodCheckPackageIdExistOrNot:(NSMutableArray *)packagelistArray
 {
-   // GetPackageListClass *instanceGetPackage = [[GetPackageListClass alloc] init];
-   // NSString *StrPackageIDFromDashboard = [NSString stringWithFormat:@"%@",instanceGetPackage.PackageID];
+    // GetPackageListClass *instanceGetPackage = [[GetPackageListClass alloc] init];
+    // NSString *StrPackageIDFromDashboard = [NSString stringWithFormat:@"%@",instanceGetPackage.PackageID];
     //DicwithCurreentActivePackDetails //PackageID
     
     NSDictionary *dic = [[NSUserDefaults standardUserDefaults]valueForKey:@"DicwithCurreentActivePackDetails"];
-     NSString *StrPackageIDFromDashboard = [NSString stringWithFormat:@"%@",[dic valueForKey:@"PackageID"]];
+    NSString *StrPackageIDFromDashboard = [NSString stringWithFormat:@"%@",[dic valueForKey:@"PackageID"]];
     
     for (int i = 0; i<packagelistArray.count; i++)
     {
@@ -182,7 +182,7 @@
 - (IBAction)btnEditTapped:(id)sender
 {
     UpdateUserProfileViewController *update = [self.storyboard instantiateViewControllerWithIdentifier:@"UpdateUserProfileViewController"];
-//    update.Dicupdatedetails
+    //    update.Dicupdatedetails
     [self.navigationController pushViewController:update animated:YES];
 }
 

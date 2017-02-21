@@ -31,22 +31,22 @@
     NSString *strCityID;
     BOOL checked;
     NSString *strPoppedd;
-   // FLAnimatedImageView *LoaderImageview;
+    // FLAnimatedImageView *LoaderImageview;
     NSMutableArray *array;
     
     DBQueryHelper *qhObj;
     NSMutableArray *ArrayDatabase;
     
-     NSString* CommodityID;
+    NSString* CommodityID;
     
-     NSString* ScriptCodee;
-     NSString* Symbol;
-     NSString* Name;
-     NSString* CommodityType;
-     NSString* Exch;
-     NSString* ExchType;
-     NSString* SubTitle;
-     NSString* Series;
+    NSString* ScriptCodee;
+    NSString* Symbol;
+    NSString* Name;
+    NSString* CommodityType;
+    NSString* Exch;
+    NSString* ExchType;
+    NSString* SubTitle;
+    NSString* Series;
     NSString* CreatedDate;
     NSString* TimeSpan;
     
@@ -102,7 +102,7 @@
     _btnSignIn.frame = frame;
     
     [self MethodForDatabase];
-   // [self callGif];
+    // [self callGif];
     [self MethodCallApiGetCommodityMaster];
     qhObj = [[DBQueryHelper alloc] init];
     array = [[NSMutableArray alloc]init];
@@ -110,30 +110,30 @@
     [_txtFieldFullName setReturnKeyType:UIReturnKeyDone];
     [_txtFieldReferalCode setReturnKeyType:UIReturnKeyDone];
     [_txtFieldMobileNumber setReturnKeyType:UIReturnKeyDone];
-   
     
-//    CGRect btntermsFrame = _btnTerms.frame;
-//    btntermsFrame.origin.x = CGRectGetMinX(_btnTerms.frame)+5;
-//    _btnTerms.frame =btntermsFrame;
-//    
-//    CGRect lblFrame = _lblAnd.frame;
-//    lblFrame.origin.x = CGRectGetMaxX(_btnTerms.frame)+1;
-//    _lblAnd.frame = lblFrame;
-//    
-//    CGRect btnprivacyFrame = _btnPrivacy.frame;
-//    btnprivacyFrame.origin.x = CGRectGetMaxX(_lblAnd.frame)+1;
+    
+    //    CGRect btntermsFrame = _btnTerms.frame;
+    //    btntermsFrame.origin.x = CGRectGetMinX(_btnTerms.frame)+5;
+    //    _btnTerms.frame =btntermsFrame;
+    //
+    //    CGRect lblFrame = _lblAnd.frame;
+    //    lblFrame.origin.x = CGRectGetMaxX(_btnTerms.frame)+1;
+    //    _lblAnd.frame = lblFrame;
+    //
+    //    CGRect btnprivacyFrame = _btnPrivacy.frame;
+    //    btnprivacyFrame.origin.x = CGRectGetMaxX(_lblAnd.frame)+1;
     
     _txtFieldLocation.userInteractionEnabled = NO;
-     [self CallCityListApi];
+    [self CallCityListApi];
     
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     //ss
-//    CALayer *bottomBorder = [CALayer layer];
-//    bottomBorder.frame = CGRectMake(0.0f, self.txtFieldFullName.frame.size.height - 1, self.txtFieldFullName.frame.size.width, 2.0f);
-//    bottomBorder.backgroundColor = [UIColor redColor].CGColor;
-//    [self.txtFieldFullName.layer addSublayer:bottomBorder];
-
+    //    CALayer *bottomBorder = [CALayer layer];
+    //    bottomBorder.frame = CGRectMake(0.0f, self.txtFieldFullName.frame.size.height - 1, self.txtFieldFullName.frame.size.width, 2.0f);
+    //    bottomBorder.backgroundColor = [UIColor redColor].CGColor;
+    //    [self.txtFieldFullName.layer addSublayer:bottomBorder];
+    
     // Do any additional setup after loading the view, typically from a nib.
     self.txtFieldFullName = [self borderColor:self.txtFieldFullName withMask:YES];
     self.txtFieldFullName = [self placeHolderColor:self.txtFieldFullName withSting:@"Full Name*"];
@@ -168,8 +168,8 @@
     
     self.btnRegister.layer.cornerRadius = 3.0f; // this value vary as per your desire
     self.btnRegister.clipsToBounds = YES;
-
-   // [string addAttributes:[NSFontAttributeName:[UIFont fontWithName:@"Helvetica Neue Medium" size:12.0]]];
+    
+    // [string addAttributes:[NSFontAttributeName:[UIFont fontWithName:@"Helvetica Neue Medium" size:12.0]]];
     
     _txtFieldFullName.layer.cornerRadius = 3;
     _txtFieldFullName.layer.masksToBounds=YES;
@@ -180,7 +180,7 @@
     _txtFieldMobileNumber.layer.masksToBounds=YES;
     _txtFieldMobileNumber.layer.borderColor= [[UIColor colorWithRed:41/255.0 green:42/255.0 blue:43/255.0 alpha:1.0] CGColor];
     _txtFieldMobileNumber.layer.borderWidth= 1.0f;
-
+    
     _txtFieldLocation.layer.cornerRadius = 3;
     _txtFieldLocation.layer.masksToBounds=YES;
     _txtFieldLocation.layer.borderColor= [[UIColor colorWithRed:41/255.0 green:42/255.0 blue:43/255.0 alpha:1.0] CGColor];
@@ -211,7 +211,7 @@
     NSString * DocumentPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
     NSString *staffPath=[DocumentPath stringByAppendingPathComponent:@"LKSDB.db"];//@"staffDB.sqlite"
     NSString *staffbundlepath=[[NSBundle mainBundle]pathForResource:@"LKSDB" ofType:@"db"];
-  //  NSLog(@"library path= %@",libraryPath);
+    //  NSLog(@"library path= %@",libraryPath);
     
     if([[NSFileManager defaultManager]fileExistsAtPath:staffPath])
     {
@@ -221,29 +221,29 @@
     {
         [[NSFileManager defaultManager]copyItemAtPath:staffbundlepath toPath:staffPath error:nil];
     }
-   // NSLog(@"database path = %@",staffPath);
+    // NSLog(@"database path = %@",staffPath);
     [self refreshData];
 }
 
 - (void)refreshData {
-   
-        // select query
+    
+    // select query
     NSString *query1 = @"delete from Alert";
     [[SQLiteDatabase sharedInstance] executeQuery:query1 withParams:nil success:^(SQLiteResult *result)
-    {
-        NSLog(@"Delete all data from alert = %@",result);
-        ArrayDatabase = result.rows;
-//        NSLog(@"Arraydatabase = %@",ArrayDatabase);
-        
-        
-//        SQLiteRow *object = [ArrayDatabase objectAtIndex:0];
-//        NSString *strName  = [NSString stringWithFormat:@"CommodityID - %@",[object stringForColumnName:@"CommodityID"]];
-//        NSLog(@"name = %@",strName);
-    }
-    failure:^(NSString *errorMessage)
-    {
-        NSLog(@"Could not fetch rows , %@",errorMessage);
-    }];
+     {
+         NSLog(@"Delete all data from alert = %@",result);
+         ArrayDatabase = result.rows;
+         //        NSLog(@"Arraydatabase = %@",ArrayDatabase);
+         
+         
+         //        SQLiteRow *object = [ArrayDatabase objectAtIndex:0];
+         //        NSString *strName  = [NSString stringWithFormat:@"CommodityID - %@",[object stringForColumnName:@"CommodityID"]];
+         //        NSLog(@"name = %@",strName);
+     }
+                                          failure:^(NSString *errorMessage)
+     {
+         NSLog(@"Could not fetch rows , %@",errorMessage);
+     }];
     NSLog(@"Query %@ ",query1);
 }
 
@@ -264,7 +264,7 @@
              [self MethodForAddCommodityToDatabase:response];
              
          }
-         failure:^(NSError *error)
+                                        failure:^(NSError *error)
          {
              NSLog(@"get commodity master error = %@",error);
          }];
@@ -475,7 +475,7 @@
      */
     
     
-   // NSString *query = @"INSERT INTO Commodity (CommodityID) VALUES (:CommodityID)";
+    // NSString *query = @"INSERT INTO Commodity (CommodityID) VALUES (:CommodityID)";
     
     
     
@@ -487,54 +487,54 @@
         NSDictionary *dic = [ArrayResponse objectAtIndex:i];
         
         // [dic valueForKey:@"CommodityID"];
-
+        
         CommodityID = [NSString stringWithFormat:@"%@",[dic valueForKey:@"CommodityID"]];
         
-         Symbol   = [dic valueForKey:@"Symbol"];
-         Name= [dic valueForKey:@"Name"];
-         CommodityType =[NSString stringWithFormat:@"%@",[dic valueForKey:@"CommodityType"]];
-         Exch = [dic valueForKey:@"Exch"];
-         ExchType = [dic valueForKey:@"ExchType"];
-         SubTitle = [dic valueForKey:@"SubTitle"];
-         Series = [dic valueForKey:@"Series"];
-         CreatedDate = [dic valueForKey:@"CreatedDate"];
-         TimeSpan = [dic valueForKey:@"TimeSpan"];
-         ShortName = [dic valueForKey:@"ShortName"];
-         Digits = [dic valueForKey:@"Digits"];
-         Type = [dic valueForKey:@"Type"];
-         BidTopic = [dic valueForKey:@"BidTopic"];
-         BidItem = [dic valueForKey:@"BidItem"];
+        Symbol   = [dic valueForKey:@"Symbol"];
+        Name= [dic valueForKey:@"Name"];
+        CommodityType =[NSString stringWithFormat:@"%@",[dic valueForKey:@"CommodityType"]];
+        Exch = [dic valueForKey:@"Exch"];
+        ExchType = [dic valueForKey:@"ExchType"];
+        SubTitle = [dic valueForKey:@"SubTitle"];
+        Series = [dic valueForKey:@"Series"];
+        CreatedDate = [dic valueForKey:@"CreatedDate"];
+        TimeSpan = [dic valueForKey:@"TimeSpan"];
+        ShortName = [dic valueForKey:@"ShortName"];
+        Digits = [dic valueForKey:@"Digits"];
+        Type = [dic valueForKey:@"Type"];
+        BidTopic = [dic valueForKey:@"BidTopic"];
+        BidItem = [dic valueForKey:@"BidItem"];
         AskTopic = [dic valueForKey:@"AskTopic"];
-         AskItem = [dic valueForKey:@"AskItem"];
-         Date = [dic valueForKey:@"Date"];
-         Description = [dic valueForKey:@"Description"];
-         CreatedID = [dic valueForKey:@"CreatedID"];
-         ModifiedID = [dic valueForKey:@"ModifiedID"];
-         ModifiedDate = [dic valueForKey:@"ModifiedDate"];
+        AskItem = [dic valueForKey:@"AskItem"];
+        Date = [dic valueForKey:@"Date"];
+        Description = [dic valueForKey:@"Description"];
+        CreatedID = [dic valueForKey:@"CreatedID"];
+        ModifiedID = [dic valueForKey:@"ModifiedID"];
+        ModifiedDate = [dic valueForKey:@"ModifiedDate"];
         
         
         // [NSString stringWithFormat:@"%@",[dic valueForKey:@"CityID"]];
         
-         CityID = [NSString stringWithFormat:@"%@",[dic valueForKey:@"CityID"]];
-         StateID = [NSString stringWithFormat:@"%@", [dic valueForKey:@"StateID"]];
-         CountryID = [NSString stringWithFormat:@"%@",[dic valueForKey:@"CountryID"]];
-         CompanyID = [NSString stringWithFormat:@"%@",[dic valueForKey:@"CompanyID"]];
-         CPTypeInt =[NSString stringWithFormat:@"%@",[dic valueForKey:@"CPTypeInt"]] ;
-         TickSize = [NSString stringWithFormat:@"%@",[dic valueForKey:@"TickSize"]];
-         LotSize= [NSString stringWithFormat:@"%@",[dic valueForKey:@"LotSize"]];
-         ULToken= [NSString stringWithFormat:@"%@",[dic valueForKey:@"ULToken"]];
-         OFISTypeInt= [NSString stringWithFormat:@"%@",[dic valueForKey:@"OFISTypeInt"]];
-         CALevel= [NSString stringWithFormat:@"%@",[dic valueForKey:@"CALevel"]];
-         SortOrder= [NSString stringWithFormat:@"%@",[dic valueForKey:@"SortOrder"]];
+        CityID = [NSString stringWithFormat:@"%@",[dic valueForKey:@"CityID"]];
+        StateID = [NSString stringWithFormat:@"%@", [dic valueForKey:@"StateID"]];
+        CountryID = [NSString stringWithFormat:@"%@",[dic valueForKey:@"CountryID"]];
+        CompanyID = [NSString stringWithFormat:@"%@",[dic valueForKey:@"CompanyID"]];
+        CPTypeInt =[NSString stringWithFormat:@"%@",[dic valueForKey:@"CPTypeInt"]] ;
+        TickSize = [NSString stringWithFormat:@"%@",[dic valueForKey:@"TickSize"]];
+        LotSize= [NSString stringWithFormat:@"%@",[dic valueForKey:@"LotSize"]];
+        ULToken= [NSString stringWithFormat:@"%@",[dic valueForKey:@"ULToken"]];
+        OFISTypeInt= [NSString stringWithFormat:@"%@",[dic valueForKey:@"OFISTypeInt"]];
+        CALevel= [NSString stringWithFormat:@"%@",[dic valueForKey:@"CALevel"]];
+        SortOrder= [NSString stringWithFormat:@"%@",[dic valueForKey:@"SortOrder"]];
         
-         Expiry= [NSString stringWithFormat:@"%@",[dic valueForKey:@"Expiry"]];
-         StrikeRate = [[dic valueForKey:@"StrikeRate"] doubleValue];
-         isPopular= [[dic valueForKey:@"isPopular"] boolValue];
-         AllowOnUpdate= [[dic valueForKey:@"AllowOnUpdate"]boolValue];
-         Status= [[dic valueForKey:@"Status"]boolValue];
-         DeletedFlag= [[dic valueForKey:@"DeletedFlag"]boolValue];
-         UpdateFlag= [[dic valueForKey:@"UpdateFlag"]boolValue];
-         ScriptCodee = [dic valueForKey:@"ScriptCode"];
+        Expiry= [NSString stringWithFormat:@"%@",[dic valueForKey:@"Expiry"]];
+        StrikeRate = [[dic valueForKey:@"StrikeRate"] doubleValue];
+        isPopular= [[dic valueForKey:@"isPopular"] boolValue];
+        AllowOnUpdate= [[dic valueForKey:@"AllowOnUpdate"]boolValue];
+        Status= [[dic valueForKey:@"Status"]boolValue];
+        DeletedFlag= [[dic valueForKey:@"DeletedFlag"]boolValue];
+        UpdateFlag= [[dic valueForKey:@"UpdateFlag"]boolValue];
+        ScriptCodee = [dic valueForKey:@"ScriptCode"];
         
         if (CommodityID == nil)
         {
@@ -604,11 +604,11 @@
     
     
     [[SQLiteDatabase sharedInstance] executeUpdate:query withParams:parameter
-     success:^(SQLiteResult *result)
+                                           success:^(SQLiteResult *result)
      {
          NSLog(@"result = %@",result);
      }
-      failure:^(NSString *errorMessage)
+                                           failure:^(NSString *errorMessage)
      {
          NSLog(@"Could not insert new row , %@",errorMessage);
      }];
@@ -628,7 +628,7 @@
     UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
     numberToolbar.barStyle = UIBarStyleBlackTranslucent;
     numberToolbar.items = @[[[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelNumberPad)],
-    [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                            [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
                             [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneWithNumberPad)]];
     [numberToolbar sizeToFit];
     
@@ -650,7 +650,7 @@
     }
     else if (_txtFieldReferalCode)
     {
-         _txtFieldReferalCode.text = @"";
+        _txtFieldReferalCode.text = @"";
     }
     else if (_txtFieldFullName)
     {
@@ -660,9 +660,9 @@
 
 -(void)doneWithNumberPad
 {
-   _mainScrollView.contentSize = CGSizeMake(_mainScrollView.frame.size.width, _btnSignIn.frame.origin.y+_btnSignIn.frame.size.height);
+    _mainScrollView.contentSize = CGSizeMake(_mainScrollView.frame.size.width, _btnSignIn.frame.origin.y+_btnSignIn.frame.size.height);
     
-   // NSString *numberFromTheKeyboard = numberTextField.text;
+    // NSString *numberFromTheKeyboard = numberTextField.text;
     [_txtFieldReferalCode resignFirstResponder];
     [_txtFieldMobileNumber resignFirstResponder];
     [_txtFieldFullName resignFirstResponder];
@@ -680,7 +680,7 @@
         _txtFieldFullName.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"Name"];
         _txtFieldMobileNumber.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"MobileNumber"];
         _txtFieldLocation.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"Location"];
-       // _txtFieldReferalCode.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"RefCode"];
+        // _txtFieldReferalCode.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"RefCode"];
         strPoppedd = @"NO";
     }
     else
@@ -765,7 +765,7 @@
             [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please enter name." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil]show];
         }
     }
-
+    
 }
 
 -(void)CallUpdatedetailsApi
@@ -812,15 +812,15 @@
     }
     
     
-     BOOL isNetworkAvailable = [[MethodsManager sharedManager]isInternetAvailable];
+    BOOL isNetworkAvailable = [[MethodsManager sharedManager]isInternetAvailable];
     
     if (isNetworkAvailable)
     {
         [[webManager sharedObject]CallPutMethodwithParameters:parameter withMethod:[NSString stringWithFormat:@"api/UserDetails/%@/true",strUSerID]
-         successResponce:^(id response)
+                                              successResponce:^(id response)
          {
              
-           
+             
              NSLog(@"response = %@",response);
              
              NSString *strUserId;
@@ -838,9 +838,9 @@
              [self.navigationController pushViewController:verify animated:YES];
              
          }
-         failure:^(NSError *error)
+                                                      failure:^(NSError *error)
          {
-           
+             
              NSLog(@"response error = %@",error);
          }];
     }
@@ -853,11 +853,11 @@
     return txt;
 }
 - (UITextField *)borderColor:(UITextField*)txt withMask:(BOOL)maskValue {
-        txt.layer.borderColor=[[UIColor colorWithRed:41/255.0 green:42/255.0 blue:43/255.0 alpha:1.0]CGColor];
-        txt.layer.borderWidth= 0.1f;
-        txt.layer.masksToBounds = maskValue;
+    txt.layer.borderColor=[[UIColor colorWithRed:41/255.0 green:42/255.0 blue:43/255.0 alpha:1.0]CGColor];
+    txt.layer.borderWidth= 0.1f;
+    txt.layer.masksToBounds = maskValue;
     return txt;
-
+    
 }
 
 - (UIView*)paddingView:(UITextField *)txt withImageNamed:(NSString *)image {
@@ -866,7 +866,7 @@
     [viewImgTxtUser setImage:[UIImage imageNamed:image]];
     [paddingView addSubview:viewImgTxtUser];
     txt.leftViewMode = UITextFieldViewModeAlways;
-   return paddingView;
+    return paddingView;
     
 }
 
@@ -886,19 +886,19 @@
         [aValue getValue:&keyboardBounds];
         // int keyboardHeight = keyboardBounds.size.height;
         /*
-        if (!keyboardIsShowing)
-        {
-            keyboardIsShowing = YES;
-            CGRect frame = self.view.frame;
-            frame.size.height -= 210;
-            
-            [UIView beginAnimations:nil context:NULL];
-            [UIView setAnimationBeginsFromCurrentState:YES];
-            [UIView setAnimationDuration:0.3f];
-            self.view.frame = frame;
-            [UIView commitAnimations];
-        }
-        */
+         if (!keyboardIsShowing)
+         {
+         keyboardIsShowing = YES;
+         CGRect frame = self.view.frame;
+         frame.size.height -= 210;
+         
+         [UIView beginAnimations:nil context:NULL];
+         [UIView setAnimationBeginsFromCurrentState:YES];
+         [UIView setAnimationDuration:0.3f];
+         self.view.frame = frame;
+         [UIView commitAnimations];
+         }
+         */
         
         if (!keyboardIsShowing)
         {
@@ -945,16 +945,16 @@
         // keyboardHeight = keyboardBounds.size.height;
         if (keyboardIsShowing)
         {    /*
-            keyboardIsShowing = NO;
-            CGRect frame = self.view.frame;
-            frame.size.height += 210;
-            
-            [UIView beginAnimations:nil context:NULL];
-            [UIView setAnimationBeginsFromCurrentState:YES];
-            [UIView setAnimationDuration:0.3f];
-            self.view.frame = frame;
-            [UIView commitAnimations];
-            */
+              keyboardIsShowing = NO;
+              CGRect frame = self.view.frame;
+              frame.size.height += 210;
+              
+              [UIView beginAnimations:nil context:NULL];
+              [UIView setAnimationBeginsFromCurrentState:YES];
+              [UIView setAnimationDuration:0.3f];
+              self.view.frame = frame;
+              [UIView commitAnimations];
+              */
             
             keyboardIsShowing = NO;
             CGRect frame = self.view.frame;
@@ -1010,7 +1010,7 @@
     {
         NSString *resultText = [textField.text stringByReplacingCharactersInRange:range withString:string];
         return resultText.length <= 10;
-
+        
     }
     return YES;
 }
@@ -1022,57 +1022,58 @@
 
 - (IBAction)btnRegisterTapped:(id)sender
 {
-     if([_strIsSigned isEqualToString:@"SignedIN"])
-     {
-         [self mathodUpdatedetails];
-     }
-    else
+    
+    if([_strIsSigned isEqualToString:@"SignedIN"])
     {
-    
-    [self.txtFieldFullName resignFirstResponder];
-    [self.txtFieldMobileNumber resignFirstResponder];
-    [self.txtFieldLocation resignFirstResponder];
-    [self.txtFieldReferalCode resignFirstResponder];
-   
-    
-    NSString *phoneNumber = _txtFieldMobileNumber.text;
-    NSString *phoneRegex = @"[789][0-9]{6}([0-9]{3})?";
-    NSPredicate *test = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneRegex];
-    BOOL matches = [test evaluateWithObject:phoneNumber];
-    
-   
-    NSString *rawString = [_txtFieldFullName text];
-    NSCharacterSet *whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
-    NSString *trimmed = [rawString stringByTrimmingCharactersInSet:whitespace];
-    if ([trimmed length] == 0)
-    {
-         [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please enter valid name" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil]show];
+        [self mathodUpdatedetails];
     }
     else
     {
-        if (_txtFieldFullName.text.length>0)
+        
+        [self.txtFieldFullName resignFirstResponder];
+        [self.txtFieldMobileNumber resignFirstResponder];
+        [self.txtFieldLocation resignFirstResponder];
+        [self.txtFieldReferalCode resignFirstResponder];
+        
+        
+        NSString *phoneNumber = _txtFieldMobileNumber.text;
+        NSString *phoneRegex = @"[789][0-9]{6}([0-9]{3})?";
+        NSPredicate *test = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneRegex];
+        BOOL matches = [test evaluateWithObject:phoneNumber];
+        
+        
+        NSString *rawString = [_txtFieldFullName text];
+        NSCharacterSet *whitespace = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+        NSString *trimmed = [rawString stringByTrimmingCharactersInSet:whitespace];
+        if ([trimmed length] == 0)
         {
-            if (_txtFieldLocation.text.length >0)
+            [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please enter valid name" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil]show];
+        }
+        else
+        {
+            if (_txtFieldFullName.text.length>0)
             {
-                if (_txtFieldMobileNumber.text.length >0)
+                if (_txtFieldLocation.text.length >0)
                 {
-                    
-                    if (_txtFieldMobileNumber.text.length == 10)
+                    if (_txtFieldMobileNumber.text.length >0)
                     {
-                        if(matches == true)
+                        
+                        if (_txtFieldMobileNumber.text.length == 10)
                         {
-                            if (checked == YES)
+                            if(matches == true)
                             {
-                             //   LoaderImageview.hidden = NO;
+                                if (checked == YES)
+                                {
+                                    //   LoaderImageview.hidden = NO;
                                     //$$$
-                                
-                                [[MethodsManager sharedManager]loadingView:self.view];
-                                
-                                NSDictionary *parameter;
-                                NSString *strRefCode;
-                                
+                                    
+                                    [[MethodsManager sharedManager]loadingView:self.view];
+                                    
+                                    NSDictionary *parameter;
+                                    NSString *strRefCode;
+                                    
                                     strRefCode = _txtFieldReferalCode.text;
-                                
+                                    
                                     if (strCityID != nil)
                                     {
                                         parameter = @{
@@ -1091,88 +1092,88 @@
                                                       @"ReferCode":strRefCode
                                                       };
                                     }
-                                
-                                 BOOL isNetworkAvailable = [[MethodsManager sharedManager]isInternetAvailable];
-                                
-                                if (isNetworkAvailable)
-                                {
-                                    [[webManager sharedObject] CallPostMethod:parameter withMethod:@"api/UserDetails"
-                                    successResponce:^(id response)
-                                     {
-                                        [[MethodsManager sharedManager]StopAnimating];
-                                         
-                                        NSString *strEmail = @"";
-                                        [[NSUserDefaults standardUserDefaults] setObject:strEmail forKey:@"Email"];
-                                         
-                                        //Location
-                                         [[NSUserDefaults standardUserDefaults]setObject:_txtFieldLocation.text forKey:@"Location"];
-                                         
-                                         NSLog(@"response = %@",response);
-                                         NSString *strUserId;
-                                         if ([response valueForKey:@"UserID"])
+                                    
+                                    BOOL isNetworkAvailable = [[MethodsManager sharedManager]isInternetAvailable];
+                                    
+                                    if (isNetworkAvailable)
+                                    {
+                                        [[webManager sharedObject] CallPostMethod:parameter withMethod:@"api/UserDetails"
+                                                                  successResponce:^(id response)
                                          {
-                                             strUserId = [response valueForKey:@"UserID"];
+                                             [[MethodsManager sharedManager]StopAnimating];
+                                             
+                                             NSString *strEmail = @"";
+                                             [[NSUserDefaults standardUserDefaults] setObject:strEmail forKey:@"Email"];
+                                             
+                                             //Location
+                                             [[NSUserDefaults standardUserDefaults]setObject:_txtFieldLocation.text forKey:@"Location"];
+                                             
+                                             NSLog(@"response = %@",response);
+                                             NSString *strUserId;
+                                             if ([response valueForKey:@"UserID"])
+                                             {
+                                                 strUserId = [response valueForKey:@"UserID"];
+                                             }
+                                             [[NSUserDefaults standardUserDefaults] setObject:strUserId forKey:@"UserID"];
+                                             
+                                             [self saveUserInformation];
+                                             VerifyAndChangeMobileViewController *verify = [self.storyboard instantiateViewControllerWithIdentifier:@"VerifyAndChangeMobileViewController"];
+                                             verify.strMobileNumber = _txtFieldMobileNumber.text;
+                                             verify.ChanegeMobileNumberDelegate =self;
+                                             [self.navigationController pushViewController:verify animated:YES];
+                                             
                                          }
-                                         [[NSUserDefaults standardUserDefaults] setObject:strUserId forKey:@"UserID"];
-                                         
-                                         [self saveUserInformation];
-                                         VerifyAndChangeMobileViewController *verify = [self.storyboard instantiateViewControllerWithIdentifier:@"VerifyAndChangeMobileViewController"];
-                                         verify.strMobileNumber = _txtFieldMobileNumber.text;
-                                         verify.ChanegeMobileNumberDelegate =self;
-                                         [self.navigationController pushViewController:verify animated:YES];
-                                         
-                                     }
-                                     failure:^(NSError *error)
-                                     {
-                                         [[MethodsManager sharedManager]StopAnimating];
-                                       //  LoaderImageview.hidden = YES;
-                                         NSLog(@"response error = %@",error);
-                                     }];
+                                                                          failure:^(NSError *error)
+                                         {
+                                             [[MethodsManager sharedManager]StopAnimating];
+                                             //  LoaderImageview.hidden = YES;
+                                             NSLog(@"response error = %@",error);
+                                         }];
+                                    }
                                 }
-                             }
+                                else
+                                {
+                                    [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please accept Terms of Service and Privacy Policy." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil]show];
+                                }
+                            }
                             else
                             {
-                                [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please accept Terms of Service and Privacy Policy." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil]show];
+                                NSLog(@"Mobile number should start with 7,8,9 only");
+                                [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Enter a valid mobile number" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil]show];
                             }
                         }
                         else
                         {
-                            NSLog(@"Mobile number should start with 7,8,9 only");
-                            [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Enter a valid mobile number" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil]show];
+                            [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Mobile number should be 10 digit" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil]show];
                         }
                     }
                     else
                     {
-                        [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Mobile number should be 10 digit" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil]show];
+                        [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please enter mobile number" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil]show];
                     }
                 }
                 else
                 {
-                    [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please enter mobile number" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil]show];
+                    [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please enter city name" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil]show];
                 }
             }
             else
             {
-                [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please enter city name" delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil]show];
+                [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please enter name." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil]show];
             }
         }
-        else
-        {
-            [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Please enter name." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil]show];
-        }
     }
-  }
 }
 
 -(void)saveUserInformation
 {
-        [[NSUserDefaults standardUserDefaults] setObject:_txtFieldFullName.text forKey:@"Name"];
+    [[NSUserDefaults standardUserDefaults] setObject:_txtFieldFullName.text forKey:@"Name"];
     
-        NSLog(@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"Name"]);
+    NSLog(@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"Name"]);
     
-        [[NSUserDefaults standardUserDefaults] setObject:_txtFieldMobileNumber.text forKey:@"MobileNumber"];
-        [[NSUserDefaults standardUserDefaults] setObject:_txtFieldLocation.text forKey:@"Location"];
-        // [[NSUserDefaults standardUserDefaults] setObject:_txtFieldReferalCode.text forKey:@"RefCode"];
+    [[NSUserDefaults standardUserDefaults] setObject:_txtFieldMobileNumber.text forKey:@"MobileNumber"];
+    [[NSUserDefaults standardUserDefaults] setObject:_txtFieldLocation.text forKey:@"Location"];
+    // [[NSUserDefaults standardUserDefaults] setObject:_txtFieldReferalCode.text forKey:@"RefCode"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -1214,9 +1215,9 @@
 
 - (IBAction)btnTermsOfserviceTapped:(id)sender
 {
-//terms_of_service:http://admin.marketmastro.com/StaticPage/sPage?pagename=tos"
-//privacy_policy:http://admin.marketmastro.com/StaticPage/sPage?
-//    pagename=pp
+    //terms_of_service:http://admin.marketmastro.com/StaticPage/sPage?pagename=tos"
+    //privacy_policy:http://admin.marketmastro.com/StaticPage/sPage?
+    //    pagename=pp
     
     //TermsOfService
     TermsAndPrivacyViewController *tos = [self.storyboard instantiateViewControllerWithIdentifier:@"TermsAndPrivacyViewController"];
@@ -1239,16 +1240,16 @@
 
 -(void)CallCityListApi
 {
-   // LoaderImageview.hidden = NO;
+    // LoaderImageview.hidden = NO;
     
     BOOL isNetworkAvailable = [[MethodsManager sharedManager]isInternetAvailable];
     
     if (isNetworkAvailable)
     {
         [[webManager sharedObject]loginRequest:nil withMethod:@"api/GetCity"
-         successResponce:^(id response)
+                               successResponce:^(id response)
          {
-            // LoaderImageview.hidden = YES;
+             // LoaderImageview.hidden = YES;
              NSLog(@"feedback  response = %@",response);
              LocationArray = [response mutableCopy];
              
@@ -1256,7 +1257,7 @@
               historialServicios = [[NSMutableDictionary alloc]init];
               array = [NSMutableArray new];
               
-            
+              
               for (dictionary in messageArray) {
               //datos de nivel objects
               NSString * code = [dictionary objectForKey:@"code"];
@@ -1284,16 +1285,16 @@
              NSString *StrStateID = @"0";
              NSString *StrCityName = @"Other";
              
-            [LocationArray addObject:@{@"CityID": StrCityID, @"CityName": StrCityName, @"StateID":StrStateID}];
+             [LocationArray addObject:@{@"CityID": StrCityID, @"CityName": StrCityName, @"StateID":StrStateID}];
              
              [[NSUserDefaults standardUserDefaults]setObject:LocationArray forKey:@"CityList"];
              
              _txtFieldLocation.text = [[LocationArray valueForKey:@"CityName"] objectAtIndex:0];
              [_tableLocation reloadData];
          }
-         failure:^(NSError *error)
+                                       failure:^(NSError *error)
          {
-            // LoaderImageview.hidden = YES;
+             // LoaderImageview.hidden = YES;
              NSLog(@"feedback error = %@",error);
              [[[UIAlertView alloc]initWithTitle:@"Error" message:error.description delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil]show];
          }];

@@ -40,7 +40,7 @@
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     }
     
-   dateFormatter=[[NSDateFormatter alloc]init];
+    dateFormatter=[[NSDateFormatter alloc]init];
     [dateFormatter setDateStyle:NSDateFormatterShortStyle];
     [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
     
@@ -49,11 +49,11 @@
     tNews.title = @"RBI introduces incremental cash reserve ratio of 100 per cent.";
     tNews.pubDate = @"26 Nov, 2016 05:00 PM";
     newsList = [[NSMutableArray alloc] init];
-   /* [newsList addObject:tNews];
-    [newsList addObject:tNews];
-    [newsList addObject:tNews];
-    [newsList addObject:tNews];*/
-   
+    /* [newsList addObject:tNews];
+     [newsList addObject:tNews];
+     [newsList addObject:tNews];
+     [newsList addObject:tNews];*/
+    
     [self getApiUrl];
     //AdBanner
     [self bannerAd];
@@ -82,7 +82,7 @@
     [formatter setDateFormat:@"EEE dd MMM, yyyy hh:mm a"];
     NSString *dateStr = [formatter stringFromDate:currentDate];
     nCell.lblNewsTitle.text = [NSString stringWithFormat:@"%@",[object stringForColumnName:@"title"]];
-  //  nCell.imgViewNewsImage.image = [UIImage imageNamed:@"rbi-Reu-L.jpg"];
+    //  nCell.imgViewNewsImage.image = [UIImage imageNamed:@"rbi-Reu-L.jpg"];
     nCell.imgViewNewsImage.image=nil;
     //    nCell.lblNewsTitle = [[newsList objectAtIndex:indexPath.row] objectForColumnName:@"title"];
     nCell.lblNewsTime.text = dateStr;
@@ -103,11 +103,11 @@
         }
     }];
     [task resume];
-
- /* NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",[object stringForColumnName:@"image"]]];
     
-    NSData *imageData = [NSData dataWithContentsOfURL:url];
-    nCell.imgViewNewsImage.image = [UIImage imageWithData:imageData];*/
+    /* NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",[object stringForColumnName:@"image"]]];
+     
+     NSData *imageData = [NSData dataWithContentsOfURL:url];
+     nCell.imgViewNewsImage.image = [UIImage imageWithData:imageData];*/
     return nCell;
 }
 
@@ -117,21 +117,21 @@
 {
     NSLog(@"row selected");
     NSLog(@"object selceted- %@",newsList[indexPath.row]);
-
+    
     NewDetailsVC *detail = [self.storyboard instantiateViewControllerWithIdentifier:@"NewDetailsVC"];
     detail.news=newsList[indexPath.row];
     [self.navigationController pushViewController:detail animated:YES];
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 #pragma mark - NewsPage
 - (void)newsPage {
@@ -144,14 +144,14 @@
     NSString *strTokenId = [[NSUserDefaults standardUserDefaults] valueForKey:@"TokenID"];
     
     /*NSDate *currentdate = [NSDate date];
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];//HH-mm-ss
-    NSString *requestDate = [dateFormatter stringFromDate:currentdate];
-    
-    [dateFormatter setDateFormat:@"HH-mm-ss"];
-    NSString *requestSecond = [dateFormatter stringFromDate:currentdate];
-    
-    NSDictionary *requestTime = @{@"RequestDate": requestDate, @"RequestSecond": requestSecond};*/
+     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+     [dateFormatter setDateFormat:@"yyyy-MM-dd"];//HH-mm-ss
+     NSString *requestDate = [dateFormatter stringFromDate:currentdate];
+     
+     [dateFormatter setDateFormat:@"HH-mm-ss"];
+     NSString *requestSecond = [dateFormatter stringFromDate:currentdate];
+     
+     NSDictionary *requestTime = @{@"RequestDate": requestDate, @"RequestSecond": requestSecond};*/
     
     NSMutableDictionary *requestDict = [[NSMutableDictionary alloc] init];
     [requestDict setObject:@"I" forKey:@"DeviceOS"];
@@ -160,21 +160,21 @@
     [requestDict setObject:UUID forKey:@"UUID"];
     
     
-   /* if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"RequestTime"] isKindOfClass:[NSDictionary class]]) {
-        NSDictionary *lRequestTime = [[NSUserDefaults standardUserDefaults] objectForKey:@"RequestTime"];
-        apiMethod = [NSString stringWithFormat:@"api/GetNews/%@/%@", [lRequestTime objectForKey:@"RequestDate"], [lRequestTime objectForKey:@"RequestSecond"]];
-    }
-    else {
-        apiMethod = @"api/GetNews";
-    }*/
+    /* if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"RequestTime"] isKindOfClass:[NSDictionary class]]) {
+     NSDictionary *lRequestTime = [[NSUserDefaults standardUserDefaults] objectForKey:@"RequestTime"];
+     apiMethod = [NSString stringWithFormat:@"api/GetNews/%@/%@", [lRequestTime objectForKey:@"RequestDate"], [lRequestTime objectForKey:@"RequestSecond"]];
+     }
+     else {
+     apiMethod = @"api/GetNews";
+     }*/
     
     [NetworkManager sendWebRequest:nil withMethod:apiMethod successResponce:^(id response) {
         NSLog(@"Data : %@", response);
         if ([response isKindOfClass:[NSArray class]]) {
             
             /*newsList = [[NSMutableArray alloc] init];
-            newsList=response;
-            [self newsPage];*/
+             newsList=response;
+             [self newsPage];*/
             [self setNewsToDB:response];
             //[self reloadNews];
         }
@@ -185,7 +185,7 @@
 
 - (void)setNewsToDB:(NSArray*)newsArr {
     NSMutableArray *columnValues = [[NSMutableArray alloc] init];
-
+    
     
     NSMutableDictionary *dataDic = [[NSMutableDictionary alloc] init];
     
@@ -193,34 +193,34 @@
         NSString *description=[tDict objectForKey:@"description"];
         NSRange range = [description rangeOfString:@"http"];
         
-            NSLog(@"position %lu", (unsigned long)range.location);
-            NSString *strImage=[description substringFromIndex:(range.location)];
-            NSRange indexEnd = [strImage rangeOfString:@"\""];
+        NSLog(@"position %lu", (unsigned long)range.location);
+        NSString *strImage=[description substringFromIndex:(range.location)];
+        NSRange indexEnd = [strImage rangeOfString:@"\""];
         
-            strImage=[strImage substringToIndex:indexEnd.location];
-            NSLog(@"image %@", strImage);
-            NSRange indexImgEnd=[description rangeOfString:@"/>"];
-            NSString *strDescription=[description substringFromIndex:indexImgEnd.location+2];
+        strImage=[strImage substringToIndex:indexEnd.location];
+        NSLog(@"image %@", strImage);
+        NSRange indexImgEnd=[description rangeOfString:@"/>"];
+        NSString *strDescription=[description substringFromIndex:indexImgEnd.location+2];
         
         strDescription=[strDescription stringByReplacingOccurrencesOfString:@"'" withString:@"''"];
-            NSLog(@"description %@", strDescription);
+        NSLog(@"description %@", strDescription);
         
         
-      /* if ([[tDict objectForKey:@"description"] isKindOfClass:[NSString class]]) {
-            [dataDic setObject:[self escapeApostrophe:[tDict objectForKey:@"description"]] forKey:@"description"];
-        }
-        else {*/
+        /* if ([[tDict objectForKey:@"description"] isKindOfClass:[NSString class]]) {
+         [dataDic setObject:[self escapeApostrophe:[tDict objectForKey:@"description"]] forKey:@"description"];
+         }
+         else {*/
         
         
         
-            [dataDic setObject:strDescription forKey:@"description"];
+        [dataDic setObject:strDescription forKey:@"description"];
         //}
         
         if ([[tDict objectForKey:@"link"] isKindOfClass:[NSString class]]) {
             [dataDic setObject:[self escapeApostrophe:[tDict objectForKey:@"link"]] forKey:@"link"];
         }
         else {
-           [dataDic setObject:@"" forKey:@"link"];
+            [dataDic setObject:@"" forKey:@"link"];
         }
         
         [dataDic setObject:strImage forKey:@"image"];
@@ -234,9 +234,9 @@
         
         //convert pubdate in seconds and set created on
         
-     //   long *seconds=
+        //   long *seconds=
         
-    
+        
         NSString *currentDateString = [tDict objectForKey:@"pubDate"];
         
         NSDate *currentDate = [dateFormatter dateFromString:currentDateString];
@@ -269,17 +269,17 @@
         insertQry = [NSString stringWithFormat:@"INSERT INTO News (%@) VALUES %@", [[dataDic allKeys] componentsJoinedByString:@", "], [columnValues componentsJoinedByString:@", "]];
         
         [[SQLiteDatabase sharedInstance] executeQuery:insertQry withParams:nil success:^(SQLiteResult *result) {
-              NSLog(@"success: %@", insertQry);
-             [self reloadNews];
+            NSLog(@"success: %@", insertQry);
+            [self reloadNews];
         } failure:^(NSString *errorMessage) {
             
             NSLog(@"error : %@",errorMessage);
             NSLog(@"FAIL QRY : %@", insertQry);
         }];
     }else{
-         [self reloadNews];
+        [self reloadNews];
     }
-
+    
     
 }
 
@@ -305,9 +305,9 @@
     [[SQLiteDatabase sharedInstance] executeQuery:selectNewsQry withParams:nil success:^(SQLiteResult *result) {
         
         NSLog(@"result : %@", result);
-       
+        
         if(result.count>0){
-           // NSMutableArray *tempArr=result.rows;
+            // NSMutableArray *tempArr=result.rows;
             SQLiteRow *object = result.rows[0];
             NSString *currentDateString=[NSString stringWithFormat:@"%@",[object stringForColumnName:@"pubDate"]];
             
@@ -320,7 +320,7 @@
             NSString *timeStr = [formatter stringFromDate:currentDate];
             NSLog(@"CurrentDate:%@", currentDate);
             apiMethod = [NSString stringWithFormat:@"api/GetNews/%@/%@",dateStr,timeStr];
-        
+            
         } else {
             apiMethod = @"api/GetNews";
         }

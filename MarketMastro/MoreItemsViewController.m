@@ -52,10 +52,10 @@
          }
          else //if database is empty then call
          {
-            [self MethodApiCallGetcommodityGroup];
+             [self MethodApiCallGetcommodityGroup];
          }
      }
-     failure:^(NSString *errorMessage)
+                                          failure:^(NSString *errorMessage)
      {
          [[MethodsManager sharedManager]StopAnimating];
          NSLog(@"Could not fetch rows from commodity group database,error = %@",errorMessage);
@@ -67,23 +67,23 @@
     ///api/GetAllCommodityGroups
     //GET
     [[webManager sharedObject]loginRequest:nil withMethod:@"api/GetAllCommodityGroups" successResponce:^(id response)
-    {
-        NSLog(@"Get commodity group api response = %@",response);
-        NSMutableArray *ArrayInsert = [response valueForKey:@"insert"];
-        NSString *strMoreItemsLUDT = [response valueForKey:@"LUDT"];
-        
-        //LUDT format
-        [self getLudtWithFormat:strMoreItemsLUDT];
-        
-        //insert all commodity groups in database table "CommodityGroup",
-        [self insertIntoCommodityGroup:ArrayInsert];
-        
-    }
-    failure:^(NSError *error)
-    {
+     {
+         NSLog(@"Get commodity group api response = %@",response);
+         NSMutableArray *ArrayInsert = [response valueForKey:@"insert"];
+         NSString *strMoreItemsLUDT = [response valueForKey:@"LUDT"];
+         
+         //LUDT format
+         [self getLudtWithFormat:strMoreItemsLUDT];
+         
+         //insert all commodity groups in database table "CommodityGroup",
+         [self insertIntoCommodityGroup:ArrayInsert];
+         
+     }
+                                   failure:^(NSError *error)
+     {
          NSLog(@"Get commodity group api error = %@",error.description);
          [self GetParentGroupTypes];
-    }];
+     }];
 }
 
 -(void)getLudtWithFormat:(NSString *)sringLUDT
@@ -103,7 +103,7 @@
     NSLog(@"CurrentDate:%@", currentDate);
     NSLog(@"DATE - %@",dateStr);
     NSLog(@"TIME - %@",timeStr);
- 
+    
     [[NSUserDefaults standardUserDefaults]setObject:dateStr forKey:@"MoreItemsLastUpdatedDate"];
     [[NSUserDefaults standardUserDefaults]setObject:timeStr forKey:@"MoreItemsLastUpdatedTime"];
 }
@@ -114,7 +114,7 @@
     
     for (int i = 0; i < insertArray.count; i ++)
     {
-      //  NSLog(@"%@",[insertArray objectAtIndex:i]);
+        //  NSLog(@"%@",[insertArray objectAtIndex:i]);
         
         //NSDictionary *dic = [insertArray objectAtIndex:i];
         NSString *GroupName= [NSString stringWithFormat:@"%@",[[insertArray objectAtIndex:i] valueForKey:@"GroupName"]];
@@ -126,13 +126,13 @@
         NSString *query = [NSString stringWithFormat:@"INSERT INTO CommodityGroup (GroupID,GroupName,GroupType,ParentGroupID) VALUES (:GroupID ,:GroupName,:GroupType,:ParentGroupID)"];
         
         /*
-        NSDictionary *parameter = @{
-                                    @"GroupName":GroupName,
-                                    @"GroupType":GroupType,
-                                    @"GroupID":[NSNumber numberWithInt:GroupID],
-                                    @"ParentGroupID":[NSNumber numberWithInt:ParentGroupID]
-                                    };
-        */
+         NSDictionary *parameter = @{
+         @"GroupName":GroupName,
+         @"GroupType":GroupType,
+         @"GroupID":[NSNumber numberWithInt:GroupID],
+         @"ParentGroupID":[NSNumber numberWithInt:ParentGroupID]
+         };
+         */
         
         NSDictionary *parameter = @{
                                     @"GroupName":GroupName,
@@ -142,21 +142,21 @@
                                     };
         
         [[SQLiteDatabase sharedInstance] executeUpdate:query withParams:parameter
-          success:^(SQLiteResult *result)
+                                               success:^(SQLiteResult *result)
          {
              NSLog(@"response of insert commodity Group = %@",result);
              
              if (i == insertArray.count-1)
              {
-                  [self GetParentGroupTypes];
+                 [self GetParentGroupTypes];
              }
          }
-          failure:^(NSString *errorMessage)
+                                               failure:^(NSString *errorMessage)
          {
              NSLog(@"error of insert commodity Group  = %@",errorMessage);
          }];
     }
-   
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -186,26 +186,26 @@
     NSString *strLUDTtime = [[NSUserDefaults standardUserDefaults]valueForKey:@"MoreItemsLastUpdatedTime"];
     
     [[webManager sharedObject]loginRequest:nil withMethod:[NSString stringWithFormat:@"api/GetAllCommodityGroups/%@/%@",strLUDTdate,strLUDTtime]
-    successResponce:^(id response)
-    {
-        NSLog(@"GetAllCommodityGroups with LUDT response = %@",response);
-        NSMutableArray *ArrayInsert = [response valueForKey:@"insert"];
-        
-        if (ArrayInsert.count >0)
-        {
-            //insert all commodity groups in database table "CommodityGroup",
-            [self insertIntoCommodityGroup:ArrayInsert];
-        }
-        else
-        {
-            [self GetParentGroupTypes];
-        }
-    }
-     failure:^(NSError *error)
-    {
-        NSLog(@"GetAllCommodityGroups with LUDT response = %@",error.description);
+                           successResponce:^(id response)
+     {
+         NSLog(@"GetAllCommodityGroups with LUDT response = %@",response);
+         NSMutableArray *ArrayInsert = [response valueForKey:@"insert"];
+         
+         if (ArrayInsert.count >0)
+         {
+             //insert all commodity groups in database table "CommodityGroup",
+             [self insertIntoCommodityGroup:ArrayInsert];
+         }
+         else
+         {
+             [self GetParentGroupTypes];
+         }
+     }
+                                   failure:^(NSError *error)
+     {
+         NSLog(@"GetAllCommodityGroups with LUDT response = %@",error.description);
          [self GetParentGroupTypes];
-    }];
+     }];
 }
 
 -(void)GetParentGroupTypes
@@ -227,11 +227,11 @@
          {
              object = [ArrDistinctGroups objectAtIndex:i];
              strGrpType = [object stringForColumnName:@"GroupType"];
-            [ArrayMoreItems addObject:strGrpType];
+             [ArrayMoreItems addObject:strGrpType];
          }
          [_tableMoreItems reloadData];
      }
-      failure:^(NSString *errorMessage)
+                                          failure:^(NSString *errorMessage)
      {
          [[MethodsManager sharedManager]StopAnimating];
          NSLog(@"Could not fetch DISTINCT GroupType from CommodityGroup query,error = %@",errorMessage);
@@ -261,9 +261,9 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-        //get detail array more items and send it to moreitemsvc1 page
-        NSString *strSelectedMoreItem = [ArrayMoreItems objectAtIndex:indexPath.row];
-        [self getDetailArray:strSelectedMoreItem];
+    //get detail array more items and send it to moreitemsvc1 page
+    NSString *strSelectedMoreItem = [ArrayMoreItems objectAtIndex:indexPath.row];
+    [self getDetailArray:strSelectedMoreItem];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -281,8 +281,8 @@
          [[MethodsManager sharedManager]StopAnimating];
          NSLog(@"Get sub groups of selectedParentGroup database response = %@",result);
          NSMutableArray *resultArray = result.rows;
-        // ArraySubGroups = [resultArray mutableCopy];
-        // NSLog(@"result Array = %@",resultArray);
+         // ArraySubGroups = [resultArray mutableCopy];
+         // NSLog(@"result Array = %@",resultArray);
          
          SQLiteRow *object;
          NSString *strGrpName;
@@ -296,8 +296,8 @@
              strGrpName = [object stringForColumnName:@"GroupName"];
              strGrpID = [object stringForColumnName:@"GroupID"];
              
-           //  [dic setObject:strGrpID forKey:@"strGrpID"];
-            // [dic setObject:strGrpName forKey:@"GroupName"];
+             //  [dic setObject:strGrpID forKey:@"strGrpID"];
+             // [dic setObject:strGrpName forKey:@"GroupName"];
              //[ArraySubGroupsID addObject:dic];
              
              [ArraySubGroups addObject:strGrpName];
@@ -309,7 +309,7 @@
          vc.strSelectedItem = selectedMoreItem;
          [self.navigationController pushViewController:vc animated:YES];
      }
-     failure:^(NSString *errorMessage)
+                                          failure:^(NSString *errorMessage)
      {
          [[MethodsManager sharedManager]StopAnimating];
          NSLog(@"Could not fetch rows from Get sub groups of selectedParentGroup database response,error = %@",errorMessage);

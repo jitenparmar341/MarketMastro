@@ -23,7 +23,7 @@
     self.title = @"Help";
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-
+    
     // Do any additional setup after loading the view.
     SWRevealViewController *revealViewController = self.revealViewController;
     if ( revealViewController )
@@ -69,7 +69,7 @@
 {
     AlertViewController *calendarVC = [self.storyboard instantiateViewControllerWithIdentifier:@"AlertViewController"];
     calendarVC.is_NotFromDraw = YES;
-
+    
     [self.navigationController pushViewController:calendarVC animated:YES];
 }
 

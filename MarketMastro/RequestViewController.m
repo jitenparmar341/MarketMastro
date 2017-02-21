@@ -47,7 +47,7 @@
     self.title = @"Request";
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-
+    
     UIColor *color = [UIColor colorWithRed:149/255.0 green:149/255.0 blue:149/255.0 alpha:1.0];
     
     txtCommodityName.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Enter Commodity name" attributes:@{NSForegroundColorAttributeName: color}];
@@ -102,7 +102,7 @@
     BOOL isNetworkAvailable = [[MethodsManager sharedManager]isInternetAvailable];
     if (isNetworkAvailable)
     {
-         [[MethodsManager sharedManager]loadingView:self.view];
+        [[MethodsManager sharedManager]loadingView:self.view];
         
         [[webManager sharedObject] CallPostMethod:parameters withMethod:@"/api/CreateRequest" successResponce:^(id response)
          {
@@ -110,7 +110,7 @@
              NSLog(@"create request response = %@",response);
              [[[UIAlertView alloc]initWithTitle:@"Success" message:[response valueForKey:@"Success"] delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil]show];
          }
-         failure:^(NSError *error)
+                                          failure:^(NSError *error)
          {
              [[MethodsManager sharedManager]StopAnimating];
              NSLog(@"create request error = %@",error.description);
@@ -157,7 +157,7 @@
                 }
                 else
                 {
-                     [self MethodCallRequestApi];
+                    [self MethodCallRequestApi];
                 }
             }
         }

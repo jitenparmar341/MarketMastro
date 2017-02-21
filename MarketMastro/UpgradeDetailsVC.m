@@ -20,7 +20,7 @@
 {
     [super viewDidLoad];
     
-     [self setDoneKeypad];
+    [self setDoneKeypad];
     
     self.title = @"Subscribe";
     [self.navigationController.navigationBar setTitleTextAttributes:
@@ -30,7 +30,7 @@
     
     self.btnApply.layer.cornerRadius = self.btnApply.frame.size.width/5.5;
     self.btnApply.clipsToBounds = true;
-
+    
     // Do any additional setup after loading the view.
 }
 
@@ -133,13 +133,13 @@
     [txtRef resignFirstResponder];
 }
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

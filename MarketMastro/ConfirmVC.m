@@ -60,7 +60,7 @@
     
     [[self navigationController]pushViewController:transaction animated:true];
     
-//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://+91 11111111111"]];
+    //    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"telprompt://+91 11111111111"]];
 }
 
 #pragma mark - Received Memory Warning

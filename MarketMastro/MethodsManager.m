@@ -42,7 +42,7 @@ static MethodsManager *SharedMethodsManager = nil;    // static instance variabl
     [view addSubview:transperentView];
     transperentView.hidden = NO;
     
-  //  UIImage *imgLoader = [UIImage imageNamed:@"loading_1.png"];
+    //  UIImage *imgLoader = [UIImage imageNamed:@"loading_1.png"];
     imgViewLoading = [[UIImageView alloc]init];
     
     imgViewLoading.frame = CGRectMake(CGRectGetMidX(view.frame)-40, CGRectGetMidY(view.frame), 100, 20);
@@ -68,7 +68,7 @@ static MethodsManager *SharedMethodsManager = nil;    // static instance variabl
     
     //unblock ui
     [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-     [imgViewLoading stopAnimating];
+    [imgViewLoading stopAnimating];
 }
 
 - (BOOL)isInternetAvailable

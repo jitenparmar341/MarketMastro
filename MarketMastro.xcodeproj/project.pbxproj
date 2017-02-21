@@ -134,7 +134,6 @@
 		684D9F4C1E4888BE00DA3A0F /* dro_emc_ico.png in Resources */ = {isa = PBXBuildFile; fileRef = 684D9F461E4888BE00DA3A0F /* dro_emc_ico.png */; };
 		688359F31E4CEA64006A31FB /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 688359F21E4CEA64006A31FB /* NewsViewController.m */; };
 		68B151221E4A6339006621E4 /* UIImage+HPImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B151211E4A6339006621E4 /* UIImage+HPImage.m */; };
-		96999CB31E5A053E00D832E3 /* Main-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96999CB21E5A053E00D832E3 /* Main-iPad.storyboard */; };
 		969C7AB51E53877B009B0123 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 969C7A8F1E53877B009B0123 /* MKAnnotationView+WebCache.m */; };
 		969C7AB61E53877B009B0123 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 969C7A911E53877B009B0123 /* NSData+ImageContentType.m */; };
 		969C7AB71E53877B009B0123 /* NSImage+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 969C7A931E53877B009B0123 /* NSImage+WebCache.m */; };
@@ -156,6 +155,8 @@
 		969C7AC71E53877B009B0123 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 969C7AB41E53877B009B0123 /* UIView+WebCacheOperation.m */; };
 		96CFE2221E54CB9200190322 /* CustomSelPack.m in Sources */ = {isa = PBXBuildFile; fileRef = 96CFE2211E54CB9200190322 /* CustomSelPack.m */; };
 		96CFE2251E54D30E00190322 /* CustomModePay.m in Sources */ = {isa = PBXBuildFile; fileRef = 96CFE2241E54D30E00190322 /* CustomModePay.m */; };
+		96DACCB11E5CAB42003F1AB4 /* LKSDB.db in Resources */ = {isa = PBXBuildFile; fileRef = 96DACCB01E5CAB42003F1AB4 /* LKSDB.db */; };
+		96DACCB31E5CAB64003F1AB4 /* Main-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96DACCB21E5CAB64003F1AB4 /* Main-iPad.storyboard */; };
 		96DB25931E561078007506AD /* TransactionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DB25921E561078007506AD /* TransactionVC.m */; };
 		96DCBD291E55FCDA00746E07 /* ConfirmVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DCBD281E55FCDA00746E07 /* ConfirmVC.m */; };
 		96FB31481E5B61A800A8A759 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB01CCBF1E2629C100DFFB63 /* UserNotifications.framework */; };
@@ -292,7 +293,6 @@
 		BBEBD4951E3A239000E04F8A /* UpdateUserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBEBD4941E3A239000E04F8A /* UpdateUserProfileViewController.m */; };
 		BBED81C41E459D1300CD980E /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBED81C31E459D1300CD980E /* GoogleMobileAds.framework */; };
 		BBED81C61E45A73200CD980E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBED81C51E45A73200CD980E /* Main.storyboard */; };
-		BBF2FAAF1E35EB750032A9FB /* LKSDB.db in Resources */ = {isa = PBXBuildFile; fileRef = BBF2FAAE1E35EB750032A9FB /* LKSDB.db */; };
 		BBF833171E3B1AC700CF91E8 /* aboutusactive.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF8330C1E3B1AC700CF91E8 /* aboutusactive.png */; };
 		BBF833181E3B1AC700CF91E8 /* accountactive.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF8330D1E3B1AC700CF91E8 /* accountactive.png */; };
 		BBF833191E3B1AC700CF91E8 /* alertactive.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF8330E1E3B1AC700CF91E8 /* alertactive.png */; };
@@ -409,7 +409,6 @@
 		688359F21E4CEA64006A31FB /* NewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsViewController.m; sourceTree = "<group>"; };
 		68B151201E4A6339006621E4 /* UIImage+HPImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+HPImage.h"; sourceTree = "<group>"; };
 		68B151211E4A6339006621E4 /* UIImage+HPImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+HPImage.m"; sourceTree = "<group>"; };
-		96999CB21E5A053E00D832E3 /* Main-iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Main-iPad.storyboard"; sourceTree = "<group>"; };
 		969C7A8E1E53877B009B0123 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		969C7A8F1E53877B009B0123 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		969C7A901E53877B009B0123 /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
@@ -453,6 +452,8 @@
 		96CFE2211E54CB9200190322 /* CustomSelPack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSelPack.m; sourceTree = "<group>"; };
 		96CFE2231E54D30E00190322 /* CustomModePay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomModePay.h; sourceTree = "<group>"; };
 		96CFE2241E54D30E00190322 /* CustomModePay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomModePay.m; sourceTree = "<group>"; };
+		96DACCB01E5CAB42003F1AB4 /* LKSDB.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = LKSDB.db; sourceTree = "<group>"; };
+		96DACCB21E5CAB64003F1AB4 /* Main-iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Main-iPad.storyboard"; sourceTree = "<group>"; };
 		96DB25911E561078007506AD /* TransactionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionVC.h; sourceTree = "<group>"; };
 		96DB25921E561078007506AD /* TransactionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionVC.m; sourceTree = "<group>"; };
 		96DCBD271E55FCDA00746E07 /* ConfirmVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmVC.h; sourceTree = "<group>"; };
@@ -676,7 +677,6 @@
 		BBEBD4941E3A239000E04F8A /* UpdateUserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateUserProfileViewController.m; sourceTree = "<group>"; };
 		BBED81C31E459D1300CD980E /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
 		BBED81C51E45A73200CD980E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		BBF2FAAE1E35EB750032A9FB /* LKSDB.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = LKSDB.db; sourceTree = "<group>"; };
 		BBF8330C1E3B1AC700CF91E8 /* aboutusactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aboutusactive.png; sourceTree = "<group>"; };
 		BBF8330D1E3B1AC700CF91E8 /* accountactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = accountactive.png; sourceTree = "<group>"; };
 		BBF8330E1E3B1AC700CF91E8 /* alertactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alertactive.png; sourceTree = "<group>"; };
@@ -843,7 +843,7 @@
 				BBF833151E3B1AC700CF91E8 /* referactive.png */,
 				BBF833161E3B1AC700CF91E8 /* subscriptionactive.png */,
 				BB01CCC21E26510F00DFFB63 /* MarketMastro-Prefix.pch */,
-				BBF2FAAE1E35EB750032A9FB /* LKSDB.db */,
+				96DACCB01E5CAB42003F1AB4 /* LKSDB.db */,
 				BB4B756C1E337C1500EE44A6 /* Bolts.framework */,
 				BB4B756D1E337C1500EE44A6 /* Parse.framework */,
 				0438171E1DD74EAD00FCEB7D /* QuartzCore.framework */,
@@ -869,7 +869,7 @@
 			isa = PBXGroup;
 			children = (
 				BBED81C51E45A73200CD980E /* Main.storyboard */,
-				96999CB21E5A053E00D832E3 /* Main-iPad.storyboard */,
+				96DACCB21E5CAB64003F1AB4 /* Main-iPad.storyboard */,
 				969C7A8D1E538755009B0123 /* SDWebimage */,
 				BB33971B1E433191007A3EEE /* mjpopup */,
 				043817111DD74AD700FCEB7D /* Images */,
@@ -1545,7 +1545,6 @@
 				BB4468C61E30C2B0002B288A /* History.png in Resources */,
 				0438173F1DD7664700FCEB7D /* reg_user_icon.png in Resources */,
 				0438174E1DD766B600FCEB7D /* reg_target_icon@2x.png in Resources */,
-				BBF2FAAF1E35EB750032A9FB /* LKSDB.db in Resources */,
 				0438174B1DD766B600FCEB7D /* reg_target_icon.png in Resources */,
 				BB4468C51E30C2B0002B288A /* upgrade.png in Resources */,
 				043817361DD7664700FCEB7D /* reg_mobile_icon.png in Resources */,
@@ -1567,6 +1566,7 @@
 				684D9F4B1E4888BE00DA3A0F /* dro_emc_ico.png in Resources */,
 				AB6C1FC21DEA8C0A0093B03E /* ts-thakur-ravi-shankar-prasad-759.jpg in Resources */,
 				04D5F8461DD4BDE200CE1091 /* Assets.xcassets in Resources */,
+				96DACCB31E5CAB64003F1AB4 /* Main-iPad.storyboard in Resources */,
 				BB8C3B2A1E49FF4D008D1E26 /* back.png in Resources */,
 				BBA9A0001E3771EA0086ADA3 /* loading_2.png in Resources */,
 				BBA99FFF1E3771EA0086ADA3 /* loading_1.png in Resources */,
@@ -1586,6 +1586,7 @@
 				AB91F1C11DE073A00032AD9A /* ChangePassword.png in Resources */,
 				043817181DD74AFB00FCEB7D /* res_logo_icon@2x.png in Resources */,
 				BB06B58F1E2F3A8A002FDCF9 /* checked.png in Resources */,
+				96DACCB11E5CAB42003F1AB4 /* LKSDB.db in Resources */,
 				BBE042C51E4CBDDC000907B4 /* act_tick_ico.png in Resources */,
 				043817301DD7664700FCEB7D /* reg_location_icon@2x.png in Resources */,
 				BBF833181E3B1AC700CF91E8 /* accountactive.png in Resources */,
@@ -1610,7 +1611,6 @@
 				BBED81C61E45A73200CD980E /* Main.storyboard in Resources */,
 				0438175A1DD80BD400FCEB7D /* checked_checkbox.png in Resources */,
 				BBF8331C1E3B1AC700CF91E8 /* helpactive.png in Resources */,
-				96999CB31E5A053E00D832E3 /* Main-iPad.storyboard in Resources */,
 				684D9F491E4888BE00DA3A0F /* dro_emc_active_ico.png in Resources */,
 				BBF8331A1E3B1AC700CF91E8 /* calenderactive.png in Resources */,
 				BB4BDBC61E3C91BB008775E1 /* sad_portfolio_ico.png in Resources */,

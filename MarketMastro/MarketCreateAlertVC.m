@@ -18,7 +18,7 @@ NSString *selctedOptionMarket;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-  
+    
     // Do any additional setup after loading the view.
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -38,29 +38,32 @@ NSString *selctedOptionMarket;
 }
 
 - (IBAction)selectCommoditeBtnClick:(id)sender
-    {
+{
     if([selctedOptionMarket length] > 0)
     {
         [_selectCondition setTitle:[NSString stringWithFormat:@"  %@",selctedOptionMarket] forState:UIControlStateNormal];
     }
+    
     CreatePortflioVC *createAlert = [self.storyboard instantiateViewControllerWithIdentifier:@"CreatePortflioVC"];
-    createAlert.isFromAlert = YES;
-    createAlert.isFromPortfolio = false;
-    createAlert.isFromMarket = false;
-        
+    
+    createAlert.isCreateAlert = YES;
+    
     [self.navigationController pushViewController:createAlert animated:YES];
 }
-- (IBAction)btnSelectConditionBtnClick:(id)sender {
+
+- (IBAction)btnSelectConditionBtnClick:(id)sender
+{
     self.viewForAlertOption.frame =  self.view.frame;
     [self.view addSubview:self.viewForAlertOption];
 }
-- (IBAction)setAlertBtnClick:(id)sender {
+
+- (IBAction)setAlertBtnClick:(id)sender
+{
     //  Select Commodity
     if([self.btnSelectComm.currentTitle isEqualToString:@"  Select Commodity"])
     {
         [[[UIAlertView alloc] initWithTitle:@"" message:@"Please select Commodity." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] show];
         return;
-        
     }
     if([_selectCondition.currentTitle isEqualToString:@"  Select Condition"])
     {
@@ -96,13 +99,13 @@ NSString *selctedOptionMarket;
     
 }
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

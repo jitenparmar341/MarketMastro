@@ -21,7 +21,7 @@
     self.title = @"Order Details";
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-
+    
     [self setUpValues];
 }
 
@@ -44,13 +44,13 @@
     
     if ([ArrayHistoryDetail valueForKey:@"TransactionID"] != nil)
     {
-       _lblTxnID.text = [NSString stringWithFormat:@"Txn Id #%@",[ArrayHistoryDetail valueForKey:@"TransactionID"]];
+        _lblTxnID.text = [NSString stringWithFormat:@"Txn Id #%@",[ArrayHistoryDetail valueForKey:@"TransactionID"]];
     }
     else
     {
         _lblTxnID.hidden = YES;
     }
-
+    
     
     if ([ArrayHistoryDetail valueForKey:@"PurchasedOn"] != nil)
     {
@@ -73,7 +73,7 @@
     
     if ([ArrayHistoryDetail valueForKey:@"PackageName"] != nil)
     {
-         _lblPackageName.text = [NSString stringWithFormat:@"%@",[ArrayHistoryDetail valueForKey:@"PackageName"]];
+        _lblPackageName.text = [NSString stringWithFormat:@"%@",[ArrayHistoryDetail valueForKey:@"PackageName"]];
     }
     else
     {
@@ -103,21 +103,21 @@
         
         strExpiredOn = [dateFormatter stringFromDate:dateFromString];
         
-         _lblExpiredOn.text = [NSString stringWithFormat:@"Expires On %@",strExpiredOn];
+        _lblExpiredOn.text = [NSString stringWithFormat:@"Expires On %@",strExpiredOn];
     }
     else
     {
         _lblExpiredOn.hidden = YES;
     }
     
-//    if ([ArrayHistoryDetail valueForKey:@"PaymentMode"] != nil)
-//    {
-//        _lblpaidVia.text =  [NSString stringWithFormat:@"Paid via %@",[ArrayHistoryDetail valueForKey:@"PaymentMode"]];
-//    }
-//    else
-//    {
-//        _lblpaidVia.hidden = YES;
-//    }
+    //    if ([ArrayHistoryDetail valueForKey:@"PaymentMode"] != nil)
+    //    {
+    //        _lblpaidVia.text =  [NSString stringWithFormat:@"Paid via %@",[ArrayHistoryDetail valueForKey:@"PaymentMode"]];
+    //    }
+    //    else
+    //    {
+    //        _lblpaidVia.hidden = YES;
+    //    }
     
     if ([ArrayHistoryDetail valueForKey:@"Paid"] != nil)
     {
@@ -143,7 +143,7 @@
     else if ([strPurchasedStatus isEqualToString:@"Failed"])
     {
         [_btnStatus setTitle:@"Transaction Failed" forState:UIControlStateNormal];
-         _btnStatus.backgroundColor = [UIColor colorWithRed:186/255.0 green:30/255.0 blue:26/255.0 alpha:1.0];
+        _btnStatus.backgroundColor = [UIColor colorWithRed:186/255.0 green:30/255.0 blue:26/255.0 alpha:1.0];
     }
     else
     {
@@ -169,14 +169,14 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 - (IBAction)btnprizeTapped:(id)sender {
 }
