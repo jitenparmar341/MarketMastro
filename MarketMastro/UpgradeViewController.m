@@ -13,6 +13,7 @@
 
 #import "ModeOfPaymentVC.h"
 
+#import "FirstFourVC.h"
 
 @interface UpgradeViewController ()
 {
@@ -29,23 +30,19 @@
     self.title = @"Select Package";
     menuItems = [NSMutableArray array];
     
+    /*
     NSMutableDictionary *dicData = [NSMutableDictionary dictionary];
-    
     [dicData setValue:@"Free - MCX only version" forKey:@"main"];
     [dicData setValue:@"30 Days Trial" forKey:@"sub"];
     [dicData setValue:@"₹25" forKey:@"price"];
-    
     [menuItems addObject:dicData];
     
     dicData = [NSMutableDictionary dictionary];
-    
     [dicData setValue:@"With Ad - MCX only version" forKey:@"main"];
     [dicData setValue:@"30 Days Trial" forKey:@"sub"];
     [dicData setValue:@"₹50" forKey:@"price"];
-    
     [menuItems addObject:dicData];
-    
-    [self.tblView reloadData];
+    */
     
     [self.navigationController.navigationBar setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
@@ -68,6 +65,7 @@
     }
     
     // Do any additional setup after loading the view.
+    [self callPackageListApi];//Harish
 }
 -(IBAction)goBack:(id)sender
 {
@@ -110,9 +108,32 @@
     
     NSDictionary *dicData = [menuItems objectAtIndex:indexPath.section];
     
-    cell.lblMain.text = [dicData valueForKey:@"main"];
-    cell.lblSub.text = [dicData valueForKey:@"sub"];
-    cell.lblPrice.text = [dicData valueForKey:@"price"];
+    if (![[dicData allKeys] containsObject:@"main"]) {
+        cell.lblMain.text = [dicData objectForKey:@"PackageName"];
+        if ([[dicData objectForKey:@"PackageValidity"] isKindOfClass:[NSNumber class]]) {
+            cell.lblSub.text = [[dicData objectForKey:@"PackageValidity"] stringValue];
+        }
+        else if ([[dicData objectForKey:@"PackageValidity"] isKindOfClass:[NSString class]]) {
+            cell.lblSub.text = [dicData objectForKey:@"PackageValidity"];
+        }
+        if ([[dicData objectForKey:@"isFree"] isKindOfClass:[NSNumber class]]) {
+            if ([[dicData objectForKey:@"isFree"] intValue] == 1)
+                cell.lblPrice.text = @"Free";
+            else
+                cell.lblPrice.text = [dicData objectForKey:@"PackagePrice"];
+        }
+        else if ([[dicData objectForKey:@"isFree"] isKindOfClass:[NSString class]]) {
+            if ([[dicData objectForKey:@"isFree"] isEqualToString:@"1"])
+                cell.lblPrice.text = @"Free";
+            else
+                cell.lblPrice.text = [dicData objectForKey:@"PackagePrice"];
+        }
+    }
+    else {
+        cell.lblMain.text = [dicData objectForKey:@"main"];
+        cell.lblSub.text = [dicData objectForKey:@"sub"];
+        cell.lblPrice.text = [dicData objectForKey:@"price"];
+    }
     
     cell.viewPrice.layer.cornerRadius = cell.viewPrice.frame.size.width/2;
     cell.viewPrice.layer.borderColor = [UIColor lightGrayColor].CGColor;
@@ -127,8 +148,78 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ModeOfPaymentVC *upgradeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"ModeOfPaymentVC"];
-    [self.navigationController pushViewController:upgradeVC animated:YES];
+    //Harish
+    if (_isFrom==1) {
+        NSDictionary *tDic = [menuItems objectAtIndex:indexPath.section];
+        if ([[tDic objectForKey:@"isFree"] isKindOfClass:[NSNumber class]]) {
+            if ([[tDic objectForKey:@"isFree"] intValue] == 1)
+                [self subscribeToPackage:[menuItems objectAtIndex:indexPath.section]];
+        }
+        else if ([[tDic objectForKey:@"isFree"] isKindOfClass:[NSString class]]) {
+            if ([[tDic objectForKey:@"isFree"] isEqualToString:@"1"])
+                [self subscribeToPackage:[menuItems objectAtIndex:indexPath.section]];
+        }
+    }
+    else {
+        ModeOfPaymentVC *upgradeVC = [self.storyboard instantiateViewControllerWithIdentifier:@"ModeOfPaymentVC"];
+        [self.navigationController pushViewController:upgradeVC animated:YES];
+    }
+}
+//Harish
+#pragma mark - PackagesList
+-(void)callPackageListApi
+{
+    BOOL isNetworkAvailable = [[MethodsManager sharedManager]isInternetAvailable];
+    //api/GetPackages
+    if (isNetworkAvailable) {
+        [[webManager sharedObject]loginRequest:nil withMethod:@"api/GetPackages" successResponce:^(id response)
+         {
+             
+             NSLog(@"get package list api response = %@",response);
+             NSMutableArray *packageArr = [response mutableCopy];
+             menuItems = packageArr;
+             [_tblView reloadData];//Harish
+         }
+                                       failure:^(NSError *error)
+         {
+             NSLog(@"get package list api error = %@",error);
+             [_tblView reloadData];
+         }];
+    }
+}
+#pragma mark - PostUserSubscription
+- (void)subscribeToPackage:(NSDictionary*)packageDic {
+    BOOL isNetworkAvailable = [[MethodsManager sharedManager]isInternetAvailable];
+    if (isNetworkAvailable) {
+        NSString *strUserID = [[NSUserDefaults standardUserDefaults] valueForKey:@"UserID"];
+        strUserID = [NSString stringWithFormat:@"%@",strUserID];
+        
+        NSMutableDictionary *requestDic = [[NSMutableDictionary alloc] init];
+        [requestDic setObject:strUserID forKey:@"UserID"];
+        [requestDic setObject:[packageDic objectForKey:@"PackageID"] forKey:@"PackageID"];
+        [requestDic setObject:@"" forKey:@"PCUsed"];
+        [requestDic setObject:@"0" forKey:@"PCValue"];
+        [requestDic setObject:@"0" forKey:@"CPUsed"];
+        [requestDic setObject:@"0" forKey:@"CreditValue"];
+        [requestDic setObject:@"Offline" forKey:@"PaymentMode"];
+        [requestDic setObject:@"0" forKey:@"PaymentMade"];
+        [requestDic setObject:@"Completed" forKey:@"PurchasedStatus"];
+        [requestDic setObject:@"0" forKey:@"TransactionID"];
+        
+        [[webManager sharedObject] CallPostMethod:requestDic withMethod:@"api/PostUserSubscription" successResponce:^(id response) {
+            NSDictionary *responseDic;
+            if ([response isKindOfClass:[NSDictionary class]]) {
+                responseDic = (NSDictionary*)response;
+                
+                [[[UIAlertView alloc] initWithTitle:@"Success" message:@"Thank You" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"ok", nil] show];
+                //FirstFourVC
+                FirstFourVC *dashboard = [self.storyboard instantiateViewControllerWithIdentifier:@"FirstFourVC"];
+                [self.navigationController pushViewController:dashboard animated:YES];
+            }
+        } failure:^(NSError *error) {
+            NSLog(@"api/PostUserSubscription error = %@", error);
+        }];
+    }
 }
 
 @end

@@ -17,4 +17,9 @@
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
 @property (nonatomic) BOOL is_NotFromDraw;
+/*!
+ 1   :   ThroughRegistration
+ 2   :   ThroughLogin
+ */
+@property NSInteger isFrom;
 @end

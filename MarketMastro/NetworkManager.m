@@ -73,13 +73,13 @@
          
          NSString* strError = [dataDic objectForKey:@"Error"];
          
-         //         [[[UIAlertView alloc] initWithTitle:@"Error"
-         //                                     message:strError
-         //                                    delegate:nil
-         //                           cancelButtonTitle:nil
-         //                           otherButtonTitles:@"Ok", nil] show];
+//                  [[[UIAlertView alloc] initWithTitle:@"Error"
+//                                              message:strError
+//                                             delegate:nil
+//                                    cancelButtonTitle:nil
+//                                    otherButtonTitles:@"Ok", nil] show];
          NSError *tLError;
-         if ([[dataDic objectForKey:@"ErrorCode"] isEqualToString:@"602"]) {
+         if ([[dataDic objectForKey:@"ErrorCode"] isEqual:@"602"]) {
              tLError = [[NSError alloc] initWithDomain:error.domain code:[[dataDic objectForKey:@"ErrorCode"] integerValue] userInfo:@{NSLocalizedDescriptionKey: strError}];
              NSLog(@"tLError : %@", tLError);
              failure(tLError);

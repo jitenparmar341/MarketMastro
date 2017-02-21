@@ -13,6 +13,7 @@
 #import "ViewController.h"
 #import "FLAnimatedImageView.h"
 #import "FLAnimatedImage.h"
+#import "UpgradeViewController.h"
 
 @interface VerifyAndChangeMobileViewController ()
 {
@@ -333,12 +334,10 @@ int secondsLeft;
                  if ([[response valueForKey:@"Success"]isEqualToString:@"Successfully updated"])
                  {
                      //AlreadyLogin
-                     
                      [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AlreadyLogin"];
                      
-                     //FirstFourVC
-                     FirstFourVC *Dashboard = [self.storyboard instantiateViewControllerWithIdentifier:@"FirstFourVC"];
-                     [self.navigationController pushViewController:Dashboard animated:YES];
+                     //Harish
+                     [self getCurrentActivePackage];
                  }
              }
                                               failure:^(NSError *error)
@@ -462,4 +461,102 @@ int secondsLeft;
     [_txtOtp resignFirstResponder];
 }
 
+#pragma mark - ActivePackageList
+-(void)getCurrentActivePackage
+{
+    NSString *strUserID = [[NSUserDefaults standardUserDefaults] valueForKey:@"UserID"];
+    strUserID = [NSString stringWithFormat:@"%@", strUserID];
+    
+    BOOL isNetworkAvailable = [[MethodsManager sharedManager] isInternetAvailable];
+    
+    if (isNetworkAvailable) {
+        if (strUserID !=nil) {
+            [[MethodsManager sharedManager] loadingView:self.view];
+            
+            [[webManager sharedObject] loginRequest:nil withMethod:[NSString stringWithFormat:@"api/getActiveUserSubscription/%@", strUserID]
+                                    successResponce:^(id response) {
+                                        [[MethodsManager sharedManager] StopAnimating];
+                                        NSLog(@"get current active package response = %@",response);
+                                        
+                                        NSDictionary *activePackDetails = response;
+                                        if (activePackDetails.count>0) {
+                                            [[NSUserDefaults standardUserDefaults] setObject:activePackDetails forKey:@"DicwithCurreentActivePackDetails"];
+                                            [self successInActivePackage:activePackDetails];
+                                        }
+                                        else {
+                                            [self navigateToPackagesFrom:1];
+                                        }
+                                    }
+                                            failure:^(NSError *error) {
+                                                NSLog(@"get current active package error = %@",error);
+                                                [self navigateToPackagesFrom:1];
+                                            }];
+        }
+        else {
+            [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil]show];
+        }
+    }
+}
+- (void)successInActivePackage:(NSDictionary*)packageDetail {
+    //FirstFourVC
+    
+    //    NSDateFormatter *dateFormate = [[NSDateFormatter alloc] init];
+    //    [dateFormate setDateFormat:@"yyyy-MM-DD HH:mm"];
+    //    NSDate *exprieDate = [dateFormate dateFromString:[packageDetail objectForKey:@"ExpiredOn"]];
+    //    [exprieDate compare:[NSDate date]]==NSOrderedDescending
+    if ([(NSNumber*)[packageDetail objectForKey:@"isExpired"] integerValue]==1) {
+        [self navigateToPackagesFrom:2];
+        return;
+    }
+    else if (![[packageDetail objectForKey:@"PurchasedStatus"] isEqual:@"Completed"]) {
+        //        return;
+    }
+    
+    FirstFourVC *Dashboard = [self.storyboard instantiateViewControllerWithIdentifier:@"FirstFourVC"];
+    [self.navigationController pushViewController:Dashboard animated:YES];
+}
+- (void)navigateToPackagesFrom:(NSInteger)isFrom {
+    //Temp
+    [self subscribeToPackage:@{@"PackageID":@"9"}];
+
+    //Temp
+//    UpgradeViewController *subscriptionPage = [self.storyboard instantiateViewControllerWithIdentifier:@"UpgradeViewController"];
+//    subscriptionPage.isFrom = isFrom;
+//    [self.navigationController pushViewController:subscriptionPage animated:YES];
+}
+
+#pragma mark - PostUserSubscription
+- (void)subscribeToPackage:(NSDictionary*)packageDic {
+    BOOL isNetworkAvailable = [[MethodsManager sharedManager]isInternetAvailable];
+    if (isNetworkAvailable) {
+        NSString *strUserID = [[NSUserDefaults standardUserDefaults] valueForKey:@"UserID"];
+        strUserID = [NSString stringWithFormat:@"%@",strUserID];
+        
+        NSMutableDictionary *requestDic = [[NSMutableDictionary alloc] init];
+        [requestDic setObject:strUserID forKey:@"UserID"];
+        [requestDic setObject:[packageDic objectForKey:@"PackageID"] forKey:@"PackageID"];
+        [requestDic setObject:@"" forKey:@"PCUsed"];
+        [requestDic setObject:@"0" forKey:@"PCValue"];
+        [requestDic setObject:@"0" forKey:@"CPUsed"];
+        [requestDic setObject:@"0" forKey:@"CreditValue"];
+        [requestDic setObject:@"Offline" forKey:@"PaymentMode"];
+        [requestDic setObject:@"0" forKey:@"PaymentMade"];
+        [requestDic setObject:@"Completed" forKey:@"PurchasedStatus"];
+        [requestDic setObject:@"0" forKey:@"TransactionID"];
+        
+        [[webManager sharedObject] CallPostMethod:requestDic withMethod:@"api/PostUserSubscription" successResponce:^(id response) {
+            NSDictionary *responseDic;
+            if ([response isKindOfClass:[NSDictionary class]]) {
+                responseDic = (NSDictionary*)response;
+                
+//                [[[UIAlertView alloc] initWithTitle:@"Success" message:@"Thank You" delegate:self cancelButtonTitle:nil otherButtonTitles:@"ok", nil] show];
+                //FirstFourVC
+                FirstFourVC *dashboard = [self.storyboard instantiateViewControllerWithIdentifier:@"FirstFourVC"];
+                [self.navigationController pushViewController:dashboard animated:YES];
+            }
+        } failure:^(NSError *error) {
+            NSLog(@"api/PostUserSubscription error = %@", error);
+        }];
+    }
+}
 @end
