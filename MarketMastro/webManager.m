@@ -25,15 +25,15 @@
 -(void)loginRequest:(NSDictionary *)parameters withMethod:(NSString *)method successResponce:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
     [NetworkManager sendWebRequest:parameters withMethod:method successResponce:^(id response)
-    {
-        [DRIVER_DETAILS initWithData:response];
+     {
+         [DRIVER_DETAILS initWithData:response];
          success(response);
-        
-    }
-    failure:^(NSError *error)
-    {
-        failure(error);
-    }];
+         
+     }
+                           failure:^(NSError *error)
+     {
+         failure(error);
+     }];
 }
 
 
@@ -47,7 +47,7 @@
          success(response);
          
      }
-   failure:^(NSError *error)
+                       failure:^(NSError *error)
      {
          failure(error);
      }];
@@ -57,14 +57,14 @@
 -(void)CallPutMethodwithParameters:(NSDictionary*)parameters withMethod:(NSString*)method successResponce:(void(^)(id response))success failure:(void (^)(NSError *error))failure
 {
     [NetworkManager PutMethodWithParameters:parameters withMethod:method successResponce:^(id response)
-    {
-        [DRIVER_DETAILS initWithData:response];
-        success(response);
-    }
-    failure:^(NSError *error)
-    {
-        failure(error);
-    }];
+     {
+         [DRIVER_DETAILS initWithData:response];
+         success(response);
+     }
+                                    failure:^(NSError *error)
+     {
+         failure(error);
+     }];
 }
 
 -(void)OrderRequest:(NSDictionary *)parameters withMethod:(NSString *)method successResponse:(void (^)(id response))success failure:(void (^)(NSError *error))failure
@@ -80,14 +80,14 @@
 {
     [NetworkManager signUp:Parameters withMethod:methodName successResponce:^(id response)
      {
-        NSLog(@"%@",response);
+         NSLog(@"%@",response);
          success(response);
-    }
-    failure:^(NSError *error)
-    {
-        failure(error);
-        NSLog(@"%@",error.localizedDescription);
-    }];
+     }
+                   failure:^(NSError *error)
+     {
+         failure(error);
+         NSLog(@"%@",error.localizedDescription);
+     }];
 }
 
 
