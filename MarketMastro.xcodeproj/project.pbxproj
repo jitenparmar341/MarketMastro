@@ -135,6 +135,7 @@
 		688359F31E4CEA64006A31FB /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 688359F21E4CEA64006A31FB /* NewsViewController.m */; };
 		68B151221E4A6339006621E4 /* UIImage+HPImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B151211E4A6339006621E4 /* UIImage+HPImage.m */; };
 		963DDFDC1E5CC3840051350D /* Main-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 963DDFDB1E5CC3840051350D /* Main-iPad.storyboard */; };
+		963DDFDE1E5CC3F10051350D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 963DDFDD1E5CC3F10051350D /* Main.storyboard */; };
 		969C7AB51E53877B009B0123 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 969C7A8F1E53877B009B0123 /* MKAnnotationView+WebCache.m */; };
 		969C7AB61E53877B009B0123 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 969C7A911E53877B009B0123 /* NSData+ImageContentType.m */; };
 		969C7AB71E53877B009B0123 /* NSImage+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 969C7A931E53877B009B0123 /* NSImage+WebCache.m */; };
@@ -292,7 +293,6 @@
 		BBE042C51E4CBDDC000907B4 /* act_tick_ico.png in Resources */ = {isa = PBXBuildFile; fileRef = BBE042C41E4CBDDC000907B4 /* act_tick_ico.png */; };
 		BBEBD4951E3A239000E04F8A /* UpdateUserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBEBD4941E3A239000E04F8A /* UpdateUserProfileViewController.m */; };
 		BBED81C41E459D1300CD980E /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBED81C31E459D1300CD980E /* GoogleMobileAds.framework */; };
-		BBED81C61E45A73200CD980E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBED81C51E45A73200CD980E /* Main.storyboard */; };
 		BBF833171E3B1AC700CF91E8 /* aboutusactive.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF8330C1E3B1AC700CF91E8 /* aboutusactive.png */; };
 		BBF833181E3B1AC700CF91E8 /* accountactive.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF8330D1E3B1AC700CF91E8 /* accountactive.png */; };
 		BBF833191E3B1AC700CF91E8 /* alertactive.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF8330E1E3B1AC700CF91E8 /* alertactive.png */; };
@@ -410,6 +410,7 @@
 		68B151201E4A6339006621E4 /* UIImage+HPImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+HPImage.h"; sourceTree = "<group>"; };
 		68B151211E4A6339006621E4 /* UIImage+HPImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+HPImage.m"; sourceTree = "<group>"; };
 		963DDFDB1E5CC3840051350D /* Main-iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Main-iPad.storyboard"; sourceTree = "<group>"; };
+		963DDFDD1E5CC3F10051350D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		969C7A8E1E53877B009B0123 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		969C7A8F1E53877B009B0123 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		969C7A901E53877B009B0123 /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
@@ -676,7 +677,6 @@
 		BBE042C41E4CBDDC000907B4 /* act_tick_ico.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = act_tick_ico.png; sourceTree = "<group>"; };
 		BBEBD4941E3A239000E04F8A /* UpdateUserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateUserProfileViewController.m; sourceTree = "<group>"; };
 		BBED81C31E459D1300CD980E /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
-		BBED81C51E45A73200CD980E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		BBF8330C1E3B1AC700CF91E8 /* aboutusactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aboutusactive.png; sourceTree = "<group>"; };
 		BBF8330D1E3B1AC700CF91E8 /* accountactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = accountactive.png; sourceTree = "<group>"; };
 		BBF8330E1E3B1AC700CF91E8 /* alertactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alertactive.png; sourceTree = "<group>"; };
@@ -868,7 +868,7 @@
 		04D5F8381DD4BDE100CE1091 /* MarketMastro */ = {
 			isa = PBXGroup;
 			children = (
-				BBED81C51E45A73200CD980E /* Main.storyboard */,
+				963DDFDD1E5CC3F10051350D /* Main.storyboard */,
 				963DDFDB1E5CC3840051350D /* Main-iPad.storyboard */,
 				969C7A8D1E538755009B0123 /* SDWebimage */,
 				BB33971B1E433191007A3EEE /* mjpopup */,
@@ -1550,6 +1550,7 @@
 				043817361DD7664700FCEB7D /* reg_mobile_icon.png in Resources */,
 				AB6C1FB81DEA89F20093B03E /* castro-obit-759.jpg in Resources */,
 				BBF833171E3B1AC700CF91E8 /* aboutusactive.png in Resources */,
+				963DDFDE1E5CC3F10051350D /* Main.storyboard in Resources */,
 				043817761DD9F84600FCEB7D /* otp_time_icon.png in Resources */,
 				BB901ED31E4208A500CE6768 /* dro_contact_ico.png in Resources */,
 				BB4468C21E30BED8002B288A /* Lato-Bold.ttf in Resources */,
@@ -1608,7 +1609,6 @@
 				043817701DD9F84600FCEB7D /* otp_lock_icon@2x.png in Resources */,
 				0438171B1DD74AFB00FCEB7D /* res_logo_icon@3xpng.png in Resources */,
 				BB3A56241E2DEADF00EACFEF /* TypeCell.xib in Resources */,
-				BBED81C61E45A73200CD980E /* Main.storyboard in Resources */,
 				0438175A1DD80BD400FCEB7D /* checked_checkbox.png in Resources */,
 				BBF8331C1E3B1AC700CF91E8 /* helpactive.png in Resources */,
 				684D9F491E4888BE00DA3A0F /* dro_emc_active_ico.png in Resources */,

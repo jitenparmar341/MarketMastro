@@ -32,6 +32,7 @@
 {
     [super viewDidLoad];
     [self setUI];
+    [self setValues];
     
     self.title = @"Account";
     [self.navigationController.navigationBar setTitleTextAttributes:
@@ -53,11 +54,6 @@
     }
     [self MethodCallPackageListApi];
     [_btnEdit.imageView setContentMode:UIViewContentModeScaleAspectFit];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [self setValues];
 }
 
 -(void)setValues
