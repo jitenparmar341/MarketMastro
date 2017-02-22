@@ -231,7 +231,7 @@
     }
     else
     {
-        mCell.lblDate.text = @"---";
+        mCell.lblDate.text = @"--";
     }
     
     mCell.lblLastPrice.text = @"21217.89";
