@@ -46,6 +46,10 @@ NSString *selctedOptionMarket;
     
     CreatePortflioVC *createAlert = [self.storyboard instantiateViewControllerWithIdentifier:@"CreatePortflioVC"];
     
+    createAlert.isFromMarket = false;
+    createAlert.isFromAlert = true;
+    createAlert.isFromPortfolio = false;
+    
     createAlert.isCreateAlert = YES;
     
     [self.navigationController pushViewController:createAlert animated:YES];

@@ -108,7 +108,7 @@
 {
     UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
     numberToolbar.barStyle = UIBarStyleBlackTranslucent;
-    numberToolbar.items = @[[[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelNumberPad)],
+    numberToolbar.items = @[[[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancelNumberPad)],
                             [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
                             [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneWithNumberPad)]];
     [numberToolbar sizeToFit];
@@ -198,8 +198,8 @@
 {
     self.view.backgroundColor = [UIColor colorWithRed:22/255.0 green:25/255.0 blue:27/255.0 alpha:1.0];
     
-    txtName.leftView =[self paddingView:txtName withImageNamed:@"reg_user_icon.png"];
-    txtLocation.leftView =[self paddingView:txtLocation withImageNamed:@"reg_location_icon.png"];
+    txtName.leftView = [self paddingView:txtName withImageNamed:@"reg_user_icon.png"];
+    txtLocation.leftView = [self paddingView:txtLocation withImageNamed:@"reg_location_icon.png"];
     
     txtEmail.leftView =[self paddingView:txtEmail withImageNamed:@"dro_contact_ico.png"];//email.png
     
@@ -368,14 +368,15 @@
              [[[UIAlertView alloc] initWithTitle:@"Success" message:@"Profile Updated successfully" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil]show];
              
              NSString *strUserId;
+             
              if ([response valueForKey:@"UserID"])
              {
                  strUserId = [NSString stringWithFormat:@"%@",[response valueForKey:@"UserID"]];
              }
+             
              [[NSUserDefaults standardUserDefaults] setObject:strUserId forKey:@"UserID"];
              
              [self saveUserInformation:response];
-             //name,city,email
          }
                                                       failure:^(NSError *error)
          {

@@ -134,6 +134,7 @@
 		684D9F4C1E4888BE00DA3A0F /* dro_emc_ico.png in Resources */ = {isa = PBXBuildFile; fileRef = 684D9F461E4888BE00DA3A0F /* dro_emc_ico.png */; };
 		688359F31E4CEA64006A31FB /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 688359F21E4CEA64006A31FB /* NewsViewController.m */; };
 		68B151221E4A6339006621E4 /* UIImage+HPImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B151211E4A6339006621E4 /* UIImage+HPImage.m */; };
+		960FF5351E5DFE3D006355D6 /* cltMarketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 960FF5341E5DFE3D006355D6 /* cltMarketCell.m */; };
 		963DDFDC1E5CC3840051350D /* Main-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 963DDFDB1E5CC3840051350D /* Main-iPad.storyboard */; };
 		963DDFDE1E5CC3F10051350D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 963DDFDD1E5CC3F10051350D /* Main.storyboard */; };
 		969C7AB51E53877B009B0123 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 969C7A8F1E53877B009B0123 /* MKAnnotationView+WebCache.m */; };
@@ -409,6 +410,8 @@
 		688359F21E4CEA64006A31FB /* NewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsViewController.m; sourceTree = "<group>"; };
 		68B151201E4A6339006621E4 /* UIImage+HPImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+HPImage.h"; sourceTree = "<group>"; };
 		68B151211E4A6339006621E4 /* UIImage+HPImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+HPImage.m"; sourceTree = "<group>"; };
+		960FF5331E5DFE3D006355D6 /* cltMarketCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cltMarketCell.h; sourceTree = "<group>"; };
+		960FF5341E5DFE3D006355D6 /* cltMarketCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cltMarketCell.m; sourceTree = "<group>"; };
 		963DDFDB1E5CC3840051350D /* Main-iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Main-iPad.storyboard"; sourceTree = "<group>"; };
 		963DDFDD1E5CC3F10051350D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		969C7A8E1E53877B009B0123 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
@@ -1143,6 +1146,8 @@
 			children = (
 				BB17F4EB1E3B91C9005B3865 /* UIColor+HPColor.h */,
 				BB17F4EC1E3B91C9005B3865 /* UIColor+HPColor.m */,
+				960FF5331E5DFE3D006355D6 /* cltMarketCell.h */,
+				960FF5341E5DFE3D006355D6 /* cltMarketCell.m */,
 				BB17F4E51E3B90C7005B3865 /* MarketViewController.h */,
 				BB17F4E61E3B90C7005B3865 /* MarketViewController.m */,
 				BB17F4E81E3B90DC005B3865 /* MarketTableViewCell.h */,
@@ -1795,6 +1800,7 @@
 				BBA9A0081E378F870086ADA3 /* City.m in Sources */,
 				BB4B755D1E334BA600EE44A6 /* SQLiteDatabase.m in Sources */,
 				969C7AC71E53877B009B0123 /* UIView+WebCacheOperation.m in Sources */,
+				960FF5351E5DFE3D006355D6 /* cltMarketCell.m in Sources */,
 				BB1847231E430F5200DCDE11 /* CurrentAlertListCell.m in Sources */,
 				BBA99FF51E374C710086ADA3 /* UIView+Toast.m in Sources */,
 				BB91ABE81E24CF51005C4DF1 /* DropDownCell.m in Sources */,

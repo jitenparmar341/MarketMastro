@@ -9,9 +9,10 @@
 #import "MarketViewController.h"
 
 #import "MarketTableViewCell.h"
+#import "cltMarketCell.h"
 
-@interface MarketViewController ()<UITableViewDelegate, UITableViewDataSource> {
-    
+@interface MarketViewController ()<UITableViewDelegate, UITableViewDataSource>
+{    
     __weak IBOutlet UITableView *tableViewMarket;
     
     NSMutableArray *arrMarketData, *arrCategoryLabels, *arrCategoryIds;
@@ -23,7 +24,8 @@
 
 @implementation MarketViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = YES;
@@ -31,14 +33,29 @@
     
     tableViewMarket.backgroundColor = [UIColor colorwithHexString:@"#16191B"];
     self.view.backgroundColor = [UIColor colorwithHexString:@"#16191B"];
-    //    tableViewMarket.backgroundColor = [UIColor clearColor];
+    
     rateDownColor = [UIColor colorwithHexString:@"#15558C"];
     rateUpColor = [UIColor colorwithHexString:@"#BA1E1A"];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
+    
+    tableViewMarket.hidden = true;
+    self.cltView.hidden = true;
+    
+    if ([AppDelegate sharedAppDelegate].isListClicked == true)
+    {
+        tableViewMarket.hidden = false;
+    }
+    else
+    {
+        self.cltView.hidden = false;
+    }
+    
     NSLog(@"Appear");
+    
     arrMarketData = [[NSMutableArray alloc] init];
     
     [self connectToDB];
@@ -46,23 +63,19 @@
     if([self.title isEqualToString:@"ProfolioList"]){
         NSString *query1 =[NSString stringWithFormat:@"SELECT * from UserPortfolio"];
         
-        [[SQLiteDatabase sharedInstance] executeQuery:query1 withParams:nil success:^(SQLiteResult *result) {
+        [[SQLiteDatabase sharedInstance] executeQuery:query1 withParams:nil success:^(SQLiteResult *result)
+        {
             arrMarketData = result.rows;
-            /* for (int i =0; i<result.rows.count; i++)
-             {
-             NSString *id= [NSString stringWithFormat:@"%@",[result.rows[i] stringForColumnName:@"CommodityID"]];
-             NSString *query1 =[NSString stringWithFormat:@"SELECT * from Commodity where Status=1 AND CommodityID=%@",id];
-             [[SQLiteDatabase sharedInstance] executeQuery:query1 withParams:nil success:^(SQLiteResult *result) {
-             if(result.rows.count>0){
-             [arrMarketData addObject:result.rows[0]];
-             }
-             
-             } failure:^(NSString *errorMessage) {
-             NSLog(@"Could not fetch rows , %@",errorMessage);
-             }];
-             }*/
             
-            [tableViewMarket reloadData];
+            if ([AppDelegate sharedAppDelegate].isListClicked == true)
+            {
+                [tableViewMarket reloadData];
+            }
+            else
+            {
+                [self.cltView reloadData];
+            }
+
         } failure:^(NSString *errorMessage) {
             NSLog(@"Could not fetch rows , %@",errorMessage);
         }];
@@ -83,7 +96,15 @@
                 
                 [[SQLiteDatabase sharedInstance] executeQuery:query1 withParams:nil success:^(SQLiteResult *result) {
                     arrMarketData = result.rows;
-                    [tableViewMarket reloadData];
+                    if ([AppDelegate sharedAppDelegate].isListClicked == true)
+                    {
+                        [tableViewMarket reloadData];
+                    }
+                    else
+                    {
+                        [self.cltView reloadData];
+                    }
+
                 } failure:^(NSString *errorMessage) {
                     NSLog(@"Could not fetch rows , %@",errorMessage);
                 }];
@@ -126,7 +147,116 @@
     [tableViewMarket reloadData];
 }
 
+#pragma mark - UICollectionView Delegate and DataSource
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return arrMarketData.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *cellIdentifier = @"market";
+    
+    cltMarketCell *cell = [self.cltView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    
+    if([self.title isEqualToString:@"Bullion"]) {
+        cell = [self shareCellDesignCollectionView:collectionView indexPath:indexPath];
+    }
+    else if ([self.title isEqualToString:@"Expected MCX"]) {
+        cell = [self shareCellDesignCollectionView:collectionView indexPath:indexPath];
+    }
+    else if ([self.title isEqualToString:@"Costing & Difference"]) {
+        cell = [self shareCellDesignCollectionView:collectionView indexPath:indexPath];
+    }
+    else if ([self.title isEqualToString:@"Base metals"]) {
+        cell = [self shareCellDesignCollectionView:collectionView indexPath:indexPath];
+    }
+    else if ([self.title isEqualToString:@"Energy"]) {
+        cell = [self shareCellDesignCollectionView:collectionView indexPath:indexPath];
+    }
+    else if ([self.title isEqualToString:@"Local Spot"]) {
+        cell = [self shareCellDesignCollectionView:collectionView indexPath:indexPath];
+    }
+    else if ([self.title isEqualToString:@"International Markets"]) {
+        cell = [self shareCellDesignCollectionView:collectionView indexPath:indexPath];
+    }
+    else if ([self.title isEqualToString:@"ProfolioEditable"]) {
+        cell = [self shareCellDesignCollectionView:collectionView indexPath:indexPath];
+    }
+    else if ([self.title isEqualToString:@"Expected MCX"]) {
+        cell = [self shareCellDesignCollectionView:collectionView indexPath:indexPath];
+    }
+    else if ([self.title isEqualToString:@"Costing & Difference"]) {
+        cell = [self shareCellDesignCollectionView:collectionView indexPath:indexPath];
+    }else if([self.title isEqualToString:@"ProfolioList"]){
+        cell = [self shareCellDesignCollectionView:collectionView indexPath:indexPath];
+    }
+    //HP Temp Condition(Remove After Every Thing Done)
+    else
+    {
+        cell = [self shareCellDesignCollectionView:collectionView indexPath:indexPath];
+    }
+
+    return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(self.view.frame.size.width/3.5, 90);
+}
+
+- (cltMarketCell*)shareCellDesignCollectionView:(UICollectionView*)collectionView indexPath:(NSIndexPath*)indexPath
+{
+    cltMarketCell *mCell;
+    
+    mCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"market" forIndexPath:indexPath];
+    
+    if (indexPath.row == 1)
+    {
+        [self colorUpForView:mCell.lblLastPrice];
+    }
+    
+    SQLiteRow *object = arrMarketData[indexPath.row];
+    
+    NSString *strName = [object stringForColumnName:@"Name"];
+    
+    mCell.lblName.text = [[strName componentsSeparatedByString:@" "] objectAtIndex:0];
+    
+    NSArray *arrData = [strName componentsSeparatedByString:@" "];
+    
+    if ([arrData count] > 3)
+    {
+        mCell.lblDate.text = [NSString stringWithFormat:@"%@ %@ %@",[[strName componentsSeparatedByString:@" "] objectAtIndex:1],[[strName componentsSeparatedByString:@" "] objectAtIndex:2],[[strName componentsSeparatedByString:@" "] objectAtIndex:3]];
+    }
+    else
+    {
+        mCell.lblDate.text = @"---";
+    }
+    
+    mCell.lblLastPrice.text = @"21217.89";
+    
+    if (indexPath.row%2==0)
+    {
+        mCell.lblLastLowHigh.text = @"-361.01(-1.25%)";
+        mCell.lblLastLowHigh.textColor = [UIColor colorwithHexString:@"#F73F2B"];
+        [self rateDownSetColor:mCell.viewBG];
+        [self rateDownCurve:mCell.viewBG];
+    }
+    else
+    {
+        mCell.lblLastLowHigh.textColor = [UIColor colorWithRed:41/255.0f green:84/255.0f blue:134/255.0f alpha:1.0f];
+        
+        mCell.lblLastLowHigh.text = @"365.01(1.25%)";
+        [self rateUpSetColor:mCell.viewBG];
+        [self rateUpCurve:mCell.viewBG];
+    }
+
+    return mCell;
+}
+
 #pragma mark - UITableViewDataSource
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return arrMarketData.count;
 }
@@ -169,7 +299,8 @@
         cell = [self shareCellEditableDesignTableView:tableView indexPath:indexPath];
     }
     //HP Temp Condition(Remove After Every Thing Done)
-    else {
+    else
+    {
         cell = [self shareCellDesignTableView:tableView indexPath:indexPath];
     }
     return cell;
@@ -182,11 +313,8 @@
     NSLog(@"row selected");
     
     MarketDetailsVC *detail = [self.storyboard instantiateViewControllerWithIdentifier:@"MarketDetailsVC"];
-    NSLog(@"%@",_object);
     [_object.navigationController pushViewController:detail animated:YES];
 }
-
-
 
 /*
  - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -204,7 +332,8 @@
     mCell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     //Temp
-    if (indexPath.row == 1) {
+    if (indexPath.row == 1)
+    {
         [self colorUpForView:mCell.lblLiveRate];
     }
     
@@ -219,20 +348,18 @@
     
     SQLiteRow *object = arrMarketData[indexPath.row];
     mCell.lblName_Date.text = [NSString stringWithFormat:@"%@",[object stringForColumnName:@"Name"]];
-    NSLog(@"SCRIPCODE - %@",[object stringForColumnName:@"ScriptCode"]);
-    NSLog(@"EXCH - %@",[object stringForColumnName:@"Exch"]);
-    NSLog(@"ExchType - %@",[object stringForColumnName:@"ExchType"]);
     
-    
-    
-    if (indexPath.row%2==0) {
+    if (indexPath.row%2==0)
+    {
         [self rateDownSetColor:mCell.viewBG];
         [self rateDownCurve:mCell.viewBG];
     }
-    else {
+    else
+    {
         [self rateUpSetColor:mCell.viewBG];
         [self rateUpCurve:mCell.viewBG];
     }
+    
     [mCell.btnOTime_Delete.titleLabel setTextAlignment:NSTextAlignmentRight];
     return mCell;
 }
@@ -315,13 +442,10 @@
     return tFAttString;
 }
 
-- (void)btnDelete:(UIButton*)sender {
-    
-    
+- (void)btnDelete:(UIButton*)sender
+{
     SQLiteRow *object = arrMarketData[sender.tag];
     NSString *str = [NSString stringWithFormat:@"%@",[object stringForColumnName:@"CommodityID"]];
-    
-    
     
     NSString *query1 =[NSString stringWithFormat:@"delete from UserPortfolio where CommodityID=%@",str];
     
@@ -333,9 +457,8 @@
         NSLog(@"Could not fetch rows , %@",errorMessage);
     }];
     
-    
-    
     [arrMarketData removeObjectAtIndex:sender.tag];
+    
     [self reloadTableData];
 }
 
@@ -375,7 +498,7 @@
     [newBezier closePath];
     
     shapeLayer.path = newBezier.CGPath;
-    shapeLayer.fillColor = [UIColor blueColor].CGColor;
+    shapeLayer.fillColor = [UIColor colorWithRed:41/255.0f green:84/255.0f blue:134/255.0f alpha:1.0f].CGColor;
     shapeLayer.fillRule = kCAFillRuleNonZero;
     shapeLayer.lineCap = kCALineCapButt;
     shapeLayer.lineJoin = kCALineJoinMiter;
@@ -408,7 +531,7 @@
     [newBezier closePath];
     
     shapeLayer.path = newBezier.CGPath;
-    shapeLayer.fillColor = [UIColor redColor].CGColor;
+    shapeLayer.fillColor = [UIColor colorwithHexString:@"#F73F2B"].CGColor;
     shapeLayer.fillRule = kCAFillRuleNonZero;
     shapeLayer.lineCap = kCALineCapButt;
     shapeLayer.lineJoin = kCALineJoinMiter;

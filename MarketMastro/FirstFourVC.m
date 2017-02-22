@@ -65,6 +65,9 @@
 {
     [super viewDidLoad];
     
+    [AppDelegate sharedAppDelegate].isListClicked = true;
+    btnSelectedTab = 10;
+    
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"commodity_types"];
     
     [self checkNetwork];
@@ -73,7 +76,6 @@
     _btnNews.selected = NO;
     _btnCalender.selected = NO;
     _btnPortfolio.selected = NO;
-    
     
     /*[self setUpPageUI];
      
@@ -169,6 +171,7 @@
     menuItems = @[@"market",@"market1",@"market2",@"market3",@"market4",@"market5",@"market6"];
     
     arrOfCollctionList = @[@"Agri",@"Costing & Difference",@"Expected MCX",@"Local Spot",@"International",@"Bullion",@"Base Metals",@"Energy"];
+    
     [_collectionView reloadData];
     
     // [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:13/255.0 green:16/255.0 blue:20/255.0 alpha:1.0]];
@@ -224,7 +227,7 @@
     
     //alert button in navigation bar
     
-    CGRect frameimg = CGRectMake(0, 0, 40, 25);
+    CGRect frameimg = CGRectMake(0, 0, 35, 25);
     UIButton *Alert = [[UIButton alloc] initWithFrame:frameimg];
     [Alert setImage:[UIImage imageNamed:@"act_alert_ico"] forState:UIControlStateNormal];
     [Alert setImage:[UIImage imageNamed:@"alert_ico"] forState:UIControlStateHighlighted];
@@ -233,14 +236,14 @@
     
     //search button in navigation bar
     
-    CGRect frameimg2 = CGRectMake(0, 0, 35, 25);
+    CGRect frameimg2 = CGRectMake(0, 0, 20, 25);
     UIButton *Search = [[UIButton alloc] initWithFrame:frameimg2];
     [Search setImage:[UIImage imageNamed:@"search_ico"] forState:UIControlStateNormal];
     [Search setImage:[UIImage imageNamed:@"search_ico"] forState:UIControlStateHighlighted];
     [Search.imageView setContentMode:UIViewContentModeScaleAspectFit];
     [Search addTarget:self action:@selector(BtnSearchTapped) forControlEvents:UIControlEventTouchUpInside];
     
-    CGRect frameimg3 = CGRectMake(0, 0, 35, 25);
+    CGRect frameimg3 = CGRectMake(0, 0, 20, 25);
     UIButton *list = [[UIButton alloc] initWithFrame:frameimg3];
     [list setImage:[UIImage imageNamed:@"act_boxview_ico"] forState:UIControlStateNormal];
     [list setImage:[UIImage imageNamed:@"act_listview_ico"] forState:UIControlStateSelected];
@@ -257,21 +260,28 @@
     
     if (indexOfDrawer == 2)
     {
-        CGRect frameimg3 = CGRectMake(0, 0, 35, 25);
+        CGRect frameimg = CGRectMake(0, 0, 25, 25);
+        UIButton *Alert = [[UIButton alloc] initWithFrame:frameimg];
+        [Alert setImage:[UIImage imageNamed:@"act_alert_ico"] forState:UIControlStateNormal];
+        [Alert setImage:[UIImage imageNamed:@"alert_ico"] forState:UIControlStateHighlighted];
+        [Alert.imageView setContentMode:UIViewContentModeScaleAspectFit];
+        [Alert addTarget:self action:@selector(BtnAlertTapped) forControlEvents:UIControlEventTouchUpInside];
+        
+        CGRect frameimg3 = CGRectMake(0, 0, 20, 25);
         UIButton *plusButton = [[UIButton alloc] initWithFrame:frameimg3];
         [plusButton setImage:[UIImage imageNamed:@"act_addcommodities_ico"] forState:UIControlStateNormal];
         [plusButton setImage:[UIImage imageNamed:@"act_addcommodities_ico"] forState:UIControlStateHighlighted];
         [plusButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
-        [plusButton addTarget:self action:@selector(BtnSearchTapped) forControlEvents:UIControlEventTouchUpInside];
+        [plusButton addTarget:self action:@selector(addCommodity) forControlEvents:UIControlEventTouchUpInside];
         
-        CGRect frameimg4 = CGRectMake(0, 0, 35, 25);
+        CGRect frameimg4 = CGRectMake(0, 0, 20, 25);
         UIButton *editButton = [[UIButton alloc] initWithFrame:frameimg4];
         [editButton setImage:[UIImage imageNamed:@"act_edit_ico"] forState:UIControlStateNormal];
         [editButton setImage:[UIImage imageNamed:@"act_edit_ico"] forState:UIControlStateHighlighted];
         [editButton.imageView setContentMode:UIViewContentModeScaleAspectFit];
         [editButton addTarget:self action:@selector(editClicked) forControlEvents:UIControlEventTouchUpInside];
         
-        CGRect frameimg5 = CGRectMake(0, 0, 35, 25);
+        CGRect frameimg5 = CGRectMake(0, 0, 20, 25);
         UIButton *list = [[UIButton alloc] initWithFrame:frameimg5];
         [list setImage:[UIImage imageNamed:@"act_boxview_ico"] forState:UIControlStateNormal];
         [list setImage:[UIImage imageNamed:@"act_listview_ico"] forState:UIControlStateSelected];
@@ -296,6 +306,26 @@
 - (void)filterClicked:(UIButton *)sender
 {
     sender.selected =! sender.selected;
+    
+    if (btnSelectedTab == 10 || btnSelectedTab == 12)
+    {
+        if (sender.selected == true)
+        {
+            [AppDelegate sharedAppDelegate].isListClicked = false;
+        }
+        else
+        {
+            [AppDelegate sharedAppDelegate].isListClicked = true;
+        }
+        
+        marketPageControl = nil;
+        eMCPageControl = nil;
+        
+//        UIButton *btn = [[UIButton alloc]init];
+//        btn.tag = btnSelectedTab;
+        
+        [self setSubViews];
+    }
 }
 
 - (void)editClicked
@@ -303,10 +333,28 @@
     
 }
 
+- (void)addCommodity
+{
+    CreatePortflioVC *commodityPage = [self.storyboard instantiateViewControllerWithIdentifier:@"CreatePortflioVC"];
+    commodityPage.isFromVC = @"Dashboard";
+    
+    commodityPage.isFromMarket = false;
+    commodityPage.isFromAlert = false;
+    commodityPage.isFromPortfolio = true;
+    
+    [[NSUserDefaults standardUserDefaults]setObject:@"Dashboard" forKey:@"isFromVC"];
+    
+    [self.navigationController pushViewController:commodityPage animated:YES];
+}
+
 -(void)BtnSearchTapped
 {
     CreatePortflioVC *commodityPage = [self.storyboard instantiateViewControllerWithIdentifier:@"CreatePortflioVC"];
     commodityPage.isFromVC = @"Dashboard";
+    
+    commodityPage.isFromMarket = true;
+    commodityPage.isFromAlert = false;
+    commodityPage.isFromPortfolio = false;
     
     [[NSUserDefaults standardUserDefaults]setObject:@"Dashboard" forKey:@"isFromVC"];
     
@@ -541,22 +589,12 @@
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     UITableViewCell *cell;
+    
     if(tableView == self.tableViewForNews)
     {
-        /*
-         NewsTableViewCell *nCell = [tableView dequeueReusableCellWithIdentifier:newsCellId];
-         if (!nCell) {
-         nCell = [[NewsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:newsCellId];
-         }
-         
-         //        NewsTableViewCell *nCell = (NewsTableViewCell*)[tableView dequeueReusableCellWithIdentifier: forIndexPath:indexPath];
-         nCell.lblNewsTitle = [[newsList objectAtIndex:indexPath.row] objectForColumnName:@"title"];
-         nCell.lblNewsTime = [[newsList objectAtIndex:indexPath.row] objectForColumnName:@"pubDate"];
-         cell = nCell;
-         */
-        
         NSString *CellIdentifier = [menuItems objectAtIndex:indexPath.row];
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
         cell.backgroundColor = [UIColor clearColor];
@@ -575,6 +613,7 @@
     
     return cell;
 }
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(tableView == self.tableViewForNews)
@@ -629,6 +668,7 @@
             indexOfDrawer = 0;
         }
     }
+    
     if(indexOfDrawer == 0)
     {
         self.title = @"Market Mastro";
@@ -708,9 +748,8 @@
     }
 }
 
--(IBAction)optionBtnClick:(id)sender
+- (void)setSubViews
 {
-    btnSelectedTab = (UIButton*)sender;
     UIButton *btnMarket = (UIButton*)[self.view viewWithTag:10];
     UIButton *btnPortfolio = (UIButton*)[self.view viewWithTag:11];
     UIButton *btnNews = (UIButton*)[self.view viewWithTag:12];
@@ -721,7 +760,7 @@
     btnCalendar.selected = NO;
     btnMarket.selected = NO;
     
-    if(btnSelectedTab == btnMarket)
+    if(btnSelectedTab == 10)
     {
         self.title = @"Market Mastro";
         btnMarket.selected = YES;
@@ -736,7 +775,7 @@
         [self.viewForMarket addSubview:ViewSelected3Commodity];
         [self setupMarketPageControl];
     }
-    else if(btnSelectedTab == btnPortfolio)
+    else if(btnSelectedTab == 11)
     {
         self.title = @"Market Mastro";
         btnPortfolio.selected = YES;
@@ -747,13 +786,13 @@
         [self.viewForMarket setHidden:YES];
         [self.viewForEMC setHidden:YES];
         [self.viewForPortflio setHidden:NO];
-        //        self.viewForPortflio.frame = CGRectMake(0, 135,SCREEN_WIDTH, SCREEN_HEIGHT-135);
+        
         [self.view addSubview:self.viewForPortflio];
         
         [self.viewForPortflio addSubview:ViewSelected3Commodity];
         [self setUpOnTapPortfolio];
     }
-    else if(btnSelectedTab == btnNews)
+    else if(btnSelectedTab == 12)
     {
         self.title = @"EMC";
         btnNews.selected = YES;
@@ -773,7 +812,7 @@
         //Harish
         //        [self newsPage];
     }
-    else if(btnSelectedTab == btnCalendar)
+    else if(btnSelectedTab == 13)
     {
         self.title = @"Calendar";
         btnCalendar.selected = YES;
@@ -787,10 +826,19 @@
         [self.view addSubview:self.viewForCalendar];
         [self.tableViewForCalendar reloadData];
     }
+}
+
+-(IBAction)optionBtnClick:(UIButton *)sender
+{
+    [AppDelegate sharedAppDelegate].isListClicked = true;
+    
+    btnSelectedTab = (int)sender.tag;
+    
+    [self setSubViews];
     
     [self setUpPageUI];
-    
 }
+
 - (IBAction)btnClickOnCalendarDays:(id)sender
 {
     UIButton *btn = (UIButton*)sender;
@@ -871,6 +919,7 @@
 }
 
 #pragma mark - Market
+
 -(void)setupMarketPageControl
 {
     if ([self.title isEqualToString:@"Market Mastro"] && marketPageControl) {
@@ -879,6 +928,7 @@
     else if ([self.title isEqualToString:@"EMC"] && eMCPageControl) {
         return;
     }
+    
     //marketTabs
     NSArray *pageArr = [seletedPageViewsDic objectForKey:self.title];
     /**** 1. Setup pages using model class "ADPageModel" ****/
@@ -886,14 +936,17 @@
     /*Bullion, Expected MCX, Costing & Difference, Base metals, Energy, Agri, Local Spot, International Markets
      */
     NSMutableArray *arrPageModle = [[NSMutableArray alloc] init];
+    
     for (int i=0; i<pageArr.count; i++)
     {
         ADPageModel *pageModel = [[ADPageModel alloc] init];
-        //page0.view.backgroundColor =    COLOR_LIGHT_RED;
+
         pageModel.strPageTitle = [pageArr objectAtIndex:i];
         pageModel.iPageNumber = i;
-        if (i!=0) {
-            pageModel.bShouldLazyLoad =    YES;
+        
+        if (i!=0)
+        {
+            pageModel.bShouldLazyLoad = YES;
         }
         else
         {
@@ -904,6 +957,7 @@
             marketVCObj.title = [pageArr objectAtIndex:i];
             pageModel.viewController = marketVCObj;
         }
+        
         [arrPageModle addObject:pageModel];
     }
     /**** 2. Initialize page control ****/
@@ -948,11 +1002,13 @@
     
     //    _pageControl.view.backgroundColor = [UIColor blackColor];
     
-    if (pageArr.count>3) {
+    if (pageArr.count>3)
+    {
         marketPageControl = _pageControl;
         [viewMarketTables addSubview:marketPageControl.view];
     }
-    else {
+    else
+    {
         eMCPageControl = _pageControl;
         [viewEMCTables addSubview:eMCPageControl.view];
     }

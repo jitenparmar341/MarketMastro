@@ -9,10 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "FirstFourVC.h"
 
-@interface MarketViewController : UIViewController
+@interface MarketViewController : UIViewController<UICollectionViewDelegate,UICollectionViewDataSource>
+{
+    
+}
+
+@property (nonatomic,weak)IBOutlet UICollectionView *cltView;
+
+@property(nonatomic, retain)FirstFourVC *object;
 
 - (void)reloadTableData;
-
-@property(nonatomic, strong)FirstFourVC *object;
 
 @end

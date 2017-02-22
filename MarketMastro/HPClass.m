@@ -35,7 +35,7 @@ static dispatch_queue_t SQLQueue;
     [newBezier closePath];
     
     shapeLayer.path = newBezier.CGPath;
-    shapeLayer.fillColor = [UIColor blueColor].CGColor;
+    shapeLayer.fillColor = [UIColor colorWithRed:41/255.0f green:84/255.0f blue:134/255.0f alpha:1.0f].CGColor;
     shapeLayer.fillRule = kCAFillRuleNonZero;
     shapeLayer.lineCap = kCALineCapButt;
     shapeLayer.lineJoin = kCALineJoinMiter;

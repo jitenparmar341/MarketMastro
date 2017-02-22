@@ -62,7 +62,7 @@
     //Firebase
     __weak IBOutlet GADBannerView *adBannerView;
     
-    UIButton *btnSelectedTab;
+    int btnSelectedTab;
 }
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
