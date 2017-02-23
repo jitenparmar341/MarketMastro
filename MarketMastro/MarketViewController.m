@@ -203,7 +203,16 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(self.view.frame.size.width/3.5, 90);
+    return CGSizeMake(self.view.frame.size.width/3.3, 90);
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    
+    return -2;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return 5;
 }
 
 - (cltMarketCell*)shareCellDesignCollectionView:(UICollectionView*)collectionView indexPath:(NSIndexPath*)indexPath
@@ -253,6 +262,14 @@
     }
 
     return mCell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"row selected");
+    
+    MarketDetailsVC *detail = [self.storyboard instantiateViewControllerWithIdentifier:@"MarketDetailsVC"];
+    [_object.navigationController pushViewController:detail animated:YES];
 }
 
 #pragma mark - UITableViewDataSource

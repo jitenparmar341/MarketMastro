@@ -527,19 +527,20 @@
      */
     
     NSString *dateString = [NSString stringWithFormat:@"%@",[object stringForColumnName:@"CreatedDateTime"]];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    // this is imporant - we set our input date format to match our input string
-    // if format doesn't match you'll get nil from your string, so be careful
-    [dateFormatter setDateFormat:@"dd-MM-yyyy"];//2017-02-03T13:36:08
-    NSDate *dateFromString = [[NSDate alloc] init];
-    dateFromString = [dateFormatter dateFromString:dateString];
-    cell.lbldate.text = dateString;
     
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS"];//2017-02-03T13:36:08
+    
+    NSDate *dateFromString = [dateFormatter dateFromString:dateString];
+    
+    [dateFormatter setDateFormat:@"dd MMM,yyyy hh:mm"];
+    
+    cell.lbldate.text = [dateFormatter stringFromDate:dateFromString];
     
     strCommodityName = [NSString stringWithFormat:@"%@",[object stringForColumnName:@"CommodityName"]];
     strAlertID = [NSString stringWithFormat:@"%@",[object stringForColumnName:@"AlertID"]];
-    strPauseAlerts =
-    [NSString stringWithFormat:@"%@",[object stringForColumnName:@"PauseAlerts"]];
+    strPauseAlerts = [NSString stringWithFormat:@"%@",[object stringForColumnName:@"PauseAlerts"]];
     
     return cell;
 }

@@ -61,11 +61,9 @@
 }
 
 -(void)setValues
-{
-    NSDictionary *dicOfLoggedInuser = [[NSUserDefaults standardUserDefaults] valueForKey:@"DictOfLogedInuser"];
-    
-    _lblName.text = [dicOfLoggedInuser valueForKey:@"Name"];
-    _lblemail.text = [dicOfLoggedInuser valueForKey:@"Email"];
+{    
+    _lblName.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"Name"];
+    _lblemail.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"Email"];
     
     NSDictionary *dic = [[NSUserDefaults standardUserDefaults]valueForKey:@"DicwithCurreentActivePackDetails"];
     

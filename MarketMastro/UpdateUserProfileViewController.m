@@ -19,7 +19,6 @@
     NSMutableArray *locationArray;
     NSString *strCityID;
     FLAnimatedImageView *LoaderImageview;
-    NSMutableArray *ArrayUserDetails;
     NSString *strcityName;
     NSDictionary *dicOfLoggedInuser;
 }
@@ -64,7 +63,6 @@
 -(void)SetValues
 {
     locationArray = [[NSMutableArray alloc]init];
-    ArrayUserDetails = [[NSMutableArray alloc]init];
     locationArray = [[NSUserDefaults standardUserDefaults] valueForKey:@"CityList"];
     _viewForLocation.hidden = YES;
     
@@ -73,12 +71,11 @@
     [txtLocation setReturnKeyType:UIReturnKeyDone];
     [self setDoneKeypad];
     
-    dicOfLoggedInuser = [[NSUserDefaults standardUserDefaults] valueForKey:@"DictOfLogedInuser"];
+    dicOfLoggedInuser = [NSMutableDictionary dictionary];
     
-    // NSString *strcityID =[NSString stringWithFormat:@"%@",[dicOfLoggedInuser valueForKey:@"CityID"]];
+    dictOfLogedInUser = [[[NSUserDefaults standardUserDefaults] valueForKey:@"DictOfLogedInuser"]mutableCopy];
     
     NSString *strcityID = [NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults]valueForKey:@"CityID"]];
-    
     
     //CityList
     NSArray *ArrCity = [[NSArray alloc] init];
@@ -101,7 +98,6 @@
     txtName.text = [[NSUserDefaults standardUserDefaults]valueForKey:@"Name"];
     txtEmail.text = [[NSUserDefaults standardUserDefaults]valueForKey:@"Email"];
     txtLocation.text = strcityName;
-    
 }
 
 -(void)setDoneKeypad
@@ -299,12 +295,6 @@
     [_tableviewCity reloadData];
 }
 
-
--(void)mathodUpdatedetails
-{
-    
-}
-
 -(void)CallUpdatedetailsApi
 {
     //api/UserDetails/{UserId}/{generateOTP}
@@ -323,11 +313,12 @@
      }
      */
     
-    NSDictionary *dic = [[NSUserDefaults standardUserDefaults]valueForKey:@"DictOfLogedInuser"];
-    NSString *strMobile = [dic valueForKey:@"MobileNo"];
+    NSString *strMobile = [dictOfLogedInUser valueForKey:@"MobileNo"];
+    
     NSString *strUSerID = [[NSUserDefaults standardUserDefaults] valueForKey:@"UserID"];
     
     NSDictionary *parameter;
+    
     if (strCityID != nil)
     {
         parameter = @{
@@ -349,9 +340,6 @@
                       };
     }
     
-    
-    
-    
     BOOL isNetworkAvailable = [[MethodsManager sharedManager]isInternetAvailable];
     
     if (isNetworkAvailable)
@@ -362,9 +350,7 @@
                                               successResponce:^(id response)
          {
              [[MethodsManager sharedManager]StopAnimating];
-             NSLog(@"response = %@",response);
-             ArrayUserDetails = [response mutableCopy];
-             
+
              [[[UIAlertView alloc] initWithTitle:@"Success" message:@"Profile Updated successfully" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil]show];
              
              NSString *strUserId;
@@ -372,11 +358,23 @@
              if ([response valueForKey:@"UserID"])
              {
                  strUserId = [NSString stringWithFormat:@"%@",[response valueForKey:@"UserID"]];
+                 [[NSUserDefaults standardUserDefaults] setObject:strUserId forKey:@"UserID"];
              }
              
-             [[NSUserDefaults standardUserDefaults] setObject:strUserId forKey:@"UserID"];
+             [dictOfLogedInUser setValue:txtName.text forKey:@"Name"];
+             [dictOfLogedInUser setValue:txtEmail.text forKey:@"Email"];
              
-             [self saveUserInformation:response];
+             [[NSUserDefaults standardUserDefaults]setObject:dictOfLogedInUser forKey:@"DictOfLogedInuser"];
+             
+             [[NSUserDefaults standardUserDefaults] setObject:txtName.text forKey:@"Name"];
+             [[NSUserDefaults standardUserDefaults] setObject:txtEmail.text forKey:@"Email"];
+             [[NSUserDefaults standardUserDefaults] setObject:txtLocation.text forKey:@"Location"];
+             
+             [[NSUserDefaults standardUserDefaults]setObject:strCityID forKey:@"CityID"];
+             
+             [[NSUserDefaults standardUserDefaults]synchronize];
+             
+             [[self navigationController]popViewControllerAnimated:true];
          }
                                                       failure:^(NSError *error)
          {
@@ -416,6 +414,7 @@
 {
     txtLocation.text = [[locationArray valueForKey:@"CityName"] objectAtIndex:indexPath.row];
     _viewForLocation.hidden = YES;
+    
     strCityID = [[locationArray valueForKey:@"CityID"] objectAtIndex:indexPath.row];
 }
 
@@ -450,11 +449,7 @@
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:invalidCharSet] componentsJoinedByString:@""];
         return [string isEqualToString:filtered];
     }
-    //    if (textField == _txtMobileNumber)
-    //    {
-    //        NSString *resultText = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    //        return resultText.length <= 10;
-    //    }
+    
     return YES;
 }
 
@@ -462,30 +457,6 @@
 {
     [textField resignFirstResponder];
     return YES;
-}
-
--(void)saveUserInformation:(id)response
-{
-    [[NSUserDefaults standardUserDefaults] setObject:txtName.text forKey:@"Name"];
-    [[NSUserDefaults standardUserDefaults] setObject:txtEmail.text forKey:@"Email"];
-    [[NSUserDefaults standardUserDefaults] setObject:txtLocation.text forKey:@"Location"];
-    
-    NSString *strcityNamee = txtLocation.text;
-    NSString *strCityIDd;
-    
-    //CityList
-    NSArray *ArrCity = [[NSArray alloc] init];
-    ArrCity = [[NSUserDefaults standardUserDefaults]valueForKey:@"CityList"];
-    for (int i = 0; i<ArrCity.count; i++)
-    {
-        NSString *strgetCityName =[NSString stringWithFormat:@"%@",[[ArrCity valueForKey:@"CityName"] objectAtIndex:i]];//CityID
-        if ([strgetCityName isEqualToString:strcityNamee])
-        {
-            strCityIDd = [[ArrCity valueForKey:@"CityID"] objectAtIndex:i];
-        }
-    }
-    [[NSUserDefaults standardUserDefaults]setObject:strCityID forKey:@"CityID"];
-    
 }
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField

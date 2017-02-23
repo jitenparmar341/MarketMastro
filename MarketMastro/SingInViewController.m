@@ -217,14 +217,9 @@
              [[MethodsManager sharedManager]StopAnimating];
              NSLog(@"Login api response = %@",response);
              NSDictionary *DicLoggedInUser = [response mutableCopy];
+             
              [[NSUserDefaults standardUserDefaults]setObject:DicLoggedInUser forKey:@"DictOfLogedInuser"];
              
-             /*
-              name
-              email
-              location
-              mobile number
-              */
              
              //$$$ 26 jan
              NSString *strName = [DicLoggedInUser valueForKey:@"Name"];
@@ -232,12 +227,12 @@
              NSString *strMobileNumber = [DicLoggedInUser valueForKey:@"MobileNo"];
              NSString *strCityID = [DicLoggedInUser valueForKey:@"CityID"];
              
-             
              [[NSUserDefaults standardUserDefaults] setObject:strName forKey:@"Name"];
              [[NSUserDefaults standardUserDefaults] setObject:strEmail forKey:@"Email"];
              [[NSUserDefaults standardUserDefaults] setObject:strMobileNumber forKey:@"MobileNo"];
              [[NSUserDefaults standardUserDefaults] setObject:strCityID forKey:@"CityID"];
              
+             [[NSUserDefaults standardUserDefaults]synchronize];
              
              BOOL success = [[response valueForKey:@"Status"] boolValue];
              strIsSignedIn =@"SignedIN";
@@ -246,7 +241,6 @@
              
              NSString *strUserID = [NSString stringWithFormat:@"%@",[response valueForKey:@"UserID"]];
              [[NSUserDefaults standardUserDefaults] setObject:strUserID forKey:@"UserID"];
-             
              
              if (success)
              {
@@ -262,9 +256,8 @@
              {
                  [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Failed to login" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil]show];
              }
-             
          }
-                                       failure:^(NSError *error)
+         failure:^(NSError *error)
          {
              [[MethodsManager sharedManager]StopAnimating];
              //LoaderImageview.hidden = YES;

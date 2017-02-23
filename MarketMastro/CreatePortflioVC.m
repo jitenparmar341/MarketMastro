@@ -107,7 +107,6 @@
         
         if(self.isFromAlert)
         {
-            NSLog(@"%@",selectedOption);
             selectedOption = sender.currentTitle;
             [self.navigationController popViewControllerAnimated:YES];
         }

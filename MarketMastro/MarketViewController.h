@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "FirstFourVC.h"
 
-@interface MarketViewController : UIViewController<UICollectionViewDelegate,UICollectionViewDataSource>
+@interface MarketViewController : UIViewController<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 {
     
 }

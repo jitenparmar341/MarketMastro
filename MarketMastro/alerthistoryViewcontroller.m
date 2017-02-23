@@ -96,11 +96,24 @@
     
     SQLiteRow *object = [ArrayAlertHistory objectAtIndex:indexPath.row];
     NSString *strText = [NSString stringWithFormat:@"%@",[object stringForColumnName:@"HistoryText"]];
+    
     //remove html tags from strhistorytext
+    
     strText = [self removeHtmlTags:strText];
     cell.lblCommodityAlert.text = strText;
+    
     NSString *dateString = [NSString stringWithFormat:@"%@",[object stringForColumnName:@"CreatedDateTime"]];
-    cell.lbldate.text = dateString;
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS"];//2017-02-03T13:36:08
+    
+    NSDate *dateFromString = [dateFormatter dateFromString:dateString];
+    
+    [dateFormatter setDateFormat:@"dd MMM,yyyy hh:mm a"];
+    
+    cell.lbldate.text = [dateFormatter stringFromDate:dateFromString];
+    
     return cell;
 }
 

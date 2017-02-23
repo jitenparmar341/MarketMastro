@@ -15,6 +15,7 @@
     __weak IBOutlet UITextField *txtEmail;
     __weak IBOutlet UITextField *txtLocation;
     __weak IBOutlet UIButton *btnUpdate;
+    NSMutableDictionary *dictOfLogedInUser;
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *BtnTextLocation;
