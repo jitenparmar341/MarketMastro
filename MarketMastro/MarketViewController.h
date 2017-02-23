@@ -14,6 +14,10 @@
     
 }
 
+@property (nonatomic,weak)IBOutlet UIButton *btnLocalSpot;
+
+@property (nonatomic,weak)IBOutlet UIView *vwLocalSpot;
+
 @property (nonatomic,weak)IBOutlet UICollectionView *cltView;
 
 @property(nonatomic, retain)FirstFourVC *object;

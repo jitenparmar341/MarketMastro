@@ -10,6 +10,7 @@
 
 #import "MarketTableViewCell.h"
 #import "cltMarketCell.h"
+#import "CityListVC.h"
 
 @interface MarketViewController ()<UITableViewDelegate, UITableViewDataSource>
 {    
@@ -44,14 +45,26 @@
     
     tableViewMarket.hidden = true;
     self.cltView.hidden = true;
+    self.vwLocalSpot.hidden = true;
     
-    if ([AppDelegate sharedAppDelegate].isListClicked == true)
+    if (![self.title isEqualToString:@"Local Spot"])
     {
-        tableViewMarket.hidden = false;
+        if ([AppDelegate sharedAppDelegate].isListClicked == true)
+        {
+            tableViewMarket.hidden = false;
+        }
+        else
+        {
+            self.cltView.hidden = false;
+        }
     }
     else
     {
-        self.cltView.hidden = false;
+        self.vwLocalSpot.hidden = false;
+        
+        [self.btnLocalSpot setTitleEdgeInsets:UIEdgeInsetsMake(-1, 34, 0, 0)];
+        
+        [self.btnLocalSpot setTitle:[[NSUserDefaults standardUserDefaults] valueForKey:@"CitySelected"] forState:UIControlStateNormal];
     }
     
     NSLog(@"Appear");
@@ -145,6 +158,15 @@
 
 - (void)reloadTableData {
     [tableViewMarket reloadData];
+}
+
+#pragma mark - Button Click Method
+
+- (IBAction)btnChangeLocalSpotClicked:(id)sender
+{
+    CityListVC *city = [self.storyboard instantiateViewControllerWithIdentifier:@"CityListVC"];
+    
+    [[_object navigationController] pushViewController:city animated:true];
 }
 
 #pragma mark - UICollectionView Delegate and DataSource

@@ -156,6 +156,8 @@
 		969C7AC51E53877B009B0123 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 969C7AB01E53877B009B0123 /* UIImageView+WebCache.m */; };
 		969C7AC61E53877B009B0123 /* UIView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 969C7AB21E53877B009B0123 /* UIView+WebCache.m */; };
 		969C7AC71E53877B009B0123 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 969C7AB41E53877B009B0123 /* UIView+WebCacheOperation.m */; };
+		96CFC8931E5F73F5003B281F /* CityListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 96CFC8921E5F73F5003B281F /* CityListVC.m */; };
+		96CFC8961E5F744A003B281F /* CustomCityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96CFC8951E5F744A003B281F /* CustomCityCell.m */; };
 		96CFE2221E54CB9200190322 /* CustomSelPack.m in Sources */ = {isa = PBXBuildFile; fileRef = 96CFE2211E54CB9200190322 /* CustomSelPack.m */; };
 		96CFE2251E54D30E00190322 /* CustomModePay.m in Sources */ = {isa = PBXBuildFile; fileRef = 96CFE2241E54D30E00190322 /* CustomModePay.m */; };
 		96DACCB11E5CAB42003F1AB4 /* LKSDB.db in Resources */ = {isa = PBXBuildFile; fileRef = 96DACCB01E5CAB42003F1AB4 /* LKSDB.db */; };
@@ -453,6 +455,10 @@
 		969C7AB21E53877B009B0123 /* UIView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCache.m"; sourceTree = "<group>"; };
 		969C7AB31E53877B009B0123 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		969C7AB41E53877B009B0123 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		96CFC8911E5F73F5003B281F /* CityListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityListVC.h; sourceTree = "<group>"; };
+		96CFC8921E5F73F5003B281F /* CityListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityListVC.m; sourceTree = "<group>"; };
+		96CFC8941E5F744A003B281F /* CustomCityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCityCell.h; sourceTree = "<group>"; };
+		96CFC8951E5F744A003B281F /* CustomCityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCityCell.m; sourceTree = "<group>"; };
 		96CFE2201E54CB9200190322 /* CustomSelPack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSelPack.h; sourceTree = "<group>"; };
 		96CFE2211E54CB9200190322 /* CustomSelPack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSelPack.m; sourceTree = "<group>"; };
 		96CFE2231E54D30E00190322 /* CustomModePay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomModePay.h; sourceTree = "<group>"; };
@@ -923,6 +929,7 @@
 				04D5F84A1DD4BDE200CE1091 /* Info.plist */,
 				68316F871E44915600198929 /* GoogleService-Info.plist */,
 				04D5F8391DD4BDE100CE1091 /* Supporting Files */,
+				96CFC8901E5F73DA003B281F /* Local Spot */,
 				AB314E4C1DE51BAC00228701 /* MyTextField.h */,
 				AB314E4D1DE51BAC00228701 /* MyTextField.m */,
 				AB314E4E1DE51BAC00228701 /* SubscriptionHistoryVC.h */,
@@ -1111,6 +1118,17 @@
 				969C7AB41E53877B009B0123 /* UIView+WebCacheOperation.m */,
 			);
 			name = SDWebimage;
+			sourceTree = "<group>";
+		};
+		96CFC8901E5F73DA003B281F /* Local Spot */ = {
+			isa = PBXGroup;
+			children = (
+				96CFC8911E5F73F5003B281F /* CityListVC.h */,
+				96CFC8921E5F73F5003B281F /* CityListVC.m */,
+				96CFC8941E5F744A003B281F /* CustomCityCell.h */,
+				96CFC8951E5F744A003B281F /* CustomCityCell.m */,
+			);
+			name = "Local Spot";
 			sourceTree = "<group>";
 		};
 		BB01CCBE1E2629C100DFFB63 /* Frameworks */ = {
@@ -1718,6 +1736,7 @@
 				BB01F4011E4ED7B900259994 /* MoreDetailPlusViewController.m in Sources */,
 				AB6C1FB41DEA7A8E0093B03E /* FirstFourVC.m in Sources */,
 				BB2E17DB1E2CC99A001ED508 /* GetPackageListClass.m in Sources */,
+				96CFC8961E5F744A003B281F /* CustomCityCell.m in Sources */,
 				BBF8BD8A1E3F828A00279FD2 /* ADPageControl.m in Sources */,
 				BB4B755E1E334BA600EE44A6 /* SQLiteResult.m in Sources */,
 				0438175F1DD8B4B300FCEB7D /* SingInViewController.m in Sources */,
@@ -1818,6 +1837,7 @@
 				BB29E00F1E1F83FF003A6042 /* webManager.m in Sources */,
 				BB29E0401E1F8446003A6042 /* AFHTTPRequestOperationManager.m in Sources */,
 				969C7AC61E53877B009B0123 /* UIView+WebCache.m in Sources */,
+				96CFC8931E5F73F5003B281F /* CityListVC.m in Sources */,
 				043817641DD9F2E500FCEB7D /* VerifyAndChangeMobileViewController.m in Sources */,
 				BB3A56231E2DEADF00EACFEF /* TypeCell.m in Sources */,
 				BB29E02A1E1F8423003A6042 /* UIWebView+AFNetworking.m in Sources */,
