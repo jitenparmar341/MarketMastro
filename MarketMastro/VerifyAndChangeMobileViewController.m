@@ -298,9 +298,13 @@ int secondsLeft;
 }
 
 -(void)MethodForUpdateDeviceDetails {
-    NSString *strUserID = [[NSUserDefaults standardUserDefaults] valueForKey:@"UserID"];
-    if (strUserID.length==0) {
+    id strUserID = [[NSUserDefaults standardUserDefaults] valueForKey:@"UserID"];
+    if ([strUserID isKindOfClass:[NSNumber class]]) {
 //        [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Couldnt get device token" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil]show];
+    }
+    else if ([strUserID isKindOfClass:[NSString class]]) {
+    }
+    else {
         return;
     }
     NSString *model = [[UIDevice currentDevice] model];
