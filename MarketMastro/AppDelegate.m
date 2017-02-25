@@ -14,7 +14,12 @@
 #import "SidebarTableViewController.h"
 #import <UserNotifications/UserNotifications.h>
 
+#import "SQLiteDatabase.h"
+
 #import "Firebase.h"
+
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 
 @interface AppDelegate ()
 
@@ -40,17 +45,7 @@ int indexOfDrawer;
     NSString *Path=[DocumentsPath stringByAppendingPathComponent:@"LKSDB.db"];//@"staffDB.sqlite"
     NSString *bundlepath=[[NSBundle mainBundle]pathForResource:@"LKSDB" ofType:@"db"];
     
-    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-    
-    center.delegate = self;
-    
-    [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error)
-     {
-         if( !error )
-         {
-             [[UIApplication sharedApplication] registerForRemoteNotifications];
-         }
-     }];
+    [self registerForRemoteNotificationFrom:@"1"];
     
     if([[NSFileManager defaultManager]fileExistsAtPath:Path])
     {
@@ -88,6 +83,7 @@ int indexOfDrawer;
         // make it as root
         self.window.rootViewController = revealController;
     }
+    NSLog(@"UUID : %@", [[[UIDevice currentDevice] identifierForVendor] UUIDString]);
     return YES;
 }
 
@@ -113,18 +109,33 @@ int indexOfDrawer;
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-//- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
-//{
-//    NSString *str = [NSString stringWithFormat:@"Device Token=%@",deviceToken];
-//    NSLog(@"Device Token = %@", str);
-//}
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSLog(@"DeviceToken: %@", [deviceToken description]);
+    NSString *deviceTokenStr = [[[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]] stringByReplacingOccurrencesOfString:@" " withString:@""];
+
+    NSLog(@"Device Token : %@", deviceTokenStr);
+    // Send token to server
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"APNsDeviceToken"] isEqualToString:deviceTokenStr]) {
+        NSLog(@"Same");
+    }
+    else {
+        NSLog(@"Change/New");
+        [[NSUserDefaults standardUserDefaults] setObject:deviceTokenStr forKey:@"APNsDeviceToken"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [self methodForUpdateDeviceDetails];
+    }
+}
+
+- (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
+    NSString *str = [NSString stringWithFormat: @"Error: %@", err];
+    NSLog(@"Error for getting device token = %@",str);
+}
 
 + (AppDelegate *)sharedAppDelegate{
     return (AppDelegate *)[UIApplication sharedApplication].delegate;
 }
 
-#pragma mark - Push Notifications delegate
-
+#pragma mark - UNUserNotificationCenterDelegate
 -(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler
 {
     //Called when a notification is delivered to a foreground app.
@@ -141,25 +152,7 @@ int indexOfDrawer;
     NSLog(@"Userinfo %@",response.notification.request.content.userInfo);
 }
 
-- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
-{
-    NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
-    
-    token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
-    
-    [[NSUserDefaults standardUserDefaults]setValue:token forKey:@"deviceToken"];
-    [[NSUserDefaults standardUserDefaults]synchronize];
-    
-    // Send token to server
-}
-
-- (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err
-{
-    NSString *str = [NSString stringWithFormat: @"Error: %@", err];
-    NSLog(@"Error for getting device token = %@",str);
-}
-
-
+#pragma mark - UIUserNotificationSettings
 #ifdef __IPHONE_8_0
 - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
 {
@@ -177,6 +170,48 @@ int indexOfDrawer;
 }
 #endif
 
+#pragma mark - ReceiveRemoteNotification
+//- (vo id)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+//    NSLog(@"%ld---\nuserInfo : %@",(long)application.applicationState, userInfo);
+    //    [self handleNotification:[[userInfo objectForKey:@"aps"] objectForKey:@"data"]];
+//    [self handleNotification:[userInfo objectForKey:NewsKey]];
+//}
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler {
+    
+    NSLog(@"%ld---\nuserInfo : %@",(long)application.applicationState, userInfo);
+    // iOS 10 will handle notifications through other methods
+    
+    if( [UIApplication sharedApplication].applicationState == UIApplicationStateInactive) {
+        NSLog(@"INACTIVE");
+    }
+    else if([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
+        NSLog(@"BACKGROUND");
+    }
+    else {
+        NSLog(@"FOREGROUND");
+    }
+    
+    if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"10.0")) {
+        NSLog( @"iOS version >= 10. Let NotificationCenter handle this one." );
+        // set a member variable to tell the new delegate that this is background
+        return;
+    }
+    
+    // custom code to handle notification content
+//    NSDictionary *apsPayload = [userInfo objectForKey:@"aps"];
+    if ([[userInfo objectForKey:@"msgtype"] isEqualToString:@"ALT"]) {
+        [self notificationForALT:userInfo];
+        completionHandler(UIBackgroundFetchResultNewData);
+    }
+    else if ([[userInfo objectForKey:@"msgtype"] isEqualToString:@"MST"]) {
+        [self notificationForMST:userInfo];
+        completionHandler(UIBackgroundFetchResultNewData);
+    }
+    else if ([[userInfo objectForKey:@"msgtype"] isEqualToString:@"OTH"]) {
+        completionHandler(UIBackgroundFetchResultNoData);
+    }
+}
+
 - (void)firebaseSetUp {
     [FIRApp configure];
     //    Live//    ca-app-pub-7827419066044802~1199975779
@@ -188,5 +223,82 @@ int indexOfDrawer;
                                      kFIRParameterItemName:@"Demo",
                                      kFIRParameterContentType:@"AppOpen"
                                      }];
+}
+
+#pragma mark - PushNotification
+- (void)registerForRemoteNotificationFrom:(NSString*)isFrom {
+    if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"10.0") && FALSE) {
+        UNUserNotificationCenter *uNUserNCenter = [UNUserNotificationCenter currentNotificationCenter];
+        [uNUserNCenter setDelegate:self];
+        [uNUserNCenter requestAuthorizationWithOptions:(UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert) completionHandler:^(BOOL granted, NSError * _Nullable error) {
+            if (granted || !error) {
+                NSLog(@"Notification Granted Success");
+                [[UIApplication sharedApplication] registerForRemoteNotifications];
+            }
+            else {
+                NSLog(@"Notification Granted Fail");
+                NSLog(@"ERROR: %@ - %@", error.localizedFailureReason, error.localizedDescription);
+                NSLog(@"SUGGESTIONS: %@ - %@", error.localizedRecoveryOptions, error.localizedRecoverySuggestion);
+            }
+        }];
+    }
+    else {
+        UIUserNotificationSettings *userNotificationSetting = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:userNotificationSetting];
+    }
+}
+
+-(void)methodForUpdateDeviceDetails {
+    NSString *strUserID = [[NSUserDefaults standardUserDefaults] valueForKey:@"UserID"];
+    if (strUserID.length==0) {
+        return;
+    }
+    NSString *model = [[UIDevice currentDevice] model];
+    NSString *iOSVersion = [[UIDevice currentDevice] systemVersion];
+    NSString *UUID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    NSString *aPNDeviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"APNsDeviceToken"];
+    
+    NSDictionary *parameter = @{
+                                @"UserID":strUserID,
+                                @"DeviceUUID":UUID,
+                                @"DeviceOSVersion":iOSVersion,
+                                @"DeviceModel":model,
+                                @"DeviceNotifyRegisterId":aPNDeviceToken,
+                                @"DeviceIMEI":@"",
+                                @"DeviceManufacturer":@"Apple",
+                                @"DeviceOS":iOSVersion,
+                                @"DeviceSerialNo":@"",
+                                @"DeviceWifiMac":@"",
+                                };
+    
+    BOOL isNetworkAvailable = [[MethodsManager sharedManager] isInternetAvailable];
+    if (isNetworkAvailable) {
+        [[webManager sharedObject] CallPostMethod:parameter withMethod:@"/api/UserDetails/PutDeviceDetails" successResponce:^(id response) {
+             NSLog(@"api/UserDetails/PutDeviceDetails response = %@",response);
+         }
+                                          failure:^(NSError *error) {
+             NSLog(@"api/UserDetails/PutDeviceDetails error = %@", error.localizedDescription);
+         }];
+    }
+}
+
+#pragma mark - NotificationReceivedProccess
+- (void)notificationForALT:(NSDictionary*)payload {
+    NSString *updateQuery;
+//    updateQuery = [NSString stringWithFormat:@"UPDATE Alert SET isRead=0, isExecuted=1, CreatedDateTime=%@, Text=%@, CreatedOn=%@ WHERE AlertID=%@", time, alertText, timeInSeconds, AlertID];
+    [[SQLiteDatabase sharedInstance] executeUpdate:updateQuery withParams:nil success:^(SQLiteResult *result) {
+        if (!result) {
+            NSLog(@"QueryFail : %@", updateQuery);
+        }
+    } failure:^(NSString *errorMessage) {
+        NSLog(@"QueryFail : %@\ErrorMSG : %@", updateQuery, errorMessage);
+    }];
+    if( [UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
+        NSLog(@"ACTIVE");
+        //To Show Custom PopUp
+    }
+}
+- (void)notificationForMST:(NSDictionary*)payload {
+    
 }
 @end

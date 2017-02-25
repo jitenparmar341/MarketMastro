@@ -15,7 +15,8 @@
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate,UNUserNotificationCenterDelegate>
+
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UNUserNotificationCenterDelegate>
 {
     
 }

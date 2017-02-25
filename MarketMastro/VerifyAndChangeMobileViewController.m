@@ -72,6 +72,27 @@ int secondsLeft;
     [self countdownTimer];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    strUserIDD = [[NSUserDefaults standardUserDefaults] valueForKey:@"UserID"];
+    
+    [super viewWillAppear:YES];
+    [self.navigationController.navigationBar setHidden:YES];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [UIApplication sharedApplication].statusBarHidden = false;
+    
+    [super viewWillDisappear:YES];
+    [self.navigationController.navigationBar setHidden:NO];
+    [ChanegeMobileNumberDelegate sendDataToA:@"YES"];
+    
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 -(void)setDoneKeypad
 {
     UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
@@ -276,105 +297,55 @@ int secondsLeft;
     }
 }
 
--(void)MethodForUpdateDeviceDetails
-{
-    /*
-     NSString *iOSVersion =[NSString stringWithFormat:@"%@", [[UIDevice currentDevice] systemVersion]];
-     
-     NSString *UUID =[NSString stringWithFormat:@"%@",[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
-     NSString *strTokenId = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"TokenID"]];
-     
-     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-     [manager.requestSerializer setValue:strTokenId forHTTPHeaderField:@"Token"];
-     [manager.requestSerializer setValue:iOSVersion forHTTPHeaderField:@"AppVer"];
-     [manager.requestSerializer setValue:UUID forHTTPHeaderField:@"UUID"];
-     [manager.requestSerializer setValue:iOSVersion forHTTPHeaderField:@"DeviceOS"];
-     
-     */
-    
-    
+-(void)MethodForUpdateDeviceDetails {
+    NSString *strUserID = [[NSUserDefaults standardUserDefaults] valueForKey:@"UserID"];
+    if (strUserID.length==0) {
+//        [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Couldnt get device token" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil]show];
+        return;
+    }
     NSString *model = [[UIDevice currentDevice] model];
-    
-    NSString *iOSVersion =[NSString stringWithFormat:@"%@", [[UIDevice currentDevice] systemVersion]];
-    
-    NSString *UUID =[NSString stringWithFormat:@"%@",[[[UIDevice currentDevice] identifierForVendor] UUIDString]];
+    NSString *iOSVersion = [[UIDevice currentDevice] systemVersion];
+    NSString *UUID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    NSString *aPNDeviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"APNsDeviceToken"];
     
     [[NSUserDefaults standardUserDefaults] setObject:iOSVersion forKey:@"SavedIosVersion"];
-    
     [[NSUserDefaults standardUserDefaults] setObject:UUID forKey:@"SavedUUID"];
     
-    NSString *strUserID = [[NSUserDefaults standardUserDefaults] valueForKey:@"UserID"];
+    NSDictionary *parameter = @{
+                                @"UserID":strUserID,
+                                @"DeviceUUID":UUID,
+                                @"DeviceOSVersion":iOSVersion,
+                                @"DeviceModel":model,
+                                @"DeviceNotifyRegisterId":aPNDeviceToken,
+                                @"DeviceIMEI":@"",
+                                @"DeviceManufacturer":@"Apple",
+                                @"DeviceOS":iOSVersion,
+                                @"DeviceSerialNo":@"",
+                                @"DeviceWifiMac":@"",
+                                };
     
-    if (strUserID!=nil)
-    {
-        NSDictionary *parameter = @{
-                                    @"UserID":strUserID,
-                                    @"DeviceUUID":UUID,
-                                    @"DeviceOSVersion":iOSVersion,
-                                    @"DeviceModel":model,
-                                    @"DeviceNotifyRegisterId":@"1234567",
-                                    @"DeviceIMEI":@"123",
-                                    @"DeviceManufacturer":@"12345",
-                                    @"DeviceOS":iOSVersion,
-                                    @"DeviceSerialNo":UUID,
-                                    @"DeviceWifiMac":@"1234567890",
-                                    };
+    BOOL isNetworkAvailable = [[MethodsManager sharedManager] isInternetAvailable];
+    if (isNetworkAvailable) {
         
-        
-        BOOL isNetworkAvailable = [[MethodsManager sharedManager]isInternetAvailable];
-        
-        if (isNetworkAvailable)
-        {
+        [[webManager sharedObject] CallPostMethod:parameter withMethod:@"/api/UserDetails/PutDeviceDetails" successResponce:^(id response) {
             
-            [[webManager sharedObject] CallPostMethod:parameter withMethod:[NSString stringWithFormat:@"/api/UserDetails/PutDeviceDetails"]
-                                      successResponce:^(id response)
-             {
-                 
-                 NSLog(@"response = %@",response);
-                 if ([[response valueForKey:@"Success"]isEqualToString:@"Successfully updated"])
-                 {
-                     //AlreadyLogin
-                     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AlreadyLogin"];
-                     
-                     //Harish
-                     [self getCurrentActivePackage];
-                 }
-             }
-                                              failure:^(NSError *error)
-             {
-                 
-                 NSLog(@"response error = %@",error);
-                 [[[UIAlertView alloc]initWithTitle:@"Error" message:error.description delegate:self cancelButtonTitle:nil otherButtonTitles:@"ok", nil]show];
-             }];
+            NSLog(@"response = %@",response);
+            if ([[response valueForKey:@"Success"]isEqualToString:@"Successfully updated"]) {
+                //AlreadyLogin
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AlreadyLogin"];
+                
+                //Harish
+                [self getCurrentActivePackage];
+            }
         }
-    }
-    else
-    {
-        //        [[[UIAlertView alloc]initWithTitle:@"Error" message:@"Couldnt get device token" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil]show];
+                                          failure:^(NSError *error) {
+                                              
+                                              NSLog(@"response error = %@",error);
+                                              [[[UIAlertView alloc]initWithTitle:@"Error" message:error.description delegate:self cancelButtonTitle:nil otherButtonTitles:@"ok", nil]show];
+                                          }];
     }
 }
 
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    strUserIDD = [[NSUserDefaults standardUserDefaults] valueForKey:@"UserID"];
-    
-    [super viewWillAppear:YES];
-    [self.navigationController.navigationBar setHidden:YES];
-}
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [UIApplication sharedApplication].statusBarHidden = false;
-    
-    [super viewWillDisappear:YES];
-    [self.navigationController.navigationBar setHidden:NO];
-    [ChanegeMobileNumberDelegate sendDataToA:@"YES"];
-    
-}
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return NO;
