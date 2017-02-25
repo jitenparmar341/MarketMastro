@@ -307,6 +307,9 @@ int secondsLeft;
     NSString *iOSVersion = [[UIDevice currentDevice] systemVersion];
     NSString *UUID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
     NSString *aPNDeviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"APNsDeviceToken"];
+    if (!aPNDeviceToken) {
+        aPNDeviceToken = @"";
+    }
     
     [[NSUserDefaults standardUserDefaults] setObject:iOSVersion forKey:@"SavedIosVersion"];
     [[NSUserDefaults standardUserDefaults] setObject:UUID forKey:@"SavedUUID"];

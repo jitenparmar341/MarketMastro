@@ -257,6 +257,9 @@ int indexOfDrawer;
     NSString *iOSVersion = [[UIDevice currentDevice] systemVersion];
     NSString *UUID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
     NSString *aPNDeviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"APNsDeviceToken"];
+    if (!aPNDeviceToken) {
+        aPNDeviceToken = @"";
+    }
     
     NSDictionary *parameter = @{
                                 @"UserID":strUserID,
