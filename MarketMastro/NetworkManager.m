@@ -46,12 +46,13 @@
     NSString *UUID =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"SavedUUID"]];
     
     NSString *strTokenId = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"TokenID"]];
+    NSString *deviceOS = [[UIDevice currentDevice] systemName];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager.requestSerializer setValue:strTokenId forHTTPHeaderField:@"Token"];
     [manager.requestSerializer setValue:iOSVersion forHTTPHeaderField:@"AppVer"];
     [manager.requestSerializer setValue:UUID forHTTPHeaderField:@"UUID"];
-    [manager.requestSerializer setValue:iOSVersion forHTTPHeaderField:@"DeviceOS"];
+    [manager.requestSerializer setValue:deviceOS forHTTPHeaderField:@"DeviceOS"];
     
     NSLog(@"%@%@",Main_URL,method);
     NSLog(@"Param = %@",parameters);
@@ -99,13 +100,13 @@
     NSString *UUID =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"SavedUUID"]];
     
     NSString *strTokenId = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"TokenID"]];
-    
+    NSString *deviceOS = [[UIDevice currentDevice] systemName];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager.requestSerializer setValue:strTokenId forHTTPHeaderField:@"Token"];
     [manager.requestSerializer setValue:iOSVersion forHTTPHeaderField:@"AppVer"];
     [manager.requestSerializer setValue:UUID forHTTPHeaderField:@"UUID"];
-    [manager.requestSerializer setValue:iOSVersion forHTTPHeaderField:@"DeviceOS"];
+    [manager.requestSerializer setValue:deviceOS forHTTPHeaderField:@"DeviceOS"];
     
     NSLog(@"%@%@",Main_URL,method);
     NSLog(@"Param = %@",parameters);
@@ -154,13 +155,13 @@
     NSString *UUID =[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]valueForKey:@"SavedUUID"]];
     
     NSString *strTokenId = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] valueForKey:@"TokenID"]];
-    
+    NSString *deviceOS = [[UIDevice currentDevice] systemName];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager.requestSerializer setValue:strTokenId forHTTPHeaderField:@"Token"];
     [manager.requestSerializer setValue:iOSVersion forHTTPHeaderField:@"AppVer"];
     [manager.requestSerializer setValue:UUID forHTTPHeaderField:@"UUID"];
-    [manager.requestSerializer setValue:iOSVersion forHTTPHeaderField:@"DeviceOS"];
+    [manager.requestSerializer setValue:deviceOS forHTTPHeaderField:@"DeviceOS"];
     
     NSLog(@"%@%@",Main_URL,method);
     NSLog(@"Param = %@",parameters);

@@ -255,6 +255,7 @@ int indexOfDrawer;
     }
     NSString *model = [[UIDevice currentDevice] model];
     NSString *iOSVersion = [[UIDevice currentDevice] systemVersion];
+    NSString *deviceOS = [[UIDevice currentDevice] systemName];
     NSString *UUID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
     NSString *aPNDeviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"APNsDeviceToken"];
     if (!aPNDeviceToken) {
@@ -269,7 +270,7 @@ int indexOfDrawer;
                                 @"DeviceNotifyRegisterId":aPNDeviceToken,
                                 @"DeviceIMEI":@"",
                                 @"DeviceManufacturer":@"Apple",
-                                @"DeviceOS":iOSVersion,
+                                @"DeviceOS":deviceOS,
                                 @"DeviceSerialNo":@"",
                                 @"DeviceWifiMac":@"",
                                 };
